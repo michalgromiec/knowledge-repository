@@ -24,7 +24,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'furo'
+html_theme = 'alabaster' # furo
 html_static_path = ['_static']
 html_logo = "https://ocdn.eu/pulscms-transforms/1/p8nk9kqTURBXy80NThmZDJiNzY1NjNiMWRmODZmNGJhMGI0OTljZWY4ZS5qcGVnk5UDAwDNAwfNAbSTBc0DFM0BvJMJpmZiNDIwNAbeAAGhMAU/onet-wprowadza-nowe-logo-i-haslo-wiem-z-onet.webp"
 html_theme_options = {"announcement": "<strong>Important <font color='red'>NEWS</font></strong>TESTOWE OSTRZEŻENIE"}
