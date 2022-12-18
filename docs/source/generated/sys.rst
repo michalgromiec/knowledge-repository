@@ -19,7 +19,6 @@
       call_tracing
       displayhook
       exc_info
-      excepthook
       exit
       get_asyncgen_hooks
       get_coroutine_origin_tracking_depth
