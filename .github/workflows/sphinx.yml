@@ -10,7 +10,9 @@ jobs:
     - name: Setup 🐍 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8    
+        python-version: 3.8
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v4        
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
     - name: Upload artifacts
