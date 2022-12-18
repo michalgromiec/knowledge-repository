@@ -17,6 +17,7 @@
       audit
       breakpointhook
       call_tracing
+      callstats
       displayhook
       exc_info
       excepthook
@@ -24,6 +25,7 @@
       get_asyncgen_hooks
       get_coroutine_origin_tracking_depth
       getallocatedblocks
+      getcheckinterval
       getdefaultencoding
       getdlopenflags
       getfilesystemencodeerrors
@@ -38,6 +40,7 @@
       is_finalizing
       set_asyncgen_hooks
       set_coroutine_origin_tracking_depth
+      setcheckinterval
       setdlopenflags
       setprofile
       setrecursionlimit
