@@ -7,9 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: pip install -r requirements.txt
+    - name: Setup 🐍 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs/"
+        pre-build-command: "python -m pip install furo"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
