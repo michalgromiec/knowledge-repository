@@ -23,7 +23,11 @@
     * quicksight
   * security
 * certification exam cost: 300USD
-* exam length: 180 minutes, 65 questions
+* exam length: 180 minutes, 65 questions 
+
+```{info}
+there is additional 30 minutes of exam length for non-native speakers, you can get it by adding exam accomodation on exam registration page (https://www.certmetrics.com/amazon/candidate/exam_accommodations_default.aspx)
+``` 
 
 ![img.png](img.png)
 
