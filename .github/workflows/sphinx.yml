@@ -15,7 +15,7 @@ jobs:
       uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "docs/"
-        pre-build-command: "python -m pip install furo myst-parser"
+        pre-build-command: "python -m pip install furo==2022.12.7 myst-parser==0.18.1"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
