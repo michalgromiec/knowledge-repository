@@ -1,3 +1,5 @@
+# Udemy Course Case Study 
+
 * case study based on huge ecommerce called Cadabra
 * first requirement - orders generated, received by kinesis, processed by lambda and results stored in dynamo available for client app
 ![img_1.png](img_1.png)
