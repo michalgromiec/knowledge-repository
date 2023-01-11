@@ -6,15 +6,19 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Lumache'
-copyright = '2022, Graziella'
-author = 'Graziella'
+project = 'Knowledge Repository'
+copyright = ''
+author = 'https://github.com/michalgromiec'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.duration', 'sphinx.ext.doctest', 'sphinx.ext.autodoc', 'sphinx.ext.autosummary']
+extensions = ['sphinx.ext.duration',
+              'sphinx.ext.doctest',
+              'sphinx.ext.autodoc',
+              'sphinx.ext.autosummary',
+              'myst_parser']
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -27,8 +31,8 @@ exclude_patterns = []
 html_theme = 'furo'
 html_static_path = ['_static']
 # html_logo = ""
-html_theme_options = {"announcement": "<strong>Important <font color='red'>NEWS</font></strong>TESTOWE OSTRZEŻENIE"}
-
+# html_theme_options = {"announcement": "<strong>Important <font color='red'>NEWS</font></strong>TESTOWE OSTRZEŻENIE"}
+html_theme_options = {"sidebar_hide_name": True}
 
 
 # If extensions (or modules to document with autodoc) are in another directory,

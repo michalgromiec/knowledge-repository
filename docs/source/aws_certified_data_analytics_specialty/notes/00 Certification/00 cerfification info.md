@@ -1,4 +1,6 @@
-* aws certification info: https://aws.amazon.com/certification/certified-data-analytics-specialty/?ch=tile&tile=getstarted
+# DAS-C01 certification info
+
+* aws certification info: [link](https://aws.amazon.com/certification/certified-data-analytics-specialty/?ch=tile&tile=getstarted)
 * exam code: DAS-C01 (previously - big data specialty BDS-C00, very similar content)
 * challenging, very demanding
 * recommended AWS basic knowledge (architect), analytics background
@@ -25,7 +27,7 @@
 * certification exam cost: 300USD
 * exam length: 180 minutes, 65 questions 
 
-```{info}
+```info
 there is additional 30 minutes of exam length for non-native speakers, you can get it by adding exam accomodation on exam registration page (https://www.certmetrics.com/amazon/candidate/exam_accommodations_default.aspx)
 ``` 
 
