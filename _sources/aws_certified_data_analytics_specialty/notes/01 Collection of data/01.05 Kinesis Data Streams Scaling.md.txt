@@ -1,0 +1,40 @@
+# Scaling
+## Add Shard
+also called "shard splitting"
+
+* used to increase Stream capacity (throughput)
+* used to divide a hot shard
+
+old shard is closed and deleted once the data is expired
+
+in practice, below steps happened when adding shard
+* completely new shards are created
+* new data are stored in created shards, old one doesn't receive any data from producers (old shard is closed)
+* there is a move process which moves data from old shard to newly created one
+* old shard will dissapear when move process is done
+
+![img_1.png](img_1.png)
+
+## Remove Shard
+also called "shard merging"
+
+* used to save costs
+* decreases the stream capacity
+* used when two low traffic shards can be merged into new one - that way we reduce costs because we pay for number of shards in stream
+
+in practice it works similar to shard splitting - old shards dissapear after retention period and new merged shard start receiving data from produces imediately after creation
+
+## Out-of-order records after resharding
+When splitting shards it can be a situation when consumer starts reading from new shards without finishing reading data from historical shard.
+
+Solution for dealing with this is to read entirely from the parent until you don't have new records after resharding.
+
+KCL has built-in this logic, even after resharding operations
+
+## Autoscaling
+there is no native autoscaling functionality - there is an api endpoint UpdateShardCount and can be used in custom lambda, but still lambda has to be developed manually
+
+## Scaling Limitations
+* resharding operations can't be done in parallel - so only one split or merge operations can be done at a time (meaning one shard splitted to two or two partitions merged to one)
+* one resharding (split or merge) partitions at a time - i.e. if you have 10 partitions and want to increase this number to 20, 10 operations is needded 
+* each resharding operation takes a few seconds, depends on size of changed shard

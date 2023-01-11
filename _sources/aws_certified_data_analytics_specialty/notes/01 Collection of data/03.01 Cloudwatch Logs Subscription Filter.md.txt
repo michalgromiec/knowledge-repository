@@ -1,0 +1,15 @@
+# Cloudwatch Logs Subscription Filter
+It is possible to move cloudwatch logs into one of solution:
+* Kinesis Data Streams
+* Kinesis Data Firehose
+* AWS Lambda
+
+## Kinesis Data Streams
+you can write your own alarm solution based on your custom code. You can have more than one consumer consumes same data stream
+
+## Kinesis Firehose
+You can write aggregation of your logs to S3, using builtin aws lambda transformation functionality
+
+## AWS Lambda
+you can write your own processing code, you will achieve real time in this case.
+

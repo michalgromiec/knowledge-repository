@@ -1,0 +1,19 @@
+# What is it
+aws service to get managed Redis or Memcached - in other words this service can be used to have serverless redis or memcached
+
+helps load off of databases for read intensive workloads
+
+## Redis
+* in-memory key-value store
+* super-low latency
+* implemented persistence (cache survive reboots)
+* use cache
+  * user sessions
+  * leaderboard (for gaming)
+  * distributed states
+
+## Memcached
+* in-memory **object** store
+* doesnt hav persistence (cache doesnt survive reboots
+* less popular than Redis
+

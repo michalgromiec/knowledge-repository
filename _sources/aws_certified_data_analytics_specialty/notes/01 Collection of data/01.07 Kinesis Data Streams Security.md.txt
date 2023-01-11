@@ -1,0 +1,7 @@
+# Security
+
+* Control acces using IAM policies
+* encryption in flight using HTTPS endpoints
+* encyption in rest using KMS
+* if you want to implement encryption on client side, you have to implement manually
+* you can do private networking using VPC Endpoints

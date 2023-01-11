@@ -1,0 +1,24 @@
+# What is it
+dynamodb table stream is the list of all modifications made to dynamodb table.
+
+so as an effect it is something like change log for all items and it can be:
+* sent to kinesis data streams
+* sent to lambda
+* read by kinesis client library applications
+
+Data Retention is up to 24 hours
+
+You can choose what data will be send to target:
+* KEYS_ONLY - only the key attributes of the modified item
+* NEW_IMAGE - entire item after changes
+* OLD_IMAGE - entire item before changes
+* NEW_AND_OLD_IMAGES - both entire items before and after changes
+
+dynamodb streams are very similar to kinesis - ie. is made of shards.
+
+stream is populated with changes made only after stream has been enabled (can't create list of historical changes) 
+
+# Use Cases
+* notification for users (i.e. lambda verifying changes on dynamodb table and sending mail, or SES on SNS on kinesis data stream)
+* analytics (firehose on top on kinesis stream and archiving data in amazon s3)
+* workaround for triggers (lambda inserts data into other tables based on changes in main table)

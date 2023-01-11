@@ -1,0 +1,19 @@
+# What is it
+Serverless system used as a central metadata and schema repository for datalake.
+
+The purpose is to extract structure from unstructured data and serve extracted structure as a schema for other tools - Athena, Redshift, EMR
+
+The other thing Glue does is custom ETL jobs - Glue can process schema using event driven processes or schedules.
+
+# AWS Glue subservices
+## Glue Crawler / Data Catalog
+* crawler scans data in S3, creates schema automatically
+* can run periodically
+* populates Data Catalog
+* data are not copied, stays in their places on S3
+
+# AWS Glue partitions
+* Crawler can extract partitions based on how data is organized in S3
+* you need to think about how you will be querying datalake and implement this in your s3 structure
+* partitions should be ordered from the most often queried to less often queried, because it will limit amount of data which has to be scanned by bigdata tools
+ 

@@ -1,0 +1,424 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Scaling" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html" /><link rel="prev" title="Producers" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Consumers - Knowledge Repository 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Knowledge Repository 0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Kinesis Data Streams</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">DAS-C01 certification info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00%20Certification/01%20training%20case%20study.html">Udemy Course Case Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.02%20Kinesis%20Data%20Streams.html">Kinesis Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html">Producers</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Consumers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">Handling duplicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">Kinesis Data Firehose</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="consumers">
+<h1>Consumers<a class="headerlink" href="#consumers" title="Permalink to this heading">#</a></h1>
+<p>Used for getting data from stream to clients/apps</p>
+<p>Types of Kinesis Consumers:</p>
+<ul class="simple">
+<li><p>SDK - you can use AWS CLI to read records from Kinesis Stream</p></li>
+<li><p>KCL - Kinesis Consumer Library, have more option than SDK and are able to solve advanced issues</p></li>
+<li><p>Kinesis Collector Library</p></li>
+<li><p>AWS Lambda</p></li>
+<li><p>3rd party applications (Spark - even directly, Kafka, NiFi)</p></li>
+<li><p>Kinesis Firehose</p></li>
+</ul>
+<p>Values of kinesis streams records data are base64 encoded - therefore consumers has to encode them to see proper values.</p>
+<div class="section" id="aws-sdk">
+<h2>AWS SDK<a class="headerlink" href="#aws-sdk" title="Permalink to this heading">#</a></h2>
+<div class="section" id="classic-standard">
+<h3>Classic/Standard<a class="headerlink" href="#classic-standard" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>you can read/poll record from stream using <code class="docutils literal notranslate"><span class="pre">get-records</span></code> (many records) cli command</p></li>
+<li><p>GetRecords polls records from Kinesis Stream with limits for one poll:</p>
+<ul>
+<li><p>up to 2MB/sec for each shard (checked each 5 seconds - see below)</p></li>
+<li><p>up to 10MB of data (then throttle for 5 seconds)</p></li>
+<li><p>up to 10.000 records (then throttle for 5 seconds)</p></li>
+<li><p>up to 5 executions/second for GetRecords - means you have minimum 200ms latency of data</p></li>
+<li><p><strong>limits are shared by all consumers</strong> - means if you have i.e. 10 consumers consuming from the same shard, they have shared limit of 2MB/sec</p></li>
+</ul>
+</li>
+<li><p>above limits are shared by all consumers for shard - meaning if you have more consumers which polls data from one shard, their latency will be higher because they will share one 10MB/5sec limit and 5 executions/second</p></li>
+</ul>
+</div>
+<div class="section" id="fan-out-enhanced-fan-out">
+<h3>Fan-out enhanced (fan out)<a class="headerlink" href="#fan-out-enhanced-fan-out" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>implemented in August 2018</p></li>
+<li><p>works with KCL 2.0 and AWS Lambda</p></li>
+<li><p>in opposition to classic, each consumer gets own limit of data transfered - 2MB per shard</p></li>
+<li><p>in opposition to classic, consumer not polling data, but subscribe to shard. After subscription, Kinesis <strong>pushes</strong> data to consumer over HTTP/2.</p></li>
+<li><p>easier scaling out - you can add more consumers which transforms data from kinesis stream (still there is a limit for producing data - 1MB/s, but can be helpful when consumer stopped work and after recover needs to eat the lag and transform records send to kinesis when consumer didn’t work)</p></li>
+<li><p>has additional costs, but throughput is increased and latency is decreased to ~70ms</p></li>
+</ul>
+<p>USE-CASE:</p>
+<ul class="simple">
+<li><p>standard:</p>
+<ul>
+<li><p>you can tolerate ~200ms latency</p></li>
+<li><p>low number of consuming application</p></li>
+<li><p>minimize costs</p></li>
+</ul>
+</li>
+<li><p>fan out consumers:</p>
+<ul>
+<li><p>low latency requirements (~70ms)</p></li>
+<li><p>multiple consumers for the same stream</p></li>
+<li><p>can accept higher costs</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="aws-kcl">
+<h2>AWS KCL<a class="headerlink" href="#aws-kcl" title="Permalink to this heading">#</a></h2>
+<p>KCL = Kinesis Client Library</p>
+<ul class="simple">
+<li><p>java-first library, but created also for other languages (python, go, ruby, node)</p></li>
+<li><p>can read records from Kinesis Stream produced with KPL (can de-aggregate records created by KPL)</p></li>
+<li><p>share multiple shards with multiple consumers (and aggregates their limits)</p></li>
+<li><p>able to checkpointing to resume progress in case of application downtime</p></li>
+<li><p>uses DynamoDB below for coordination and checkpointing (one row per shard)</p></li>
+<li><p>in case of ExpiredIteratorException raised, you need to increase WCU (write capacity units) in your dynamo table setup</p></li>
+</ul>
+</div>
+<div class="section" id="aws-kinesis-connector-library">
+<h2>AWS Kinesis Connector Library<a class="headerlink" href="#aws-kinesis-connector-library" title="Permalink to this heading">#</a></h2>
+<p>older java library</p>
+<ul class="simple">
+<li><p>reads data from Kinesis Stream and send them to other services like S3, DynamoDB, Redshift or Elasticsearch Service</p></li>
+<li><p>in most of areas replaced by Kinesis Firehose or AWS Lambda</p></li>
+<li><p>must be running on EC2 instance</p></li>
+</ul>
+</div>
+<div class="section" id="aws-lambda">
+<h2>AWS Lambda<a class="headerlink" href="#aws-lambda" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>can read records from Kinesis Stream</p></li>
+<li><p>can de-aggregate records created by KPL (by additional small library)</p></li>
+<li><p>can be used to lightweight ETL and saves data to:</p>
+<ul>
+<li><p>S3</p></li>
+<li><p>DynamoDB</p></li>
+<li><p>Redshift</p></li>
+<li><p>ElasticSearch</p></li>
+<li><p>other, almost not limited as long as implemented in programming language used in Lambda function</p></li>
+</ul>
+</li>
+<li><p>can be used to trigger notification (SNS)</p></li>
+<li><p>has a configurable batch size (you can declare how many records has to be waited to execute Lambda function and increase throughput)</p></li>
+</ul>
+</div>
+<div class="section" id="hands-on">
+<h2>Hands-on<a class="headerlink" href="#hands-on" title="Permalink to this heading">#</a></h2>
+<div class="section" id="aws-sdk-cli">
+<h3>AWS SDK (CLI)<a class="headerlink" href="#aws-sdk-cli" title="Permalink to this heading">#</a></h3>
+<div class="section" id="stream-management">
+<h4>Stream Management<a class="headerlink" href="#stream-management" title="Permalink to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>create-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--shard-count<span class="w"> </span><span class="m">1</span><span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+aws<span class="w"> </span>kinesis<span class="w"> </span>list-streams<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+aws<span class="w"> </span>kinesis<span class="w"> </span>describe-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal
+aws<span class="w"> </span>kinesis<span class="w"> </span>update-shard-count<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--target-shard-count<span class="w"> </span><span class="m">2</span><span class="w"> </span>--scaling_type<span class="w"> </span>UNIFORM_SCALING
+aws<span class="w"> </span>kinesis<span class="w"> </span>delete-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+</pre></div>
+</div>
+</div>
+<div class="section" id="consumer">
+<h4>Consumer<a class="headerlink" href="#consumer" title="Permalink to this heading">#</a></h4>
+<p><strong>get-shard-iterator</strong> is used to get current position of shard, option <code class="docutils literal notranslate"><span class="pre">TRIM_HORIZON</span></code> used here is to specify that shard data should be returned from the oldest data in the shard.
+Other types are:</p>
+<ul class="simple">
+<li><p>LATEST - points to the newest data, allows to read only new data added after shard iterator is obtained</p></li>
+<li><p>AT_TIMESTAMP - points to data at specific time</p></li>
+<li><p>AFTER_SEQUENCE_NUMBER - points to data after specific sequence number</p></li>
+</ul>
+<p>Function <code class="docutils literal notranslate"><span class="pre">get-records</span></code> in response returns NextShardIterator next to data - so you can use it in consuming next records from stream</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>get-shard-iterator<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--shard-id<span class="w"> </span>shardId-000000000000<span class="w"> </span>--shard-iterator-type<span class="w"> </span>TRIM_HORIZON<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+aws<span class="w"> </span>kinesis<span class="w"> </span>get-records<span class="w"> </span>--shard-iterator<span class="w"> </span><span class="s2">&quot;AAAAAAAAAAGqN+Z5rHgWgExCnlJa0txKc/95odt/jhTh6GtAwBS32R6QazWe8BMCBfcF7u3Q7wax+7y3avWcYLpw10lt+jDrJitVnmnQwcL3mTf9QATnv/hsFFUOb9uELHADYNsLM2Ee1X1mpkVEKewrUlswpEu3gBqbadqlZ9i+Vu44Ygyuf0SRhmvMDk9THfq9QgthynomGlumQmR6nmEjQCJPfzPbDg4O4hRbL2GkSK2n2wrjGA==&quot;</span><span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+</pre></div>
+</div>
+<p><strong>when using SDK, you have to manually put shard id in command, in opposition to KCL when this option is managed automatically</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Scaling</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Producers</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Consumers</a><ul>
+<li><a class="reference internal" href="#aws-sdk">AWS SDK</a><ul>
+<li><a class="reference internal" href="#classic-standard">Classic/Standard</a></li>
+<li><a class="reference internal" href="#fan-out-enhanced-fan-out">Fan-out enhanced (fan out)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aws-kcl">AWS KCL</a></li>
+<li><a class="reference internal" href="#aws-kinesis-connector-library">AWS Kinesis Connector Library</a></li>
+<li><a class="reference internal" href="#aws-lambda">AWS Lambda</a></li>
+<li><a class="reference internal" href="#hands-on">Hands-on</a><ul>
+<li><a class="reference internal" href="#aws-sdk-cli">AWS SDK (CLI)</a><ul>
+<li><a class="reference internal" href="#stream-management">Stream Management</a></li>
+<li><a class="reference internal" href="#consumer">Consumer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+# What is it
+SQS is a Simple Queue Service.
+
+You can have producers which write to queue and consumers reads from queue.
+
+* AWS oldest offering (since first version)
+* scales from 1 message/second to 10000 per second
+* default retention = 4 days, maximum = 14 days, minimum = 1 minute
+* extreme low latency (<10ms)
+* no messages number limit
+* you can add consumers to horizontally scalling solution
+* can have duplicate messages (at-least-once-delivery)
+* can have out of order messages (best effort ordering)
+* limit of message size = 256KB maximum
+* by default, sqs queue doesnt take into account order of messages (there is a new type of queue - fifo, which takes it into account)
+
+# How to produce message
+1. Define body (string, up to 256KB of size)
+2. optionally add metadata (key-value attributes)
+3. optionally provide delay delivery
+
+SQS returns:
+1. Message identifier
+2. MD5 hash of the body
+
+# How to consume message
+1. application polls sqs for messages (receives up to 10 messages at a time)
+2. application process messages within the visibility timeout
+3. SQS delete message using message ID
+
+# FIFO queue
+* first-in-first-out
+* guarantees order of messages
+* lower throughput than the default queue (up to 3000 messages per second with batching or 300 mess/second without batching)
+* name of the queue **must** end with `.fifo` suffix
+
+# SQS extended client
+* allows for processing objects bigger than 256KB of size
+* producer puts object into S3 and add only small metadata message to SQS queue, consumer receives metadata and retrieve large object from S3
+* helpful, but not recommended (long time of processing such big objects)
+
+# Use cases
+* decouple applications (allow application to be asynchronous)
+* buffer writes to database
+* handle large loads of messages comming in (for example on peaks for database writes)
+
+# Pricing
+* pay per api request and per network usage
+
+# Security
+* encryption in flight by using https endpoints
+* encryption at rest by using server side enctyption using KMS
+* iam policy must allow usage of sqs in general
+* sqs queue access policy can verify if certain role can access to certain queue
+  * controlled over IP
+  * controlled over the time the requests come in
+
+# Differences to Kinesis
+1. Message body is string, Kinesis have bytes
+2. Message size limit is 256KB, Kinesis has 1MB
+3. As consumers deletes messages when processing done, one SQS message cannot be processed by more than one application, Kinesis doesn't delete messages so one kinesis stream message can be processed by more than one application or processed more than once
+4. So in general, data can be consumed once, in Kinesis they can be deleted many times
+5. and in general, allows for multiple applcations reading from one stream (pub-sub architecture)
+6. SQS deletes messages when processed by consumer, Kinesis delete only after the retention period
+7. SQS by default doesnt pay attention on messages order, Kinesis store messages in shards ordered by incoming timestamp
+8. SQS doesnt have option for checkpointing to store where application finished reading
+9. SQS have one pricing option similar to kinesis provisioned, kinesis has provisioned/on-demand mode
+
+In general, we can recognize below use-cases:
+## SQS use cases
+* processing objects
+* application decoupling
+## Kinesis Data Streams use cases:
+* fast data collection and processing
+* data capture
+* real time data analytics
+* complex stream processing

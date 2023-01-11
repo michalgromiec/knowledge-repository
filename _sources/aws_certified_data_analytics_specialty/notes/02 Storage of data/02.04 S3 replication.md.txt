@@ -1,0 +1,24 @@
+# What is it
+it's the asynchronous replication of data between two buckets in the same region (SRR) or in two regions (CRR)
+
+* to use replication, both source and destination buckets has to have enabled versioning.
+* buckets can be in different AWS accounts
+* copying is asynchronous
+* proper IAM permissions is required
+* only new objects are replicated (new after enabling replication). Existing objects can be replicated using S3 Batch Operation
+* by default, delete marker are not replicated - you need to enable it on replication rule in additional replication options
+* but **deletion of selected version is not being replicated** - only deletion markers are
+
+# Types of S3 replication
+CRR = Cross Region Replication
+SRR = Same Region Replication
+
+# Use cases
+CRR
+* compliance
+* lower latency access (for users in different regions)
+* replication across accounts
+
+SRR
+* log aggregation
+* live replication between environments (prod/test/int)

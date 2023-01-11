@@ -1,0 +1,26 @@
+# What is it
+events are generated after almost all of actions done on S3 bucket, i.e.: s3:ObjectCreated, s3:ObjectRemoved, s3:Replication etc.
+
+you can filter events by using name filtering, but only using prefix and suffix
+
+# When to use it
+For example, you can create thumbnails for every jpg uploaded to your bucket.
+
+Event notification can imply on one of the below service:
+* SNS - generate notification
+* SQS - put record on queue for future processing
+* Lambda - launch lambda function
+* amazon eventbridge
+
+Events are delivered typically in seconds, but can also take a minute or longer
+
+You have to create event notification manually or enable eventbridge integration (second option enable gathering all s3 events).
+
+Manual created event notification contains source and target, so you have to define which S3 events will trigger action and what destination will be for storing event data (lambda, sns or sqs)
+
+# Amazon EventBridge
+Serverless events bus service which gathers all events informations. With eventbridge you can expand target services which can be implied by S3 events
+
+Eventbridge has more filtering options than classic event notifications - you can filter by metadata, object size, names etc). 
+
+You can also have multiple destinations.
