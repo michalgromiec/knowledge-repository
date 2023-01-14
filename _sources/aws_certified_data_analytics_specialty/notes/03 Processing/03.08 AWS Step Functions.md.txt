@@ -1,0 +1,11 @@
+# What is it
+
+* used to design workflows
+* visualize workflows
+* advanced error handling and retry mechanism
+* audit of workflows history
+* can be used not only for bigdata (you can run lambdas using step functions)
+
+looks like process orchestrator like Apache Airflow
+
+![img_6.png](img_6.png)

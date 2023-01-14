@@ -1,0 +1,367 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>What is it - Knowledge Repository 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Knowledge Repository 0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Kinesis Data Streams</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">DAS-C01 certification info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00%20Certification/01%20training%20case%20study.html">Udemy Course Case Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.02%20Kinesis%20Data%20Streams.html">Kinesis Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">Consumers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">Handling duplicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">Kinesis Data Firehose</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="what-is-it">
+<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>EMR = Elastic Map Reduce</p></li>
+<li><p>Managed Hadoop framework run on EC2 instances (AWS implement Hadoop to automate set up using AWS EC2 instances)</p></li>
+<li><p>includes Spark/Hbase/Presto/Flink/Hive &amp; more, depends on EMR cluster version</p></li>
+<li><p>includes EMR Notebooks</p></li>
+<li><p>integrated with other AWS services (e.g. AWS Glue metastore)</p></li>
+</ul>
+</div>
+<div class="section" id="emr-cluster">
+<h1>EMR Cluster<a class="headerlink" href="#emr-cluster" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>collection of EC2 instances (node)</p></li>
+<li><p>types of nodes:</p>
+<ul>
+<li><p>master - manages the cluster, tracks status of tasks, “leader node”, can runs tasks</p></li>
+<li><p>core node - hosts HDFS data and runs tasks</p></li>
+<li><p>task node - runs tasks, doesnt host data, use when you dont need local HDFS datastore, if you have data on S3 bucket, good use of spot instances because doesn’t contain data and there is no risk of data loss itself</p></li>
+</ul>
+</li>
+<li><p>it is possible to create single node cluster composed of master node only</p></li>
+<li><p>like in every hadoop cluster, tasks will be executed by core and task nodes (and optionally by master node)</p></li>
+</ul>
+</div>
+<div class="section" id="cluster-types-based-on-usage">
+<h1>Cluster types based on usage<a class="headerlink" href="#cluster-types-based-on-usage" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>transient cluster</p>
+<ul>
+<li><p>automatically terminates once all steps are complete</p></li>
+<li><p>exists only for the duration of steps processing</p></li>
+<li><p>costs reduction</p></li>
+</ul>
+</li>
+<li><p>long-running clusters</p>
+<ul>
+<li><p>terminated manually</p></li>
+<li><p>best for data warehouse with periodic processing on large datasets (to reduce bootstrapping time for every process)</p></li>
+<li><p>can use reserved instances on long-running clusters to save money</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="emr-usage">
+<h1>EMR usage<a class="headerlink" href="#emr-usage" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>applications and their versions are selected at cluster creation</p></li>
+<li><p>user connects directly to master node to run jobs directly</p></li>
+<li><p>user can submit steps by using AWS Console</p></li>
+<li><p>user can also use Jupyter Notebooks and use EMR cluster</p></li>
+</ul>
+</div>
+<div class="section" id="emr-integration-with-other-aws-services">
+<h1>EMR integration with other AWS services<a class="headerlink" href="#emr-integration-with-other-aws-services" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>EC2 = uses EC2 instances for nodes</p></li>
+<li><p>VPC = nodes uses virtual network</p></li>
+<li><p>S3 = store input and output data, not need to use HDFS filesystem in EMR cluster</p></li>
+<li><p>Cloudwatch = monitor cluter performance</p></li>
+<li><p>IAM = store permission to EMR cluster</p></li>
+<li><p>CloudTrail = audit requrests made to the service</p></li>
+<li><p>Data Pipeline = schedule and start clusters</p></li>
+</ul>
+</div>
+<div class="section" id="emr-storage-types">
+<h1>EMR storage types<a class="headerlink" href="#emr-storage-types" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>HDFS = simple Hadoop Filesystem</p>
+<ul>
+<li><p>data stored on core nodes of EMR cluster</p></li>
+<li><p>ephemeral - data is lost when cluster is terminated</p></li>
+<li><p>as in a standadrd HDFS implementation - data stored in blocks, redundant stored in core nodes</p></li>
+<li><p>data locality can be used - dadta are processed directly on node where they exists (can be faster than S3 bucket data)</p></li>
+</ul>
+</li>
+<li><p>EMRFS = EMR file system</p>
+<ul>
+<li><p>access S3 as if it were HDFS</p></li>
+<li><p>persistent storage, preserve also after cluster termination</p></li>
+</ul>
+</li>
+<li><p>Local file system</p>
+<ul>
+<li><p>ephemeral</p></li>
+<li><p>suitable only for temporary data (buffers, caches)</p></li>
+</ul>
+</li>
+<li><p>EBS for HDFS</p>
+<ul>
+<li><p>elastic block storage</p></li>
+<li><p>ephemeral</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pricing-model">
+<h1>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>separate price for EMR, beyond this EC2 costs so you have to pay for them</p></li>
+<li><p>user can add or remove task node anytime on the fly</p></li>
+<li><p>user can change code nodes number, but removing those core came with risk of data loss (hdfs stores data there, it should be done using hadoop nodes redundancy, but still it is risky when more than one code node is removed)</p></li>
+<li><p>you can temporarily improve EMR cluster efficiency by adding task nodes (or reduce it)</p></li>
+</ul>
+</div>
+<div class="section" id="emr-scaling">
+<h1>EMR scaling<a class="headerlink" href="#emr-scaling" title="Permalink to this heading">#</a></h1>
+<div class="section" id="automatic-scaling">
+<h2>Automatic scaling<a class="headerlink" href="#automatic-scaling" title="Permalink to this heading">#</a></h2>
+<p>Before 2020, the only option of scaling cluster was EMR Automatic Scaling.
+EMR cluster capacity was changed based on cloudwatch metrics.
+It was limited to instance groups only (only instances from same instance groups could be added)</p>
+</div>
+<div class="section" id="managed-scaling">
+<h2>Managed scaling<a class="headerlink" href="#managed-scaling" title="Permalink to this heading">#</a></h2>
+<p>Introduced in 2020.
+It allows specify minimum and maximum number of units which are taken into account when cluster resize is needed.</p>
+</div>
+</div>
+<div class="section" id="emr-serverless">
+<h1>EMR Serverless<a class="headerlink" href="#emr-serverless" title="Permalink to this heading">#</a></h1>
+<p>It’s an option for creating EMR jobs but without bootstraping and defining EMR cluster (and using EC2 underthehood).
+It means you dont manage EMR cluster and AWS decide how many nodes with what power should be used to process your data.</p>
+<p>You need to use EMR studio to use this service.</p>
+<p>You can still specify default worker size &amp; pre-initialized capacity, otherwise capacity used will be defined automatically</p>
+<p>The most advantage is you dont have to define how many nodes, memory you need - it is calculated automatically.</p>
+<p><strong>BUT</strong> it is not a serveless like e.g. Athena - you still manage with create application, delete application etc.</p>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    </body>
+</html>

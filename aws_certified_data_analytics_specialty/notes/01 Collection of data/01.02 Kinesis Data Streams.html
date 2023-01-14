@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Producers" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html" /><link rel="prev" title="Udemy Course Case Study" href="../00%20Certification/01%20training%20case%20study.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Consumers" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html" /><link rel="prev" title="Udemy Course Case Study" href="../00%20Certification/01%20training%20case%20study.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>Kinesis Data Streams - Knowledge Repository 0.1 documentation</title>
@@ -157,7 +157,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">DAS-C01 certification info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00%20Certification/01%20training%20case%20study.html">Udemy Course Case Study</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Kinesis Data Streams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html">Producers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">Consumers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">Scaling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">Handling duplicates</a></li>
@@ -208,14 +207,128 @@
 </ul>
 <div class="section" id="producers">
 <h2>Producers<a class="headerlink" href="#producers" title="Permalink to this heading">#</a></h2>
+<p>Used for gettting data into AWS Kinesis stream</p>
 <ul class="simple">
 <li><p>data are created by producers</p></li>
-<li><p>producer can be an application, an other client, AWS SDK command or Kinesis Agent</p></li>
+<li><p>producer can be an application, other client, AWS SDK command or Kinesis Agent</p></li>
 <li><p>producer send <strong>record</strong> to Kinesis Stream</p></li>
 <li><p><strong>record</strong> contain Partition Key and Data Blob (up to 1MB)</p></li>
-<li><p>partition key define which shard record will be send to</p></li>
+<li><p>partition key define which shard record will be sent to</p></li>
 <li><p>one shard can ingest 1MB of data per second or 1000 messages per second (AWS limit, see more https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)</p></li>
 </ul>
+<div class="section" id="producer-types">
+<h3>Producer types<a class="headerlink" href="#producer-types" title="Permalink to this heading">#</a></h3>
+<div class="section" id="aws-sdk">
+<h4>AWS SDK<a class="headerlink" href="#aws-sdk" title="Permalink to this heading">#</a></h4>
+<p>you can use AWS CLI to send records to Kinesis Stream</p>
+<ul class="simple">
+<li><p>you can send record to stream using <code class="docutils literal notranslate"><span class="pre">put-record</span></code> (one record) or <code class="docutils literal notranslate"><span class="pre">put-records</span></code> (many records) cli command (see examples below)</p></li>
+<li><p>PutRecords increase your throughput - it generates less HTTP requests</p></li>
+<li><p>can be used on mobile app (Ios, android)</p></li>
+<li><p>USE CASE: low throughput, higher latency accepted, simple API, Lambda</p></li>
+<li><p>raises ProvisionedThroughputExceeded exemption when go over the limits</p>
+<ul>
+<li><p>kinesis simply rejects records exceeding limits, itself not repeat the put operation</p></li>
+<li><p>can be solved by exponential backoff retry (i.e. after 2,4,8,16 seconds) or by increasing number of shards</p></li>
+<li><p>make sure you don’t have hot shard (shard for which the most record partition keys are send)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="aws-kpl">
+<h4>AWS KPL<a class="headerlink" href="#aws-kpl" title="Permalink to this heading">#</a></h4>
+<p>Kinesis Producer Library, have more option than SDK and are able to solve advanced issues</p>
+<ul class="simple">
+<li><p>easy to implement C++/Java library (the most often Java is used)</p></li>
+<li><p>USE CASE: high throughput, low latency, asynchronous, long running producers, but no in cases when you are focused on very low latency (due to default mini-batch functionality)</p></li>
+<li><p>includes automated retry mechanism</p></li>
+<li><p>both synchronous and asynchronous API are available - in opposition to AWS SDK when only synchronous is possible</p></li>
+<li><p>by default, also submit metrics to cloudwatch, so you can monitor kinesis data stream</p></li>
+<li><p>supports mini-batching, enabled by default, used to improve throughput and decrease costs</p>
+<ul>
+<li><p>collects records and send to Kinesis Stream in one record (executing on one PutRecords API call)</p></li>
+<li><p>aggregate records to fill 1MB/sec limit, and then send them using one PutRecords API call</p></li>
+<li><p>uses RecordMaxBufferedTime option, default 100ms, which states how long Kinesis has to wait to implement batching on produced records</p></li>
+<li><p>by batching, latency is increased</p></li>
+</ul>
+</li>
+<li><p>compression has to be still implemented by user - uncompression has to be implemented in consumer solution</p></li>
+<li><p><strong>records handled by KPL can be consumed only by KCL</strong> (Kinesis Consumer Library) or special helper library</p></li>
+</ul>
+</div>
+<div class="section" id="kinesis-agent">
+<h4>Kinesis Agent<a class="headerlink" href="#kinesis-agent" title="Permalink to this heading">#</a></h4>
+<p>linux tool which can be used on external linux server and i.e. send logs from this server</p>
+<p>java-based agent, built on top of KPL. Monitors server logs and send new records to Kinesis Stream</p>
+<ul class="simple">
+<li><p>available only for linux servers</p></li>
+<li><p>features:</p>
+<ul>
+<li><p>can write from multiple locations to multiple Kinesis Streams</p></li>
+<li><p>can route based on directory/log file</p></li>
+<li><p>can preprocess data before sending to streams (csv to json, json to csv etc)</p></li>
+<li><p>handles file rotation, retry upon failures…</p></li>
+<li><p>store own metrics in cloudwatch</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="rd-party-applications-spark-flume-kafka-connect-nifi">
+<h4>3rd party applications (Spark, Flume, Kafka Connect, NiFi)<a class="headerlink" href="#rd-party-applications-spark-flume-kafka-connect-nifi" title="Permalink to this heading">#</a></h4>
+</div>
+</div>
+<div class="section" id="hands-on">
+<h3>Hands-on<a class="headerlink" href="#hands-on" title="Permalink to this heading">#</a></h3>
+<div class="section" id="aws-sdk-cli">
+<h4>AWS SDK (CLI)<a class="headerlink" href="#aws-sdk-cli" title="Permalink to this heading">#</a></h4>
+<div class="section" id="stream-management">
+<h5>Stream Management<a class="headerlink" href="#stream-management" title="Permalink to this heading">#</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>create-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--shard-count<span class="w"> </span><span class="m">1</span><span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+aws<span class="w"> </span>kinesis<span class="w"> </span>list-streams<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+aws<span class="w"> </span>kinesis<span class="w"> </span>describe-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal
+aws<span class="w"> </span>kinesis<span class="w"> </span>update-shard-count<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--target-shard-count<span class="w"> </span><span class="m">2</span><span class="w"> </span>--scaling_type<span class="w"> </span>UNIFORM_SCALING
+aws<span class="w"> </span>kinesis<span class="w"> </span>delete-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+</pre></div>
+</div>
+</div>
+<div class="section" id="produce-records">
+<h5>Produce records<a class="headerlink" href="#produce-records" title="Permalink to this heading">#</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--partition-key<span class="w"> </span>user1<span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;action&quot;: &quot;user signup&quot;}&#39;</span><span class="w"> </span>--cli-binary-format<span class="w"> </span>raw-in-base64-out
+aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--partition-key<span class="w"> </span>user1<span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;action&quot;: &quot;user login&quot;}&#39;</span><span class="w"> </span>--cli-binary-format<span class="w"> </span>raw-in-base64-out
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>put-records<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--records<span class="w"> </span>file://records.json
+</pre></div>
+</div>
+<p>where records.json has below structure:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;PartitionKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user signup&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;PartitionKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user login&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;PartitionKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user signup&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--partition-key<span class="w"> </span>user1<span class="w"> </span>--data-binary<span class="w"> </span>fileb://binary-data.bin
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="consumers">
 <h2>Consumers<a class="headerlink" href="#consumers" title="Permalink to this heading">#</a></h2>
@@ -280,12 +393,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html">
+          <a class="next-page" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Producers</div>
+                <div class="title">Consumers</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -331,7 +444,24 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Kinesis Data Streams</a><ul>
-<li><a class="reference internal" href="#producers">Producers</a></li>
+<li><a class="reference internal" href="#producers">Producers</a><ul>
+<li><a class="reference internal" href="#producer-types">Producer types</a><ul>
+<li><a class="reference internal" href="#aws-sdk">AWS SDK</a></li>
+<li><a class="reference internal" href="#aws-kpl">AWS KPL</a></li>
+<li><a class="reference internal" href="#kinesis-agent">Kinesis Agent</a></li>
+<li><a class="reference internal" href="#rd-party-applications-spark-flume-kafka-connect-nifi">3rd party applications (Spark, Flume, Kafka Connect, NiFi)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hands-on">Hands-on</a><ul>
+<li><a class="reference internal" href="#aws-sdk-cli">AWS SDK (CLI)</a><ul>
+<li><a class="reference internal" href="#stream-management">Stream Management</a></li>
+<li><a class="reference internal" href="#produce-records">Produce records</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#consumers">Consumers</a></li>
 <li><a class="reference internal" href="#properties-characteristics">Properties/characteristics</a></li>
 <li><a class="reference internal" href="#capacity-modes">Capacity modes</a></li>

@@ -157,7 +157,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">DAS-C01 certification info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00%20Certification/01%20training%20case%20study.html">Udemy Course Case Study</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.02%20Kinesis%20Data%20Streams.html">Kinesis Data Streams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01.03%20Kinesis%20Data%20Streams%20-%20producers.html">Producers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">Consumers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">Scaling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">Handling duplicates</a></li>
@@ -244,6 +243,28 @@
 <li><p>name of the queue <strong>must</strong> end with <code class="docutils literal notranslate"><span class="pre">.fifo</span></code> suffix</p></li>
 </ul>
 </div>
+<div class="section" id="visibility-timeout">
+<h1>Visibility timeout<a class="headerlink" href="#visibility-timeout" title="Permalink to this heading">#</a></h1>
+<p>Describes amount of time after which message consumed by consumer and not deleted by consumer are back and available to other consumers. It begins when SQS return a message for consumer.
+You should set the visibility timeout to the maximum amount of time that consumer needs to process and delete a message from the queue.
+Default = 30 seconds, maximum = 12 hours</p>
+</div>
+<div class="section" id="delivery-delay">
+<h1>Delivery Delay<a class="headerlink" href="#delivery-delay" title="Permalink to this heading">#</a></h1>
+<p>Amout of time to delay delivery of message produced by producer to queue. In practce, message send to queue remains invisible to consumers for this duration.
+Default = 0 seconds, maximum = 15 minutes</p>
+</div>
+<div class="section" id="receive-message-wait-time">
+<h1>Receive message wait time<a class="headerlink" href="#receive-message-wait-time" title="Permalink to this heading">#</a></h1>
+<p>You can delay queue polling processes to reduce the costs. Setting this option helps in getting more items in one request (up to 10 messages) and it eliminates number of empty responses. If a reveive request collects the maximum number of messages, it doesn’t wait for the polling to timeout, it returns batch of results immediately.
+Default = 0 seconds, maximum = 20 seconds.</p>
+</div>
+<div class="section" id="dead-letter-queues">
+<h1>Dead-letter queues<a class="headerlink" href="#dead-letter-queues" title="Permalink to this heading">#</a></h1>
+<p>You can rewrite messages which can’t be consumed succesfully to separate queue which is called dead-letter queue. Dead-letter queue is not created automatically, you have to create it by yourself. Dead-letter queue type (standard/fifo) must match the source queue.
+Message is sent to dead-letter queue when Maximum receive values is exceeded. If the ReceiveCount exceeds this threshold (set up on creating the queue), message is sent do dead-letter queue.
+Dead-letter queue must exist within the same AWS account and resides in the same region as the source queue.</p>
+</div>
 <div class="section" id="sqs-extended-client">
 <h1>SQS extended client<a class="headerlink" href="#sqs-extended-client" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
@@ -309,6 +330,91 @@
 <li><p>real time data analytics</p></li>
 <li><p>complex stream processing</p></li>
 </ul>
+</div>
+</div>
+<div class="section" id="how-to">
+<h1>How to…<a class="headerlink" href="#how-to" title="Permalink to this heading">#</a></h1>
+<div class="section" id="send-message-to-queue">
+<h2>Send message to queue<a class="headerlink" href="#send-message-to-queue" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>send-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--message-body<span class="w"> </span><span class="s2">&quot;testowy&quot;</span><span class="w"> </span>--profile<span class="w"> </span>mg-priv
+</pre></div>
+</div>
+</div>
+<div class="section" id="retrieve-message-from-queue">
+<h2>Retrieve message from queue<a class="headerlink" href="#retrieve-message-from-queue" title="Permalink to this heading">#</a></h2>
+<p>Default function, which retrieves one message from queue:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>receive-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--profile<span class="w"> </span>mg-priv
+</pre></div>
+</div>
+<p>By using max-number-of-messages parameter you can retrieve up to 10 messages in one request</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>receive-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--max-number-of-messages<span class="w"> </span><span class="m">10</span><span class="w"> </span>--profile<span class="w"> </span>mg-priv
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-message-from-queue">
+<h2>Delete message from queue<a class="headerlink" href="#delete-message-from-queue" title="Permalink to this heading">#</a></h2>
+<p>To delete one selected message:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>delete-message<span class="w"> </span>--receipt-handle<span class="w"> </span>AQEBUjqhol2b6R0OzsWBtONbDhk8wVlnU4bRJsUOnHIorUZZijTXydsOSBKI2+D4MVoPApMp+Dm8Y6T77IwNJan001/wS0GEpMg6eemDnj7IcuiGFlEc1M64YzuqMyirbdPb6ZsDucfethSAxzu7QsIqHjb0L9y9ePUBnDi1JFNHtgUlzRYMUdroP9QaQebAsaSoPkbUmXKqxheAq9EkNDrYN6AYZ8T1VPzpM0Gn/fU7HVMl+40PTwY21hk7H5dWYoE5xd21ug3i8HycxMIfy/2YRE46MmEYJSmK0bPqYJj+7E/Kq/R/UklnTNrIpdlfbojUDcXoo/sBOWrZv57NQ8NyPgiWkfZttqgsrOUvVirLkV+VyrvXQlKmOG/M0tA3Rd0364lCLmWJU/8SvraJM0zKng<span class="o">==</span><span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg
+</pre></div>
+</div>
+<p>You can also delete messages in batch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>delete-message-batch<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--entries<span class="w"> </span><span class="s1">&#39;[{&quot;Id&quot;:&quot;msg1&quot;,&quot;ReceiptHandle&quot;:&quot;abc123&quot;},{&quot;Id&quot;:&quot;msg2&quot;,&quot;ReceiptHandle&quot;:&quot;def456&quot;}]&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manually-move-message-to-dead-letter-queue">
+<h2>Manually move message to dead-letter queue<a class="headerlink" href="#manually-move-message-to-dead-letter-queue" title="Permalink to this heading">#</a></h2>
+<p>There is no direct option for moving message to dead-letter queue. What you could do is:</p>
+<ol class="arabic simple">
+<li><p>Receive message data</p></li>
+<li><p>Manually put message to dead-letter queue by using aws sqs send-message</p></li>
+<li><p>Delete message from source queue</p></li>
+</ol>
+</div>
+<div class="section" id="get-number-of-messages-in-queue">
+<h2>Get number of messages in queue<a class="headerlink" href="#get-number-of-messages-in-queue" title="Permalink to this heading">#</a></h2>
+<p>You can retrieve <strong>approximate</strong> number of messages waiting for consumption in queue. Approximate because at the end SQS uses a distribute system to process messages, so the actual number of messages in the queue may differ from this number</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>get-queue-attributes<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--attribute-names<span class="w"> </span>ApproximateNumberOfMessages<span class="w"> </span>--profile<span class="w"> </span>mg-priv
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-number-of-processed-messages-for-queue">
+<h2>Get number of processed messages for queue<a class="headerlink" href="#get-number-of-processed-messages-for-queue" title="Permalink to this heading">#</a></h2>
+<p>It is not possible to get it directly from SQS - this service is only for distribution of messages so it doesn’t store number of processed messages anywhere.</p>
+</div>
+<div class="section" id="get-data-of-oldest-and-the-newest-message-in-queue">
+<h2>Get data of oldest and the newest message in queue<a class="headerlink" href="#get-data-of-oldest-and-the-newest-message-in-queue" title="Permalink to this heading">#</a></h2>
+<p>SQS doesn’t support such requests, you can use Cloudwatch metric ApproximateAgeOfOldestMessage to monitor this value</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>cloudwatch<span class="w"> </span>get-metric-statistics<span class="w"> </span>--namespace<span class="w"> </span>AWS/SQS<span class="w"> </span>--metric-name<span class="w"> </span>ApproximateAgeOfOldestMessage<span class="w"> </span>--start-time<span class="w"> </span><span class="m">2022</span>-01-06T17:10:00<span class="w"> </span>--end-time<span class="w"> </span><span class="m">2022</span>-01-06T17:15:00<span class="w"> </span>--period<span class="w"> </span><span class="m">1</span><span class="w"> </span>--profile<span class="w"> </span>mg-priv<span class="w"> </span>--region<span class="w"> </span>eu-central-1<span class="w"> </span>--statistics<span class="w"> </span>Maximum
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-if-message-is-present-in-queue-based-on-body">
+<h2>Check if message is present in queue (based on body)<a class="headerlink" href="#check-if-message-is-present-in-queue-based-on-body" title="Permalink to this heading">#</a></h2>
+<p>(?)</p>
+</div>
+<div class="section" id="get-number-of-processing-time-of-waiting-messages-and-calculate-histogram">
+<h2>Get number of processing time of waiting messages and calculate histogram<a class="headerlink" href="#get-number-of-processing-time-of-waiting-messages-and-calculate-histogram" title="Permalink to this heading">#</a></h2>
+<p>(?)</p>
+</div>
+<div class="section" id="get-how-many-times-message-were-consumed-by-consumers-tries">
+<h2>Get how many times message were consumed by consumers (tries)<a class="headerlink" href="#get-how-many-times-message-were-consumed-by-consumers-tries" title="Permalink to this heading">#</a></h2>
+<p>There is no direct command to retrieve this number, however it is possible to retrieve message and include this number as an attributes of the response</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>receive-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--attribute-names<span class="w"> </span>All<span class="w"> </span>--profile<span class="w"> </span>mg-priv
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-all-queue-attributes-in-one-request">
+<h2>Get all queue attributes in one request<a class="headerlink" href="#get-all-queue-attributes-in-one-request" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>get-queue-attributes<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--attribute-names<span class="w"> </span>All
+</pre></div>
+</div>
+</div>
+<div class="section" id="purge-queues">
+<h2>Purge queues<a class="headerlink" href="#purge-queues" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>purge-queue<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--profile<span class="w"> </span>mg-priv
+</pre></div>
+</div>
 </div>
 </div>
 

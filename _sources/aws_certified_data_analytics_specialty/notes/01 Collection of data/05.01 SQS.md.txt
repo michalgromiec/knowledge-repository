@@ -34,6 +34,24 @@ SQS returns:
 * lower throughput than the default queue (up to 3000 messages per second with batching or 300 mess/second without batching)
 * name of the queue **must** end with `.fifo` suffix
 
+# Visibility timeout
+Describes amount of time after which message consumed by consumer and not deleted by consumer are back and available to other consumers. It begins when SQS return a message for consumer.
+You should set the visibility timeout to the maximum amount of time that consumer needs to process and delete a message from the queue.
+Default = 30 seconds, maximum = 12 hours
+
+# Delivery Delay
+Amout of time to delay delivery of message produced by producer to queue. In practce, message send to queue remains invisible to consumers for this duration.
+Default = 0 seconds, maximum = 15 minutes
+
+# Receive message wait time
+You can delay queue polling processes to reduce the costs. Setting this option helps in getting more items in one request (up to 10 messages) and it eliminates number of empty responses. If a reveive request collects the maximum number of messages, it doesn't wait for the polling to timeout, it returns batch of results immediately.
+Default = 0 seconds, maximum = 20 seconds.
+
+# Dead-letter queues
+You can rewrite messages which can't be consumed succesfully to separate queue which is called dead-letter queue. Dead-letter queue is not created automatically, you have to create it by yourself. Dead-letter queue type (standard/fifo) must match the source queue.
+Message is sent to dead-letter queue when Maximum receive values is exceeded. If the ReceiveCount exceeds this threshold (set up on creating the queue), message is sent do dead-letter queue.
+Dead-letter queue must exist within the same AWS account and resides in the same region as the source queue.
+
 # SQS extended client
 * allows for processing objects bigger than 256KB of size
 * producer puts object into S3 and add only small metadata message to SQS queue, consumer receives metadata and retrieve large object from S3
@@ -75,3 +93,76 @@ In general, we can recognize below use-cases:
 * data capture
 * real time data analytics
 * complex stream processing
+
+# How to...
+
+## Send message to queue
+```bash
+aws sqs send-message --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --message-body "testowy" --profile mg-priv
+```
+
+## Retrieve message from queue
+Default function, which retrieves one message from queue:
+```bash
+aws sqs receive-message --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --profile mg-priv
+```
+By using max-number-of-messages parameter you can retrieve up to 10 messages in one request
+```bash
+aws sqs receive-message --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --max-number-of-messages 10 --profile mg-priv
+```
+
+## Delete message from queue
+To delete one selected message:
+```bash
+aws sqs delete-message --receipt-handle AQEBUjqhol2b6R0OzsWBtONbDhk8wVlnU4bRJsUOnHIorUZZijTXydsOSBKI2+D4MVoPApMp+Dm8Y6T77IwNJan001/wS0GEpMg6eemDnj7IcuiGFlEc1M64YzuqMyirbdPb6ZsDucfethSAxzu7QsIqHjb0L9y9ePUBnDi1JFNHtgUlzRYMUdroP9QaQebAsaSoPkbUmXKqxheAq9EkNDrYN6AYZ8T1VPzpM0Gn/fU7HVMl+40PTwY21hk7H5dWYoE5xd21ug3i8HycxMIfy/2YRE46MmEYJSmK0bPqYJj+7E/Kq/R/UklnTNrIpdlfbojUDcXoo/sBOWrZv57NQ8NyPgiWkfZttqgsrOUvVirLkV+VyrvXQlKmOG/M0tA3Rd0364lCLmWJU/8SvraJM0zKng== --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg
+```
+
+You can also delete messages in batch:
+```bash
+aws sqs delete-message-batch --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --entries '[{"Id":"msg1","ReceiptHandle":"abc123"},{"Id":"msg2","ReceiptHandle":"def456"}]'
+```
+
+## Manually move message to dead-letter queue
+There is no direct option for moving message to dead-letter queue. What you could do is:
+
+1. Receive message data
+2. Manually put message to dead-letter queue by using aws sqs send-message
+3. Delete message from source queue
+
+## Get number of messages in queue
+You can retrieve **approximate** number of messages waiting for consumption in queue. Approximate because at the end SQS uses a distribute system to process messages, so the actual number of messages in the queue may differ from this number
+```bash
+aws sqs get-queue-attributes --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --attribute-names ApproximateNumberOfMessages --profile mg-priv
+```
+
+## Get number of processed messages for queue
+It is not possible to get it directly from SQS - this service is only for distribution of messages so it doesn't store number of processed messages anywhere.
+
+## Get data of oldest and the newest message in queue
+SQS doesn’t support such requests, you can use Cloudwatch metric ApproximateAgeOfOldestMessage to monitor this value
+
+```bash
+aws cloudwatch get-metric-statistics --namespace AWS/SQS --metric-name ApproximateAgeOfOldestMessage --start-time 2022-01-06T17:10:00 --end-time 2022-01-06T17:15:00 --period 1 --profile mg-priv --region eu-central-1 --statistics Maximum
+```
+
+## Check if message is present in queue (based on body)
+(?)
+
+## Get number of processing time of waiting messages and calculate histogram
+(?)
+
+## Get how many times message were consumed by consumers (tries)
+There is no direct command to retrieve this number, however it is possible to retrieve message and include this number as an attributes of the response
+```bash
+aws sqs receive-message --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --attribute-names All --profile mg-priv
+```
+
+## Get all queue attributes in one request
+```bash
+aws sqs get-queue-attributes --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --attribute-names All
+```
+
+## Purge queues
+```bash
+aws sqs purge-queue --queue-url https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg --profile mg-priv
+```

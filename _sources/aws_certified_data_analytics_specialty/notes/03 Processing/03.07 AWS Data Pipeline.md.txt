@@ -1,0 +1,11 @@
+# What is it
+Task scheduling like oozie which can schedule some operations in AWS (e.g. copy data between S3, execute Spark Application etc)
+
+Web service help process and move data between AWS compute and processing services.
+
+* destinations: S3, RDS, DynamoDB, Redshift, EMR
+* manages task dependencies
+* included retries andd notification on failures
+* has precondition checks
+* data sources may be on premises
+

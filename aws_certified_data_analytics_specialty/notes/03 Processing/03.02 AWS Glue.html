@@ -157,7 +157,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">DAS-C01 certification info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00%20Certification/01%20training%20case%20study.html">Udemy Course Case Study</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.02%20Kinesis%20Data%20Streams.html">Kinesis Data Streams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.03%20Kinesis%20Data%20Streams%20-%20producers.html">Producers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">Consumers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">Scaling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">Handling duplicates</a></li>
@@ -200,8 +199,9 @@
           <div class="section" id="what-is-it">
 <h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
 <p>Serverless system used as a central metadata and schema repository for datalake.</p>
-<p>The purpose is to extract structure from unstructured data and serve extracted structure as a schema for other tools - Athena, Redshift, EMR</p>
-<p>The other thing Glue does is custom ETL jobs - Glue can process schema using event driven processes or schedules.</p>
+<p>The purpose is to extract structure (schema) from unstructured data and serve extracted structure as a schema for other tools - Athena, Redshift, EMR.
+So in other way - if you have unstructered data, glue allow you to query those data using structured query language (SQL)</p>
+<p>The other thing Glue does is custom ETL jobs (using Apache Spark under the hood) - Glue can process schema using event driven processes or schedules.</p>
 </div>
 <div class="section" id="aws-glue-subservices">
 <h1>AWS Glue subservices<a class="headerlink" href="#aws-glue-subservices" title="Permalink to this heading">#</a></h1>
@@ -209,10 +209,11 @@
 <h2>Glue Crawler / Data Catalog<a class="headerlink" href="#glue-crawler-data-catalog" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>crawler scans data in S3, creates schema automatically</p></li>
-<li><p>can run periodically</p></li>
+<li><p>can be run periodically or on demand</p></li>
 <li><p>populates Data Catalog</p></li>
-<li><p>data are not copied, stays in their places on S3</p></li>
+<li><p>data are not copied, stays in their places on S3, just schema is added on them</p></li>
 </ul>
+<p><img alt="img.png" src="../../../_images/img2.png" /></p>
 </div>
 </div>
 <div class="section" id="aws-glue-partitions">
@@ -220,7 +221,129 @@
 <ul class="simple">
 <li><p>Crawler can extract partitions based on how data is organized in S3</p></li>
 <li><p>you need to think about how you will be querying datalake and implement this in your s3 structure</p></li>
-<li><p>partitions should be ordered from the most often queried to less often queried, because it will limit amount of data which has to be scanned by bigdata tools</p></li>
+<li><p>partitions should be ordered from the most often queried to less often queried, because by using partitions it will limit amount of data which has to be scanned by bigdata tools</p></li>
+</ul>
+</div>
+<div class="section" id="glue-and-hive">
+<h1>Glue and Hive<a class="headerlink" href="#glue-and-hive" title="Permalink to this heading">#</a></h1>
+<p>Hive can query AWS Glue databases and their schemas - you can use HiveQL (similar language to SQL) to query data crawled into AWS Glue metastore.</p>
+<p>You can also import hive metadata store into AWS Glue.</p>
+</div>
+<div class="section" id="aws-glue-etl">
+<h1>AWS Glue ETL<a class="headerlink" href="#aws-glue-etl" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>automatically generate code for interfaces created by user to transform data</p></li>
+<li><p>before Glue Studio introduction, user had to write his custom code based on boilerplate shared by AWS</p></li>
+<li><p>uses Scala or Python and run generated code in Apache Spark (uses custom AWS code - awsglue library)</p></li>
+<li><p>you can provide your own Apache Spark code (scala or python)</p></li>
+<li><p>handles encryption</p></li>
+<li><p>can be event driven (so you can have processes which are started automatically after certain change in your AWS account is made)</p></li>
+<li><p>can provision additional “DPU’s” (data procesisng units) when builtin aws glue etl efficiency is not enough</p></li>
+<li><p>errors are reported directly to cloudwatch</p></li>
+<li><p>targets can be S3, JDBC (RDS, Redshift) or Glue Data Catalog (create table in glue metastore)</p></li>
+<li><p>fully managed, cost effective (pay only for the resources consumed)</p></li>
+<li><p>apache spark platform used in etl jobs is serverless</p></li>
+<li><p>job created in AWS Glue Studio is under the hood json file - so you can store it outside in version control (there is also option of Version Control directly in AWS Glue Studio)</p></li>
+<li><p>in 2022 AWS added Data Quality steps which allows you to implement Data Quality inside jobs</p></li>
+</ul>
+<div class="section" id="dynamic-frame">
+<h2>Dynamic Frame<a class="headerlink" href="#dynamic-frame" title="Permalink to this heading">#</a></h2>
+<p>basic object used in glue studio etl jobs - it’s a spark dataframe with additional etl functions which expands default functionality of dataframe</p>
+<p>in simillar way as spark dataframe contains many datarows, dynamicframe contains one or mode <code class="docutils literal notranslate"><span class="pre">DynamicRecord</span></code>. Each dynamicrecord contains fields/columns.</p>
+</div>
+<div class="section" id="available-transformations">
+<h2>Available Transformations<a class="headerlink" href="#available-transformations" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>bundled transformations:</p>
+<ul>
+<li><p>DropFields, DropNullFields</p></li>
+<li><p>Filter (filtering records based on function)</p></li>
+<li><p>Join</p></li>
+<li><p>Map (add custom fields, add calculated fields, perform external lookups)</p></li>
+<li><p>ResolveChoice (resolve ambiguities in dataframe - when more than one column has the same name)</p>
+<ul>
+<li><p>make_cols - creates a new column for each data type</p></li>
+<li><p>cast</p></li>
+<li><p>make_struct</p></li>
+<li><p>project</p></li>
+</ul>
+</li>
+<li><p>machine learning transformations</p>
+<ul>
+<li><p>FindMatchesML - identify duplicate or matching records in dataset (based on fuzzy similarity)</p></li>
+</ul>
+</li>
+<li><p>format conversions</p>
+<ul>
+<li><p>CSV, Json, Avro, Parquet, ORC, XML</p></li>
+</ul>
+</li>
+<li><p>any other apache spark transformations (including Spark MLLib transformations)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="aws-glue-data-catalog-modify">
+<h2>AWS Glue Data Catalog modify<a class="headerlink" href="#aws-glue-data-catalog-modify" title="Permalink to this heading">#</a></h2>
+<p>it is possible to update Glue Metastore based on glue etl jobs:</p>
+<ul class="simple">
+<li><p>to add new partitions, you rerun glue crawler or enable option Data Catalog update options to do this automatically based on data in job run</p></li>
+<li><p>to update table schema, you rerun glue crawler or enable option Data Catalog update options to do this automatically based on data in job run</p></li>
+<li><p>to create new table - enable option Data Catalog update options to do this automatically based on data in job run</p></li>
+</ul>
+<p>you can do all of those operations inside your etl job code (custom code required)</p>
+<p><img alt="img_1.png" src="../../../_images/img_12.png" /></p>
+<p>Restrictions:</p>
+<ul class="simple">
+<li><p>tables data must be located on S3 only</p></li>
+<li><p>json, csv, avro and parquet only</p></li>
+<li><p>parquet requires special code</p></li>
+<li><p>nested schemas are not supported</p></li>
+</ul>
+</div>
+<div class="section" id="development-endpoints">
+<h2>Development Endpoints<a class="headerlink" href="#development-endpoints" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>allows for develop etl scripts using notebook environements, but it looks like engine only, you need to have client which can connect to this instance.</p></li>
+</ul>
+</div>
+<div class="section" id="running-glue-jobs">
+<h2>Running Glue jobs<a class="headerlink" href="#running-glue-jobs" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>time-based schedules (like any cron style runs)</p></li>
+<li><p>Job bookmarks</p>
+<ul>
+<li><p>used to persist state from the job run</p></li>
+<li><p>allows for running job for increment processing</p></li>
+<li><p>prevents from reprocessing of old data</p></li>
+<li><p>only handles new rows, not updated rows</p></li>
+</ul>
+</li>
+<li><p>CloudWatch events</p>
+<ul>
+<li><p>you can fire lambda function or sns notification when ETL succeeds or fails</p></li>
+<li><p>invoke ec2 run, send event to kinesis, run Step Functions</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="cost-model">
+<h1>Cost model<a class="headerlink" href="#cost-model" title="Permalink to this heading">#</a></h1>
+<p>You pay for:</p>
+<ul class="simple">
+<li><p>Glue Data Catalog - for number of objects and access to the Glue Data Catalog (first million is free)</p></li>
+<li><p>Glue ETL Jobs - for the time it takes to run your Glue ETL Jobs (based on DPUs which are in some way multiplication of power of node and time consumed by node). Billed by the second</p></li>
+<li><p>Glue Developement Endpoints - same as for etl jobs - payed for DPU used by number of time, minimum billing duration is 10 minutes. Billed by minute.</p></li>
+<li><p>Glue Triggers -</p></li>
+<li><p>Glue Crawlers - similar to etl jobs, pay for DPU and duration of crawling data.</p></li>
+</ul>
+</div>
+<div class="section" id="antipatterns">
+<h1>Antipatterns<a class="headerlink" href="#antipatterns" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>if you need to use other engines than Spark (use Data Pipeline or EMR)</p></li>
+<li><p>before 2020 streaming was antipattern, but since April 2020 Glue started support streaming ETL by using APache Spark Structured Streaming</p></li>
 </ul>
 </div>
 

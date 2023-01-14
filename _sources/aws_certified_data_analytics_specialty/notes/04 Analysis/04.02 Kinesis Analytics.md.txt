@@ -1,0 +1,48 @@
+# AWS Kinesis Analytics
+
+* query streams of data continously
+* similar in spirit to Spark Streaming
+* can receive data from Kinesis Data Stream or Kinesis Data Firehose
+* optionaly you can create reference table (lookup table) based on object stored in S3 bucket
+* you can set up time window that you look for and aggregate/analyze data within this window
+* uses SQL to query data
+* possible destinations: Kinesis Data Stream, Kinesis Firehose, S3 or Amazon Redshift
+* errors are redirected to error stream (i.e. on type mismatch)
+* specific destination type is lambda
+
+## Reference table
+You can join external data to your stream data (lookup table)
+
+## Integration with Lambda
+Allows for postprocessing data which are results from Kinesis Analytics query. Adds lot of flexibility, i.e. aggregating rows, translating to different formats, encryption etc.
+
+By using Lambda, you can indirect write your stream aggregated data to other destinations (i.e. DynamoDB, SNS, SQS etc) or even any other external data targets.
+
+## Kinesis Data Analytics for Apache Flink
+formerly known as Kinesis Data Analytics for Java, now it supports Scala also.
+
+Flink is a framework for processing data streams.
+
+Instead of using SQL, users can write Flink application locally on their machines and use this application to transform stream data in Kinesis Data Analytics.
+
+In practice, you put your Flink code on S3 and setup KDA for Apache Flink and tellKDA where the code lives in S3.
+
+It's serverless.
+
+KDA for Apache Flink code can read data only from data streams (both Kinesis Data Stream or AWS Managed Streaimng for Apache Kafka). It can't read data from Firehose.
+
+## Use-cases
+* streaming ETL - continuously processing stream data (reads data from stream, organize data by sensor type, normalize data and save to S3)
+* continuous metric generation - continously calculate frame of data stream, i.e. online games leaderboard for last 60 minutes
+* responsive analytics - i.e. application calculating availability of site and writes result status (0/1) to Cloudwatch
+
+## Costs model
+* serverless - pay for resource consumed (but it's not cheap)
+* charged by Kinesis Processing Units (KPU), 1KPU = 1vCPU/4GB per one hour
+
+## Others
+* it scales automatically
+* run on IAM role, which must have permissions for both sources and destinations
+* schema discovery - automatic derivation of schema based on incoming data
+* RANDOM_CUT_FOREST - AWS publish paper about this, newest way of identifying outliers in a dataset. 
+
