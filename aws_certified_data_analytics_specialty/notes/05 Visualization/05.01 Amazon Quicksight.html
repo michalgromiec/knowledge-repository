@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>AWS Kinesis Analytics - Knowledge Repository 0.1 documentation</title>
+        <title>Amazon Quicksight - Knowledge Repository 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -196,73 +196,125 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="aws-kinesis-analytics">
-<h1>AWS Kinesis Analytics<a class="headerlink" href="#aws-kinesis-analytics" title="Permalink to this heading">#</a></h1>
+          <div class="section" id="amazon-quicksight">
+<h1>Amazon Quicksight<a class="headerlink" href="#amazon-quicksight" title="Permalink to this heading">#</a></h1>
+<div class="section" id="what-is-it">
+<h2>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>query streams of data continuously</p></li>
-<li><p>similar in spirit to Spark Streaming</p></li>
-<li><p>can receive data from Kinesis Data Stream or Kinesis Data Firehose</p></li>
-<li><p>optionally you can create reference table (lookup table) based on object stored in S3 bucket</p></li>
-<li><p>you can set up time window that you look for and aggregate/analyze data within this window</p></li>
-<li><p>uses SQL to query data</p></li>
-<li><p>possible destinations: Kinesis Data Stream, Kinesis Firehose, S3 or Amazon Redshift</p></li>
-<li><p>errors are redirected to error stream (i.e. on type mismatch)</p></li>
-<li><p>specific destination type is lambda</p></li>
+<li><p>fast, easy, cloud-powered business analytics service</p></li>
+<li><p>made not for developers, but for business analysts</p></li>
+<li><p>allows to:</p>
+<ul>
+<li><p>build visualizations</p></li>
+<li><p>perform ad-hoc analysis</p></li>
+<li><p>get business insights from data</p></li>
+<li><p>support any devices</p></li>
 </ul>
-<div class="section" id="reference-table">
-<h2>Reference table<a class="headerlink" href="#reference-table" title="Permalink to this heading">#</a></h2>
-<p>You can join external data to your stream data (lookup table)</p>
+</li>
+<li><p>serverless</p></li>
+</ul>
 </div>
-<div class="section" id="integration-with-lambda">
-<h2>Integration with Lambda<a class="headerlink" href="#integration-with-lambda" title="Permalink to this heading">#</a></h2>
-<p>Allows for postprocessing data which are results from Kinesis Analytics query. Adds lot of flexibility, i.e. aggregating rows, translating to different formats, encryption etc.</p>
-<p>By using Lambda, you can indirect write your stream aggregated data to other destinations (i.e. DynamoDB, SNS, SQS etc) or even any other external data targets.</p>
+<div class="section" id="data-sources">
+<h2>Data sources<a class="headerlink" href="#data-sources" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>redshift</p></li>
+<li><p>aurora/rds</p></li>
+<li><p>athena</p></li>
+<li><p>EC2-hosted databases (via ODBC/JDBC)</p></li>
+<li><p>files (S3 or on-premises): Excel, CSVs etc</p></li>
+<li><p>data preparation allows limited ETL (change field names, add calculated files, change data types etc)</p></li>
+</ul>
 </div>
-<div class="section" id="kinesis-data-analytics-for-apache-flink">
-<h2>Kinesis Data Analytics for Apache Flink<a class="headerlink" href="#kinesis-data-analytics-for-apache-flink" title="Permalink to this heading">#</a></h2>
-<p>formerly known as Kinesis Data Analytics for Java, now it supports Scala also.</p>
-<p>Flink is a framework for processing data streams.</p>
-<p>Instead of using SQL, users can write Flink application locally on their machines and use this application to transform stream data in Kinesis Data Analytics.</p>
-<p>In practice, you put your Flink code on S3 and setup KDA for Apache Flink and tellKDA where the code lives in S3.</p>
-<p>It’s serverless.</p>
-<p>KDA for Apache Flink code can read data only from data streams (both Kinesis Data Stream or AWS Managed Streaimng for Apache Kafka). It can’t read data from Firehose.</p>
+<div class="section" id="spice">
+<h2>SPICE<a class="headerlink" href="#spice" title="Permalink to this heading">#</a></h2>
+<p>SPICE = Super-fast, Parallel, In-memory Calculation Engine</p>
+<ul class="simple">
+<li><p>It’s a way of copy data from Athena into a more optimized format required by Quicksight</p></li>
+<li><p>in practice, it’s copies data from sources to quicksight, so every user gets 10 gigabytes of storage for SPICE data.</p></li>
+<li><p>can accelerate large queries that would timeout in direct query mode</p></li>
+<li><p>it behave similar to local cache. It means that it prevents from querying datasource many times, instead of this quicksight checks if data is already stored in SPICE.</p></li>
+</ul>
 </div>
 <div class="section" id="use-cases">
-<h2>Use-cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>streaming ETL - continuously processing stream data (reads data from stream, organize data by sensor type, normalize data and save to S3)</p></li>
-<li><p>continuous metric generation - continously calculate frame of data stream, i.e. online games leaderboard for last 60 minutes</p></li>
-<li><p>responsive analytics - i.e. application calculating availability of site and writes result status (0/1) to Cloudwatch</p></li>
+<li><p>interactive ad-hoc exploration</p></li>
+<li><p>dashboards and KPI’s</p></li>
 </ul>
 </div>
-<div class="section" id="costs-model">
-<h2>Costs model<a class="headerlink" href="#costs-model" title="Permalink to this heading">#</a></h2>
+<div class="section" id="anti-patterns">
+<h2>Anti-patterns<a class="headerlink" href="#anti-patterns" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>serverless - pay for resource consumed (but it’s not cheap)</p></li>
-<li><p>charged by Kinesis Processing Units (KPU), 1KPU = 1vCPU/4GB per one hour</p></li>
+<li><p>highly formatted canned reports (Quicksight is rather for ad-hoc analysis…)</p></li>
+<li><p>ETL - use Glue instead</p></li>
 </ul>
 </div>
-<div class="section" id="others">
-<h2>Others<a class="headerlink" href="#others" title="Permalink to this heading">#</a></h2>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>it scales automatically</p></li>
-<li><p>run on IAM role, which must have permissions for both sources and destinations</p></li>
-<li><p>schema discovery - automatic derivation of schema based on incoming data</p></li>
-<li><p>RANDOM_CUT_FOREST - AWS publish paper about this, newest way of identifying outliers in a dataset.</p></li>
+<li><p>VPC connectivity</p></li>
+<li><p>Row-level security</p></li>
+<li><p>private VPC access</p></li>
+<li><p>quicksight should have permissions for S3 and Athena (can be managed right from quicksight console)</p></li>
 </ul>
 </div>
+<div class="section" id="user-management">
+<h2>User Management<a class="headerlink" href="#user-management" title="Permalink to this heading">#</a></h2>
 </div>
-<div class="section" id="how-it-works">
-<h1>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this heading">#</a></h1>
+<div class="section" id="pricing-model">
+<h2>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>you can use Notebook Studio which is a Zeppelin instance which can connect to Kinesis streams</p></li>
-<li><p>Zepellin instance is run using EC2 role, this role should have permissions to both source and target</p></li>
-<li><p>you are creating your Kinesis Analytics flow by using Zepellin</p></li>
-<li><p>under the hood, Apache Flink is running</p></li>
-<li><p>This Flink app requires separate AWS Glue database, in which you can create Glue tables</p></li>
-<li><p>So you can create Glue tables based on Kinesis stream (simple as that), process data by using simple SQL and put the results wherever you want (i.e. to another table based on other Kinesis stream or on S3 location)</p></li>
-<li><p>still you can use standalone Flink application to to the same</p></li>
+<li><p>there are two version of quicksight - Standard and Enterprise</p></li>
+<li><p>enterprise allows for:</p>
+<ul>
+<li><p>encryption at rest (for results of queries and SPICE)</p></li>
+<li><p>MS Active Directory integration</p></li>
 </ul>
+</li>
+<li><p>costs are based on number of user:</p>
+<ul>
+<li><p>standard - 108$/year or 12$/month</p></li>
+<li><p>enterprise - 216$/year or 24$/month</p></li>
+</ul>
+</li>
+<li><p>there are option for buying extra SPICE capacity (beyond 10GB) - for standard 0.25$/user/GB, for enterprise - 0.38$/user/GB</p></li>
+<li><p>above prices are for authors - people who do dashboards and ad-hoc analysis</p></li>
+</ul>
+</div>
+<div class="section" id="machine-learning-insights">
+<h2>Machine Learning Insights<a class="headerlink" href="#machine-learning-insights" title="Permalink to this heading">#</a></h2>
+<p>quicksight offer builtin machine learning models:</p>
+<ul class="simple">
+<li><p>anomaly detection (uses Random Cut Forest)</p></li>
+<li><p>forecasting (detects seasonality also by using Random Cut Forest)</p></li>
+<li><p>autonarratives (adds “story of your data” to dashboards, description of key measures generated by machine learning models)</p></li>
+<li><p>suggested insights</p></li>
+</ul>
+</div>
+<div class="section" id="quicksight-q">
+<h2>Quicksight Q<a class="headerlink" href="#quicksight-q" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>machine learning powered</p></li>
+<li><p>answers business questions with Natural Language Processing</p></li>
+<li><p>needs a lot of communication, personal training, preprocessing data to be NLP-friendly</p></li>
+</ul>
+</div>
+<div class="section" id="visual-types">
+<h2>Visual Types<a class="headerlink" href="#visual-types" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>autograph - automatically suggests what type of visual should be used</p></li>
+<li><p>bar charts - for comparison and histograms</p></li>
+<li><p>line graphs - for changes over time</p></li>
+<li><p>scatter plots, heat maps - for correlation</p></li>
+<li><p>pie graphs, tree maps - for aggregation</p></li>
+<li><p>pivot tables - for tabular data</p></li>
+<li><p>KPI</p></li>
+<li><p>Geospatial (maps)</p></li>
+<li><p>donut</p></li>
+<li><p>gauge - compare value in a measure (execution of target)</p></li>
+<li><p>word clouds</p></li>
+</ul>
+</div>
 </div>
 
         </article>
@@ -302,16 +354,20 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">AWS Kinesis Analytics</a><ul>
-<li><a class="reference internal" href="#reference-table">Reference table</a></li>
-<li><a class="reference internal" href="#integration-with-lambda">Integration with Lambda</a></li>
-<li><a class="reference internal" href="#kinesis-data-analytics-for-apache-flink">Kinesis Data Analytics for Apache Flink</a></li>
-<li><a class="reference internal" href="#use-cases">Use-cases</a></li>
-<li><a class="reference internal" href="#costs-model">Costs model</a></li>
-<li><a class="reference internal" href="#others">Others</a></li>
+<li><a class="reference internal" href="#">Amazon Quicksight</a><ul>
+<li><a class="reference internal" href="#what-is-it">What is it</a></li>
+<li><a class="reference internal" href="#data-sources">Data sources</a></li>
+<li><a class="reference internal" href="#spice">SPICE</a></li>
+<li><a class="reference internal" href="#use-cases">Use cases</a></li>
+<li><a class="reference internal" href="#anti-patterns">Anti-patterns</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#user-management">User Management</a></li>
+<li><a class="reference internal" href="#pricing-model">Pricing model</a></li>
+<li><a class="reference internal" href="#machine-learning-insights">Machine Learning Insights</a></li>
+<li><a class="reference internal" href="#quicksight-q">Quicksight Q</a></li>
+<li><a class="reference internal" href="#visual-types">Visual Types</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#how-it-works">How it works</a></li>
 </ul>
 
           </div>

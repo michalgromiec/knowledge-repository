@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>AWS Kinesis Analytics - Knowledge Repository 0.1 documentation</title>
+        <title>Amazon Athena - Knowledge Repository 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -196,73 +196,114 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="aws-kinesis-analytics">
-<h1>AWS Kinesis Analytics<a class="headerlink" href="#aws-kinesis-analytics" title="Permalink to this heading">#</a></h1>
+          <div class="section" id="amazon-athena">
+<h1>Amazon Athena<a class="headerlink" href="#amazon-athena" title="Permalink to this heading">#</a></h1>
+<p>query engine for doing interactive queries of S3 data</p>
+<div class="section" id="what-is-it">
+<h2>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>query streams of data continuously</p></li>
-<li><p>similar in spirit to Spark Streaming</p></li>
-<li><p>can receive data from Kinesis Data Stream or Kinesis Data Firehose</p></li>
-<li><p>optionally you can create reference table (lookup table) based on object stored in S3 bucket</p></li>
-<li><p>you can set up time window that you look for and aggregate/analyze data within this window</p></li>
-<li><p>uses SQL to query data</p></li>
-<li><p>possible destinations: Kinesis Data Stream, Kinesis Firehose, S3 or Amazon Redshift</p></li>
-<li><p>errors are redirected to error stream (i.e. on type mismatch)</p></li>
-<li><p>specific destination type is lambda</p></li>
+<li><p>completely serverless (pay for scanned data)</p></li>
+<li><p>interactive query service for S3 (data stays at S3, Athena give only interface and optimizer for this data)</p></li>
+<li><p>under the hood - Presto</p></li>
+<li><p>supports many ddata formats</p>
+<ul>
+<li><p>CSV</p></li>
+<li><p>JSON</p></li>
+<li><p>ORC (columnar, splittable)</p></li>
+<li><p>Parquet (columnar, splittable)</p></li>
+<li><p>Avro (splittable)</p></li>
 </ul>
-<div class="section" id="reference-table">
-<h2>Reference table<a class="headerlink" href="#reference-table" title="Permalink to this heading">#</a></h2>
-<p>You can join external data to your stream data (lookup table)</p>
-</div>
-<div class="section" id="integration-with-lambda">
-<h2>Integration with Lambda<a class="headerlink" href="#integration-with-lambda" title="Permalink to this heading">#</a></h2>
-<p>Allows for postprocessing data which are results from Kinesis Analytics query. Adds lot of flexibility, i.e. aggregating rows, translating to different formats, encryption etc.</p>
-<p>By using Lambda, you can indirect write your stream aggregated data to other destinations (i.e. DynamoDB, SNS, SQS etc) or even any other external data targets.</p>
-</div>
-<div class="section" id="kinesis-data-analytics-for-apache-flink">
-<h2>Kinesis Data Analytics for Apache Flink<a class="headerlink" href="#kinesis-data-analytics-for-apache-flink" title="Permalink to this heading">#</a></h2>
-<p>formerly known as Kinesis Data Analytics for Java, now it supports Scala also.</p>
-<p>Flink is a framework for processing data streams.</p>
-<p>Instead of using SQL, users can write Flink application locally on their machines and use this application to transform stream data in Kinesis Data Analytics.</p>
-<p>In practice, you put your Flink code on S3 and setup KDA for Apache Flink and tellKDA where the code lives in S3.</p>
-<p>It’s serverless.</p>
-<p>KDA for Apache Flink code can read data only from data streams (both Kinesis Data Stream or AWS Managed Streaimng for Apache Kafka). It can’t read data from Firehose.</p>
+</li>
+<li><p>can read unstructured, semi-structured or structured data</p></li>
+<li><p>works with Glue Data Catalog</p></li>
+</ul>
 </div>
 <div class="section" id="use-cases">
-<h2>Use-cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>streaming ETL - continuously processing stream data (reads data from stream, organize data by sensor type, normalize data and save to S3)</p></li>
-<li><p>continuous metric generation - continously calculate frame of data stream, i.e. online games leaderboard for last 60 minutes</p></li>
-<li><p>responsive analytics - i.e. application calculating availability of site and writes result status (0/1) to Cloudwatch</p></li>
+<li><p>ad-hoc queries of web logs</p></li>
+<li><p>querying staging data before loading to redshift</p></li>
+<li><p>analyze cloudtrail/cloudfront logs in S3</p></li>
+<li><p>integration with Jupyter/Zeppelin/RStudion notebooks</p></li>
+<li><p>integration with QuickSight</p></li>
+<li><p>integration via ODBC/JDBC with other visualization tools</p></li>
 </ul>
 </div>
-<div class="section" id="costs-model">
-<h2>Costs model<a class="headerlink" href="#costs-model" title="Permalink to this heading">#</a></h2>
+<div class="section" id="integration-with-aws-glue">
+<h2>Integration with AWS Glue<a class="headerlink" href="#integration-with-aws-glue" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>serverless - pay for resource consumed (but it’s not cheap)</p></li>
-<li><p>charged by Kinesis Processing Units (KPU), 1KPU = 1vCPU/4GB per one hour</p></li>
+<li><p>uses AWS Glue Data Catalog by default (it is possible to add other data source by using Lambda’s functions, supported heavily by AWS GUI)</p></li>
+<li><p>Athena is based on Presto, so it doesn’t contain table schemas directly - it uses external data sources, in this example - Hive metastore which is in this definition AWS Glue Meta Store</p></li>
 </ul>
 </div>
-<div class="section" id="others">
-<h2>Others<a class="headerlink" href="#others" title="Permalink to this heading">#</a></h2>
+<div class="section" id="workgroups">
+<h2>Workgroups<a class="headerlink" href="#workgroups" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>it scales automatically</p></li>
-<li><p>run on IAM role, which must have permissions for both sources and destinations</p></li>
-<li><p>schema discovery - automatic derivation of schema based on incoming data</p></li>
-<li><p>RANDOM_CUT_FOREST - AWS publish paper about this, newest way of identifying outliers in a dataset.</p></li>
+<li><p>can organize users/teams/apps into Workgroups</p></li>
+<li><p>you can control query access and track costs by Workgroup</p></li>
+<li><p>integrates with IAM/Cloudwatch/SNS</p></li>
+<li><p>workgroups have its own separate:</p>
+<ul>
+<li><p>query history (via S3 path set for query history)</p></li>
+<li><p>data limits (limit how much data queries may scan by workgroup)</p></li>
+<li><p>IAM policies</p></li>
+<li><p>Encryption settings</p></li>
+</ul>
+</li>
 </ul>
 </div>
-</div>
-<div class="section" id="how-it-works">
-<h1>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this heading">#</a></h1>
+<div class="section" id="pricing-model">
+<h2>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>you can use Notebook Studio which is a Zeppelin instance which can connect to Kinesis streams</p></li>
-<li><p>Zepellin instance is run using EC2 role, this role should have permissions to both source and target</p></li>
-<li><p>you are creating your Kinesis Analytics flow by using Zepellin</p></li>
-<li><p>under the hood, Apache Flink is running</p></li>
-<li><p>This Flink app requires separate AWS Glue database, in which you can create Glue tables</p></li>
-<li><p>So you can create Glue tables based on Kinesis stream (simple as that), process data by using simple SQL and put the results wherever you want (i.e. to another table based on other Kinesis stream or on S3 location)</p></li>
-<li><p>still you can use standalone Flink application to to the same</p></li>
+<li><p>pay as you go</p></li>
+<li><p>$5 per TB scanned</p></li>
+<li><p>succesful or cancelled queries count, failed queries do not</p></li>
+<li><p>all DDL operations are free (CREATE/ALTER/DROP)</p></li>
+<li><p>you can save lots of money by using columnar formats (ORC/Parquet, by allowing athena to query only necessary columns not all data and by reucing size of column by columnar storage)</p></li>
+<li><p>schema partitioning also reduce size of scanned data</p></li>
 </ul>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>access control by IAM (access to athena, read from S3) and S3 bucket policies (permissions for certain path in S3 bucket)</p></li>
+<li><p>encrypt results at rest in S3 staging directory</p>
+<ul>
+<li><p>SSE-S3, SSE-KMS and CSE-KMS (being honest, it’s an option for S3 not directly for Athena)</p></li>
+</ul>
+</li>
+<li><p>in-transit secured by TLS (HTTPS), also between Athena and S3</p></li>
+</ul>
+</div>
+<div class="section" id="anti-patterns">
+<h2>Anti-patterns<a class="headerlink" href="#anti-patterns" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>visualization, highly formatted reports</p></li>
+<li><p>ETL - use Glue instead, EMR with Apache Spark</p></li>
+</ul>
+</div>
+<div class="section" id="performance-optimization">
+<h2>Performance optimization<a class="headerlink" href="#performance-optimization" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>use columnar data</p></li>
+<li><p>small number of large files performs better than large number of small files</p></li>
+<li><p>use partitions</p></li>
+</ul>
+</div>
+<div class="section" id="acid-transactions">
+<h2>ACID transactions<a class="headerlink" href="#acid-transactions" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>powered by Apache Iceberg (just add <code class="docutils literal notranslate"><span class="pre">table_type='ICEBERG</span></code> in TBLPROPERTIES of CREATE TABLE command)</p></li>
+<li><p>compatible with EMR/Spark and any other tool supporting Iceberg table format</p></li>
+<li><p>implement record locking (to prevent from changing data when more than one user modifies record in the same moment)</p></li>
+<li><p>allows for time travel operations</p>
+<ul>
+<li><p>user is able to revoer data recently deleted</p></li>
+</ul>
+</li>
+<li><p>need to manual optimize table to prevent from degrade performance of table (by using <code class="docutils literal notranslate"><span class="pre">OPTIMIZE</span></code> command)</p></li>
+</ul>
+</div>
 </div>
 
         </article>
@@ -302,16 +343,18 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">AWS Kinesis Analytics</a><ul>
-<li><a class="reference internal" href="#reference-table">Reference table</a></li>
-<li><a class="reference internal" href="#integration-with-lambda">Integration with Lambda</a></li>
-<li><a class="reference internal" href="#kinesis-data-analytics-for-apache-flink">Kinesis Data Analytics for Apache Flink</a></li>
-<li><a class="reference internal" href="#use-cases">Use-cases</a></li>
-<li><a class="reference internal" href="#costs-model">Costs model</a></li>
-<li><a class="reference internal" href="#others">Others</a></li>
+<li><a class="reference internal" href="#">Amazon Athena</a><ul>
+<li><a class="reference internal" href="#what-is-it">What is it</a></li>
+<li><a class="reference internal" href="#use-cases">Use cases</a></li>
+<li><a class="reference internal" href="#integration-with-aws-glue">Integration with AWS Glue</a></li>
+<li><a class="reference internal" href="#workgroups">Workgroups</a></li>
+<li><a class="reference internal" href="#pricing-model">Pricing model</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#anti-patterns">Anti-patterns</a></li>
+<li><a class="reference internal" href="#performance-optimization">Performance optimization</a></li>
+<li><a class="reference internal" href="#acid-transactions">ACID transactions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#how-it-works">How it works</a></li>
 </ul>
 
           </div>

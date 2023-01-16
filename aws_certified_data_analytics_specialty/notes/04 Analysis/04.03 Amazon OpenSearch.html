@@ -1,0 +1,418 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Amazon OpenSearch (former Amazon ElasticSearch) - Knowledge Repository 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Knowledge Repository 0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Kinesis Data Streams</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">DAS-C01 certification info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00%20Certification/01%20training%20case%20study.html">Udemy Course Case Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.02%20Kinesis%20Data%20Streams.html">Kinesis Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">Consumers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">Handling duplicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">Kinesis Data Firehose</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="amazon-opensearch-former-amazon-elasticsearch">
+<h1>Amazon OpenSearch (former Amazon ElasticSearch)<a class="headerlink" href="#amazon-opensearch-former-amazon-elasticsearch" title="Permalink to this heading">#</a></h1>
+<div class="section" id="what-is-it">
+<h2>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h2>
+<p>Large scale analysis and reporting at petabyte scale</p>
+<p>At the beginning it was made for search engine, but now it’s not only for search anymore.
+Now its primarily for reporting.</p>
+<p>Can analyze massive data set a lot faster than i.e. APache Spark.</p>
+<ul class="simple">
+<li><p>OpenSearch if fork of Elasticsearch and Kibana (visualization tool), of which ElasticSearch was actually build on top of Lucene</p></li>
+<li><p>fundamentally is search engine, used for searching using json and fuzzy matching</p></li>
+<li><p>scalable, distributed horizontally</p></li>
+<li><p>over years, thanks to addition of new tools, it has became analysis tool</p></li>
+<li><p>can be used as data pipeline by using Kinesis (it replaces Beats &amp; LogStash from Elastic Stack)</p></li>
+<li><p>managed solution, but not serverless, simillar to EMR (user is not responsible for i.e. server upgrades), instead of installing opensource elasticsearch on many EC2 instances and managed them by user</p></li>
+<li><p>can scale up or ddown without downtime, but it is not automatic</p></li>
+<li><p>pay for what you use (instance-hours, storage, data transfer), still idle working instances generate costs</p></li>
+<li><p>security assued by network isolation (VPC, default) and encryption both at rest and in-transit</p></li>
+</ul>
+</div>
+<div class="section" id="renaming-to-opensearch">
+<h2>Renaming to opensearch<a class="headerlink" href="#renaming-to-opensearch" title="Permalink to this heading">#</a></h2>
+<p>Amazon renamed service to Amazon openSearch after licensing dispute in September 2021 - they’ve forked open source ElasticSearch, it works in very much the same way as the Amazon Elasticsearch, it just has a different name.</p>
+</div>
+<div class="section" id="use-cases">
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>(basic) full-text search</p></li>
+<li><p>log analytics</p></li>
+<li><p>application monitoring (based on incoming log data)</p></li>
+<li><p>security analytics / clickstream analytics (also based on log data)</p></li>
+</ul>
+</div>
+<div class="section" id="main-concepts">
+<h2>Main Concepts<a class="headerlink" href="#main-concepts" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>documents = data are stored as a document (because basically opensearch was for full-text search…). But it is not limited to text - you can store data in json files. Every document has a unique ID and a type</p></li>
+<li><p>types = defines schema and mapping shared by documents that represent the same soft of thing/format. But in newer elasticsearch version types are limited and going to be ddeprecated, because schemas will be derived automatically in future</p></li>
+<li><p>indices = index powers search into all documents within a collection of type, in opensearch we have one type per indedx</p></li>
+</ul>
+</div>
+<div class="section" id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>index is splitted into shards (allows for horizontal scalling)</p></li>
+<li><p>document is hashed and stored in particular shard</p></li>
+<li><p>every shard may be on a different node in a cluster</p></li>
+<li><p>in opensearch every shard is a self-contained Lucene index of its own (every shard is kindd of separate search engine)</p></li>
+<li><p>each index has own primary shard and replicas</p></li>
+<li><p>writes are first writed to primary shard and then replicated to replica shards</p></li>
+<li><p>reads are routed to the primary shard or any of replica shardds, opensearch tries to distribute the load of read request between all possible shardsd (both primary and replicas)</p></li>
+</ul>
+</div>
+<div class="section" id="integration-with-other-aws-services">
+<h2>Integration with other AWS Services<a class="headerlink" href="#integration-with-other-aws-services" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>S3 buckets (via Lambda to Kinesis)</p></li>
+<li><p>Kinesis Data Streams</p></li>
+<li><p>DynamoDB Streams</p></li>
+<li><p>Cloudwatch / cloudtrail</p></li>
+</ul>
+</div>
+<div class="section" id="deployment-options">
+<h2>Deployment options<a class="headerlink" href="#deployment-options" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>dedicated master node (doesn’t hold data, it aim is to manage work on primary and replica shards)</p></li>
+<li><p>domains = in AWS opensearch domain is a collection of nodes which can work as a opensearch cluster</p></li>
+<li><p>snapshot to S3 - it is possible to make a snapshot of opensearch indices to S3, to prevent from losing data on accidentally delete opensearch cluster</p></li>
+</ul>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>resource-based policies (so you can grant operations on certain domain for certain role)</p></li>
+<li><p>identity-based policies</p></li>
+<li><p>ip-based policies (you can restrict access to selected IP numbers)</p></li>
+<li><p>VPC restriction (you can place cluter in VPC with no internet access). You cannot change this option on running cluster, you have to decide it when creating the cluster</p></li>
+<li><p>Cognito can be used to grant separate authentication (both using Active Directory, social media identity services or Cognito user pool)</p></li>
+</ul>
+</div>
+<div class="section" id="anti-patterns">
+<h2>Anti-patterns<a class="headerlink" href="#anti-patterns" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>OLTP = opensearch doesnt have transation support, use RDS or DynamoDB instead</p></li>
+<li><p>ad-hoc data querying = you can do this, but athena is better for this</p></li>
+</ul>
+</div>
+<div class="section" id="storage-types">
+<h2>Storage types<a class="headerlink" href="#storage-types" title="Permalink to this heading">#</a></h2>
+<p>This is one of the difference vs Elasticsearch - AWS introduce storage types</p>
+<p>By default, your data nores use “hot” storage - with EBS volumes, fastest performance, but the most expensive</p>
+<p>As an alternative, you can choose other storage types:</p>
+<ul class="simple">
+<li><p>ultrawarm/warm - uses S3 and caching, best for indices with few writes, slower performance but much lower costs (uses S3 instead of EBS)</p></li>
+<li><p>cold - uses S3, it’s even cheaper, best use for “periodic research on older data”</p></li>
+</ul>
+<p>Data can be migrated between different storage types</p>
+</div>
+<div class="section" id="index-state-management">
+<h2>Index State Management<a class="headerlink" href="#index-state-management" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>automates index management policies - in other words automate operations which can be done on index, for example:</p>
+<ul>
+<li><p>delete old indices after a period of time</p></li>
+<li><p>move inddices into read only state</p></li>
+<li><p>move indices between storage types</p></li>
+<li><p>reduce replica count over time</p></li>
+<li><p>automate index snapshots</p></li>
+</ul>
+</li>
+</ul>
+<p>ISM policies run every 30-48 minutes, you can send notifications when done</p>
+</div>
+<div class="section" id="index-rollups">
+<h2>Index rollups<a class="headerlink" href="#index-rollups" title="Permalink to this heading">#</a></h2>
+<p>You can automatically periodically roll up old data into summarized indices - it allows you save storage costs.</p>
+<p>New rolled-up index may have fewer fields.</p>
+</div>
+<div class="section" id="index-transforms">
+<h2>Index transforms<a class="headerlink" href="#index-transforms" title="Permalink to this heading">#</a></h2>
+<p>like rollups but purpose is to create a different view to analyze data differently</p>
+</div>
+<div class="section" id="cross-cluster-replication">
+<h2>Cross-cluster replication<a class="headerlink" href="#cross-cluster-replication" title="Permalink to this heading">#</a></h2>
+<p>You can repliace indices across domains, to ensure high availability (prevent from losing data) or to reduce latency (replicate data geographically).</p>
+<p>You set up follower index which pulls data from leader index.</p>
+<p>You can also copy index on demand by using Remote Reindex functionality.</p>
+</div>
+<div class="section" id="stability">
+<h2>Stability<a class="headerlink" href="#stability" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>3 dedicated master nodeds is best practice (avoids split brain when you have two master nodes and they have different state - who is master then?)</p></li>
+<li><p>pay attention on disk space - minimum storage requiremens is roughly <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">data</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">replicas)</span> <span class="pre">*</span> <span class="pre">1.45</span></code>, so with 45% of overhead</p></li>
+<li><p>choose correct number of shards (many times needs to be done by try and error method)</p></li>
+<li><p>choose correct instance types (mostly about storage requirements, not about CPU and memory, cause opensearch is storage-heavy). Instances for search have suffix <code class="docutils literal notranslate"><span class="pre">.search</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="pricing-model">
+<h2>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>you pay for your instances per hour (same as for EC2)</p></li>
+<li><p>you pay for your EBS volumes (if you use hot storage type, not cold or ultrawarm)</p></li>
+</ul>
+</div>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Amazon OpenSearch (former Amazon ElasticSearch)</a><ul>
+<li><a class="reference internal" href="#what-is-it">What is it</a></li>
+<li><a class="reference internal" href="#renaming-to-opensearch">Renaming to opensearch</a></li>
+<li><a class="reference internal" href="#use-cases">Use cases</a></li>
+<li><a class="reference internal" href="#main-concepts">Main Concepts</a></li>
+<li><a class="reference internal" href="#how-does-it-work">How does it work?</a></li>
+<li><a class="reference internal" href="#integration-with-other-aws-services">Integration with other AWS Services</a></li>
+<li><a class="reference internal" href="#deployment-options">Deployment options</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#anti-patterns">Anti-patterns</a></li>
+<li><a class="reference internal" href="#storage-types">Storage types</a></li>
+<li><a class="reference internal" href="#index-state-management">Index State Management</a></li>
+<li><a class="reference internal" href="#index-rollups">Index rollups</a></li>
+<li><a class="reference internal" href="#index-transforms">Index transforms</a></li>
+<li><a class="reference internal" href="#cross-cluster-replication">Cross-cluster replication</a></li>
+<li><a class="reference internal" href="#stability">Stability</a></li>
+<li><a class="reference internal" href="#pricing-model">Pricing model</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    </body>
+</html>
