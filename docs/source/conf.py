@@ -34,7 +34,15 @@ html_static_path = ['_static']
 # html_logo = ""
 # html_theme_options = {"announcement": "<strong>Important <font color='red'>NEWS</font></strong>TESTOWE OSTRZEŻENIE"}
 # html_theme_options = {"sidebar_hide_name": True}
-html_theme_options = {'single_page': False}
+html_theme_options = {'single_page': False,
+                      "repository_url": "https://github.com/michalgromiec/knowledge-repository",
+                      "use_repository_button": True,
+                      "use_edit_page_button": True,
+                      "path_to_docs": "docs/source",
+                      'use_download_button': False,
+                      'home_page_in_toc': True,
+                      'logo_only': True
+                      }
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
