@@ -1,0 +1,31 @@
+# Identity Federation
+
+* lets user outside of AWS to assume temporary role for accessing AWS resources
+* those users doesn't have to have user in AWS - they assume identity provided access role
+* in practice, it's a process when 3rd party identity manager, trusted by AWS, is able to return to the user temporary credentials which allows to access to AWS
+* types of possibly trusted identity managers:
+  * LDAP
+  * Microsoft Active Directory (more or less equal to SAML)
+  * Single Sign On
+  * Open ID
+  * Cognito
+
+## SAML Federeation
+* for enterprises
+* integrates Active Directory with AWS
+* in practice, user authenticate in identity provider, gets SAML assertion and exchange it with STS into temporary access and secret key or redirect to website with AWS GUI.
+* user needs to be defined in identity provider
+
+## Custom Identity Broker Application
+* for enterprises
+* only if identity provider is not compatible with SAML 2.0
+* we have to develop/program identity broker which behave like identity provider
+* user needs to be defined in identity provider
+
+## AWS Cognito (Federated Identity Pool)
+* for public applications
+* it allows users to sign in to AWS by using their existing accounts (Google, Facebook, Cognito User Pool) 
+* goal is to provide direct access to aws resource from the client side (sometime anonymous)
+* temporary credentials are retrieved from the Federated Identity Pool based on authentication token retrieved from above mentioned identity providers
+* Web Identity Federation is an alternative byt AWS recommends against it
+

@@ -1,0 +1,16 @@
+# AWS STS (Security Token Service)
+* allows to grant temporary access to AWS resources
+* token is valid for up to one hour
+* used for 
+  * cross account access
+  * federation (active directory)
+    * non-aws user with link with Active Directory users
+    * SAML (security assertion markup language)
+    * SSO (enables users to log in to AWS console without assigning IAM credentials)
+  * federation with third party providers / Cognito
+
+## Cross Account Access
+1. define IAM role for another account to access
+2. define which accounts can access with IAM role
+3. use aws sts to retrieve credentials and impersonate the IAM role you have access to (AssumeRole)
+4. temporary credentials valid between 15 minutes to 1 hour

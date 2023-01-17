@@ -1,0 +1,6 @@
+# Cloud HSM (Hardware Security Modules)
+* dedicated hardware to client
+* client maanges own encryption keys
+* AWS can't even touch device to assure high securit standards
+* HSM clusters can be spread accross multi az (setup manually by clients)
+* AWS cannot recover keys in case of locing credentials

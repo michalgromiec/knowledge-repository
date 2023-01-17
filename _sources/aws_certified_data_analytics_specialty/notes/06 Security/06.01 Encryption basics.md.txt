@@ -1,0 +1,42 @@
+# Encryption basics
+
+## Encryption in-flight
+* TLS/SSL (TLS is the newer version of SSL)
+* data are encrypted before sending and encrypted after receiving
+* communication between client and server or server and server
+* encryption is done by using tls certificates
+* ensures no "man in the middle" (MITM) attack is possible - so other user see only encrypted network data and can't see raw messages
+
+### Step by step
+1. source want to send object to the server
+2. at the source side, object is encrypted using TLS certificate
+3. object in encrypted form is send to target
+4. target receives encrypted object and decrypt it using TLS certificate
+5. target is able to see decrypted object 
+
+## Server-side encryption at rest
+* data is encrypted after received by the server and decrypted before sent to the client
+* data is encrypted using the key
+* keys must be managed somewhere and server must have access to key
+
+### Step by step
+1. client send object to the server (preferably using encryption in-transit, HTTPS)
+2. server receives object and decrypt it using TLS certificate (in case HTTPS has been used)
+3. server encrypts data using key known by the server
+4. server stores encrypted object in encrypted form
+5. when client want to download object, server decrypt object using key known by the server and send decrypted object to client (preferably using encryption in-transit, HTTPS)
+6. client receives object and decrypt them using TLS certificate (in case HTTPS has been used)
+7. client is able to see decrypted object
+
+## Client-side encryption
+* data is encrypted before sending and encrypted after receiving, but **only on the client side**
+* server should not be able to decrypt the data
+* used when we do not trust server
+
+### Step by step
+1. client send object to the server (preferably using encryption in-transit, HTTPS)
+2. client encrypts object using key known only for client
+3. client sent encrypted object to server and encrypted object is stored on server in encrypted form
+4. when client want to download object, server sends object in encrypted form
+5. client decrypts objects using key known only for client
+6. client is able to see decrypted object
