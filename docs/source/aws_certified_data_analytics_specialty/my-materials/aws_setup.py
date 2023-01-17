@@ -3,14 +3,14 @@ import botocore
 
 
 class AwsCloudGuruSetuper:
-    def __init__(self, aws_access_key_id, aws_secret_access_key, region_name):
+    def __init__(self, aws_access_key_id: str = None, aws_secret_access_key: str = None, region_name: str = None):
         self.aws_access_key_id = aws_access_key_id
         self.aws_secret_access_key = aws_secret_access_key
         self.region_name = region_name
 
-        self.ses = boto3.Session(aws_access_key_id='AKIA4L23LN4ZOJQTE3FU',
-                                 aws_secret_access_key='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',
-                                 region_name='us-east-1')
+        self.ses = boto3.Session(aws_access_key_id=self.aws_access_key_id,
+                                 aws_secret_access_key=self.aws_secret_access_key,
+                                 region_name=self.region_name)
 
     def s3_create_bucket(self, bucket_name):
         s3 = self.ses.client('s3')
@@ -60,10 +60,9 @@ class AwsCloudGuruSetuper:
 
         return [instance.id for instance in resp]
 
+
 if __name__ == '__main__':
-    aws = AwsCloudGuruSetuper(aws_access_key_id='AKIA4L23LN4ZOJQTE3FU',
-                              aws_secret_access_key='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',
-                              region_name='us-east-1')
+    aws = AwsCloudGuruSetuper()
 
     aws.ec2_create_keypair(key_name='mg', key_format='pem', ignore_errors=True)
     aws.s3_create_bucket('test-mg-nowy-999')
