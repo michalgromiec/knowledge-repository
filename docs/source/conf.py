@@ -28,13 +28,13 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'furo'
-# html_theme = "sphinx_book_theme"
+# html_theme = 'furo'
+html_theme = "sphinx_book_theme"
 html_static_path = ['_static']
 # html_logo = ""
 # html_theme_options = {"announcement": "<strong>Important <font color='red'>NEWS</font></strong>TESTOWE OSTRZEŻENIE"}
-html_theme_options = {"sidebar_hide_name": True}
-# html_theme_options = {'single_page': False}
+# html_theme_options = {"sidebar_hide_name": True}
+html_theme_options = {'single_page': False}
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
