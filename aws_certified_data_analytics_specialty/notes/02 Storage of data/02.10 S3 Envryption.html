@@ -93,8 +93,8 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">
-   DAS-C01 certification info
+  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+   Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,6 +125,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.01%20AWS%20S3.html">
+   AWS S3 (Simple Storage Service)
   </a>
  </li>
 </ul>
@@ -367,9 +372,9 @@ title="Edit this page"
                 
   <div class="section" id="types-of-data-at-rest-encryption-in-s3-data">
 <h1>Types of data at-rest-encryption in S3 data<a class="headerlink" href="#types-of-data-at-rest-encryption-in-s3-data" title="Permalink to this heading">#</a></h1>
-<p>You can store object in one bucket encypted by more than one key (one can be encrypted by KMS, one by client-side etc).
-You can declare default encryption, which will be applied in case when you doesn’t specify encryption for uploaded object.
-You can use bucket policy to force encryption on client uploads (protect from unencrypted uploads) or you can use default encryption to force encyption even ifuser tries to upload unencrypted data.</p>
+<p>You can store object in one bucket encrypted by more than one key (one can be encrypted by KMS, one by client-side etc).
+You can declare default encryption, which will be applied in case when you doesn’t specify encryption for uploaded object in request headers.
+You can use bucket policy to force encryption on client uploads (protect from unencrypted uploads) or you can use default encryption to force encyption even if user tries to upload unencrypted data.</p>
 <div class="section" id="sse-server-side-encryption">
 <h2>SSE - Server-Side Encryption<a class="headerlink" href="#sse-server-side-encryption" title="Permalink to this heading">#</a></h2>
 <div class="section" id="sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
@@ -393,7 +398,7 @@ Client must set header “x-amz-server-side-encryption”:”aws:kms” to uploa
 <div class="section" id="sse-c-server-side-encryption-with-customer-provided-keys">
 <h3>SSE-C Server-Side Encryption with Customer-Provided Keys<a class="headerlink" href="#sse-c-server-side-encryption-with-customer-provided-keys" title="Permalink to this heading">#</a></h3>
 <p>Encryption using keys fully managed by client, outside of AWS. AWS doesn’t store the encryption key client provides.
-Key is being send in request headers, https must be used.
+Key is being sent in request headers, https must be used.
 Objects are encrypted server-side.
 Client must set header “x-amz-server-side-encryption-customer-algorithm”:”AES256” and “x-amz-server-side-encryption-customer-key”:”<base64-encoded-encryption-key>” to upload and download data from S3 bucket.</p>
 <p>This option can be used only with AWS CLI, AWS SDK or Amazon S3 Rest API.</p>
@@ -407,7 +412,7 @@ Objects are encrypted client-side and stored encrypted in S3 bucket.</p>
 </div>
 <div class="section" id="encryption-in-transit-ssl-tls">
 <h1>Encryption in transit (SSL/TLS)<a class="headerlink" href="#encryption-in-transit-ssl-tls" title="Permalink to this heading">#</a></h1>
-<p>Data are encrypted in flight by using HTTPS connections.</p>
+<p>Data are encrypted in-flight by using HTTPS connections. It is not possible to request data from S3 using non-tls requests (http).</p>
 </div>
 
 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AWS S3 overview &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS S3 (Simple Storage Service) &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,7 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Kinesis Data Firehose" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,10 +92,10 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">
-   DAS-C01 certification info
+  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+   Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,6 +126,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   AWS S3 (Simple Storage Service)
   </a>
  </li>
 </ul>
@@ -217,7 +223,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/02 Storage of data/02.01 S3 overview.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/02 Storage of data/02.01 AWS S3.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -287,7 +293,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>AWS S3 overview</h1>
+                <h1>AWS S3 (Simple Storage Service)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -327,11 +333,11 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="aws-s3-overview">
-<h1>AWS S3 overview<a class="headerlink" href="#aws-s3-overview" title="Permalink to this heading">#</a></h1>
+  <div class="section" id="aws-s3-simple-storage-service">
+<h1>AWS S3 (Simple Storage Service)<a class="headerlink" href="#aws-s3-simple-storage-service" title="Permalink to this heading">#</a></h1>
 <div class="section" id="what-is-it">
 <h2>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h2>
-<p>S3 is one of the main building blocks of AWS</p>
+<p>S3 is one of the main building blocks of AWS, one of the earliest of AWS services</p>
 <p>S3 is a “hard-drive for internet”, advertised as “infinitely scaling” storage.</p>
 </div>
 <div class="section" id="use-cases">
@@ -350,7 +356,7 @@ title="Edit this page"
 <div class="section" id="aws-s3-bucket">
 <h2>AWS S3 Bucket<a class="headerlink" href="#aws-s3-bucket" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>top-level directory for objects stored in S3</p></li>
+<li><p>top-level directory for <strong>objects</strong> stored in S3</p></li>
 <li><p>must have a globally unique name (accross all regions)</p></li>
 <li><p><strong>defined at the region level</strong> (despite looking as global service)</p></li>
 <li><p>naming convention</p>
@@ -370,7 +376,7 @@ title="Edit this page"
 <ul class="simple">
 <li><p><strong>full</strong> path of object (file) within bucket</p></li>
 <li><p>key is composed of prefix and object name</p></li>
-<li><p>there is <strong>no concept of directories</strong> in S3 - only tools trying to impose this to help users</p></li>
+<li><p>there is <strong>no concept of directories/folders</strong> in S3 - only tools trying to impose this to help users</p></li>
 <li><p>object values is content of the body</p></li>
 <li><p>maximum size of object value if 5TB (bigger files has to be splitted using multi-part upload)</p></li>
 <li><p>can contain metadata</p></li>
@@ -388,6 +394,13 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Kinesis Data Firehose</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>

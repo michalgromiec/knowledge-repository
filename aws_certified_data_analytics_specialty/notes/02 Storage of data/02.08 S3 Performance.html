@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>How to improve S3 performance &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>Multipart upload &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -93,8 +93,8 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">
-   DAS-C01 certification info
+  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+   Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,6 +125,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.01%20AWS%20S3.html">
+   AWS S3 (Simple Storage Service)
   </a>
  </li>
 </ul>
@@ -258,17 +263,17 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multipart-upload">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
    Multipart upload
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#s3-transfer-acceleration">
    S3 Transfer Acceleration
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#s3-byte-range-fetches">
    S3 byte-range fetches
   </a>
@@ -282,7 +287,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>How to improve S3 performance</h1>
+                <h1>Multipart upload</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -292,17 +297,17 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multipart-upload">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
    Multipart upload
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#s3-transfer-acceleration">
    S3 Transfer Acceleration
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#s3-byte-range-fetches">
    S3 byte-range fetches
   </a>
@@ -321,24 +326,43 @@ title="Edit this page"
 <li><p>amazon S3 automatically scales to high request rates with latency 100-200ms</p></li>
 <li><p>s3 allows for 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD operations per second per prefix (perfix = full path to file)</p></li>
 </ul>
-<div class="section" id="how-to-improve-s3-performance">
-<h1>How to improve S3 performance<a class="headerlink" href="#how-to-improve-s3-performance" title="Permalink to this heading">#</a></h1>
 <div class="section" id="multipart-upload">
-<h2>Multipart upload<a class="headerlink" href="#multipart-upload" title="Permalink to this heading">#</a></h2>
+<h1>Multipart upload<a class="headerlink" href="#multipart-upload" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>recommended for files &gt; 100MB, required for files &gt; 5GB</p></li>
-<li><p>in practice, big file is splitted and paralelly uploaded to S3, and when all of them are uploaded to S3, S3 concatenate them into one big file and store it like it was one big file</p></li>
+<li><p>recommended for files &gt; 100MB, required for files &gt; 5GB (single S3 Put have hard limit of 5GB of object size)</p></li>
+<li><p>in practice, big file is split and paralelly uploaded to S3, and when all of them are uploaded to S3, S3 concatenate them into one big file and store it like it was one big file</p></li>
+<li><p>done by CLI under the hood, but can be done also manually, especially when SDK is used:</p>
+<ul>
+<li><p>Create Multpart Upload (CreateMultipartUpload API call, returns Bucket, Key, UploadID)</p></li>
+<li><p>Upload Parts (UploadPart API call, user needs to provide Bucket, Key, <strong>Part Number</strong> and UploadID returned from create mulipart upload, returns ETag). Part Number is important so AWS would know in what order parts should be merged when multipart upload is finished</p></li>
+<li><p>Complete Multipart Upload (CompleteMultipartUpload API call, tell that uploads are finished, provide bucket, key, uploadid and all part numbers and etags)</p></li>
+</ul>
+</li>
+<li><p>to gain the highest performance, use multiprocessing or threading when you do multipart upload using boto3 ()</p></li>
+</ul>
+<p>Limitations:</p>
+<ul class="simple">
+<li><p>up to 10000 parts only</p></li>
+<li><p>mistake leads to overwrite parts when same part number is used</p></li>
+<li><p>can be lifecycle policy which closes multipart uploads after a specified time period</p></li>
+<li><p>all parts except the final part must be at least 5MB (so it’s not possible to multipart upload for objects smaller than 5MB)</p></li>
 </ul>
 </div>
 <div class="section" id="s3-transfer-acceleration">
-<h2>S3 Transfer Acceleration<a class="headerlink" href="#s3-transfer-acceleration" title="Permalink to this heading">#</a></h2>
-<p>Increases transfer speed by transfering data to one of hundreds edge location using public internet, and therefore AWS copies data between regions by using very fast AWS private network
-It is compatible with multi-part upload.</p>
+<h1>S3 Transfer Acceleration<a class="headerlink" href="#s3-transfer-acceleration" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>increases transfer speed (mostly upload)</p></li>
+<li><p>transfering data to one of hundreds edge location using public internet, and therefore AWS copies data between regions by using very fast AWS private network</p></li>
+<li><p>enabled per bucket</p></li>
+<li><p>to use acceleration, user have to send request to separate endpoint (changed in application - boto3 or cli)</p></li>
+<li><p>generate additional costs (0.04$/GB of transfered data and 0.08$ outside US, Europe and Japan). Costs are calculated only when acceleearted data is faster than a standard data transfer</p></li>
+<li><p>It is compatible with multi-part upload.</p></li>
+<li><p>for the issue with download speed, cloudfront cache should be used</p></li>
+</ul>
 </div>
 <div class="section" id="s3-byte-range-fetches">
-<h2>S3 byte-range fetches<a class="headerlink" href="#s3-byte-range-fetches" title="Permalink to this heading">#</a></h2>
+<h1>S3 byte-range fetches<a class="headerlink" href="#s3-byte-range-fetches" title="Permalink to this heading">#</a></h1>
 <p>similar to multi-part upload, allows to get range of object (i.e. allows to get only head 50 bytes of object)</p>
-</div>
 </div>
 
 

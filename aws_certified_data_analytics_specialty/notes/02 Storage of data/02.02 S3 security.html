@@ -93,8 +93,8 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">
-   DAS-C01 certification info
+  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+   Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,6 +125,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.01%20AWS%20S3.html">
+   AWS S3 (Simple Storage Service)
   </a>
  </li>
 </ul>
@@ -269,6 +274,11 @@ title="Edit this page"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3-access-security-waterfall">
+   S3 Access Security waterfall
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#encryption">
    Encryption
   </a>
@@ -276,6 +286,31 @@ title="Edit this page"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#block-all-public-access">
    Block all public access
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vpc-endpoints">
+   VPC Endpoints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudtrail-logs">
+   CloudTrail logs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudwatch-alarms">
+   CloudWatch alarms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#object-lock">
+   Object lock
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mfa-delete">
+   MFA Delete
   </a>
  </li>
 </ul>
@@ -308,6 +343,11 @@ title="Edit this page"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3-access-security-waterfall">
+   S3 Access Security waterfall
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#encryption">
    Encryption
   </a>
@@ -315,6 +355,31 @@ title="Edit this page"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#block-all-public-access">
    Block all public access
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vpc-endpoints">
+   VPC Endpoints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudtrail-logs">
+   CloudTrail logs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudwatch-alarms">
+   CloudWatch alarms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#object-lock">
+   Object lock
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mfa-delete">
+   MFA Delete
   </a>
  </li>
 </ul>
@@ -331,7 +396,7 @@ title="Edit this page"
 <h1>Types<a class="headerlink" href="#types" title="Permalink to this heading">#</a></h1>
 <div class="section" id="user-based">
 <h2>User-Based<a class="headerlink" href="#user-based" title="Permalink to this heading">#</a></h2>
-<p>selected AWS role can or cannot have permission for S3 bucket or path</p>
+<p>selected AWS role can or cannot have permission for S3 bucket or path (using AWS IAM)</p>
 </div>
 <div class="section" id="resource-based">
 <h2>Resource-Based<a class="headerlink" href="#resource-based" title="Permalink to this heading">#</a></h2>
@@ -346,9 +411,27 @@ title="Edit this page"
 <li><p>object access control list (ACL) - finer grain</p></li>
 <li><p>bucket access control list (ACL)</p></li>
 </ul>
+</div>
+<div class="section" id="s3-access-security-waterfall">
+<h2>S3 Access Security waterfall<a class="headerlink" href="#s3-access-security-waterfall" title="Permalink to this heading">#</a></h2>
 <p>You have a permission for object if</p>
 <ul class="simple">
 <li><p>the user IAM permisions allow it <strong>OR</strong> the resource policy allows <strong>AND</strong> there is no explicit deny</p></li>
+</ul>
+<p>Or even more specific, below you will find checks in order from the top to the bottom when explicit deny or allow can occur:</p>
+<ul class="simple">
+<li><p>Service Control Policy - at Organization level (account can have denied access to S3 service at all)</p></li>
+<li><p>IAM Policy - IAM role can have denied access to S3 or bucket</p></li>
+<li><p>Bucket ACL</p></li>
+<li><p>Bucket policy</p></li>
+<li><p>Object ACL</p></li>
+<li><p>Object Policy</p></li>
+</ul>
+<p>Main rules:</p>
+<ul class="simple">
+<li><p>impliit deny is default (meaning if there is no explicit rules, you don’t have access to the object)</p></li>
+<li><p>explicit allow beats implicit deny (meaning if there is explicit allow but no explicit deny, you have access to the object)</p></li>
+<li><p>explicit deny beats explicit allow (meaning if there is any explicit deny, you don’t have access to the object)</p></li>
 </ul>
 </div>
 <div class="section" id="encryption">
@@ -364,6 +447,27 @@ title="Edit this page"
 <h2>Block all public access<a class="headerlink" href="#block-all-public-access" title="Permalink to this heading">#</a></h2>
 <p>additional security layer which blocks public access for all objects (meaning only owner and user which directly granted permissions are allowed to see content of object)
 by default, all s3 bucket blocks all public access</p>
+</div>
+<div class="section" id="vpc-endpoints">
+<h2>VPC Endpoints<a class="headerlink" href="#vpc-endpoints" title="Permalink to this heading">#</a></h2>
+<p>you can provide S3 service to private subnets or restrict network traffic to just intra-vpc network space (therefore, all communication with such bucket will be done using AWS network not internet connection).</p>
+<p>Such protected data can still be accessed outside VPC using VPN connections.</p>
+</div>
+<div class="section" id="cloudtrail-logs">
+<h2>CloudTrail logs<a class="headerlink" href="#cloudtrail-logs" title="Permalink to this heading">#</a></h2>
+<p>All API requests are visible to cloudtrail service</p>
+</div>
+<div class="section" id="cloudwatch-alarms">
+<h2>CloudWatch alarms<a class="headerlink" href="#cloudwatch-alarms" title="Permalink to this heading">#</a></h2>
+<p>You can create cloudwatch alarms based on cloudwatch metrics - for example you can launch lambda function when there is huge amount of requests to S3</p>
+</div>
+<div class="section" id="object-lock">
+<h2>Object lock<a class="headerlink" href="#object-lock" title="Permalink to this heading">#</a></h2>
+<p>prevents objects from being deleted by storing objects using write-once-read-many (WORM) model</p>
+</div>
+<div class="section" id="mfa-delete">
+<h2>MFA Delete<a class="headerlink" href="#mfa-delete" title="Permalink to this heading">#</a></h2>
+<p>requires multifactor authentication in case object deletion is required, it is an additional option when object versioning is enabled.</p>
 </div>
 </div>
 

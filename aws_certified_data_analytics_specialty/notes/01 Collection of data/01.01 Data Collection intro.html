@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>Collection of data - intro &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Kinesis Data Streams" href="01.02%20Kinesis%20Data%20Streams.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../../../index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,39 +93,39 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.02%20Kinesis%20Data%20Streams.html">
+  <a class="reference internal" href="01.02%20Kinesis%20Data%20Streams.html">
    Kinesis Data Streams
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
+  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
    Consumers
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
+  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
    Scaling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
+  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
    Handling duplicates
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
+  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
    Security
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
+  <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
   </a>
  </li>
@@ -222,7 +224,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/03 Processing/03.07 AWS Data Pipeline.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/01.01 Data Collection intro.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -241,23 +243,60 @@ title="Edit this page"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glossary">
+   Glossary
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>Collection of data - intro</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glossary">
+   Glossary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -265,17 +304,30 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
-<p>Task scheduling like oozie which can schedule some operations in AWS (e.g. copy data between S3, execute Spark Application etc)</p>
-<p>Web service help process and move data between AWS compute and processing services.</p>
+  <div class="section" id="collection-of-data-intro">
+<h1>Collection of data - intro<a class="headerlink" href="#collection-of-data-intro" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Real time - immediate actions can be done based on data
+2. Kinesis Data Streams (KDS)
+3. Simple Queue Services (SQS)
+4. Internet of Things (IOT)</p></li>
+<li><p>Near-real time - Reactive actions
+6. Kinesis Data Firehose (KDF)
+7. Database Migration Services</p></li>
+<li><p>Batch - Historical Analysis
+9. Snowball
+10. Data Pipeline</p></li>
+</ol>
+<div class="section" id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>destinations: S3, RDS, DynamoDB, Redshift, EMR</p></li>
-<li><p>manages task dependencies</p></li>
-<li><p>included retries andd notification on failures</p></li>
-<li><p>has precondition checks</p></li>
-<li><p>data sources may be on premises</p></li>
+<li><p>throughput = efficiency of stream, measured in data size per second</p></li>
+<li><p>latency = delay of storing data in stream, measured in milliseconds/seconds</p></li>
+<li><p>throughput vs latency tradeoff - you can decrease latency by decreasing batch size, but as a side-effect your throughput can be decreased</p></li>
+<li><p>hot shard / hot partition = case when one of the shard have much more data than the other ones (when stream contains unbalansed partition keys)</p></li>
+<li><p>throttle</p></li>
 </ul>
+</div>
 </div>
 
 
@@ -286,6 +338,20 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../../../index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">&lt;no title&gt;</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="01.02%20Kinesis%20Data%20Streams.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kinesis Data Streams</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

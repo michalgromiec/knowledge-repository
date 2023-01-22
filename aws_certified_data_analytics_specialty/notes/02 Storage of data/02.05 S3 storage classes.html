@@ -93,8 +93,8 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../00%20Certification/00%20cerfification%20info.html">
-   DAS-C01 certification info
+  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+   Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
@@ -125,6 +125,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.01%20AWS%20S3.html">
+   AWS S3 (Simple Storage Service)
   </a>
  </li>
 </ul>
@@ -267,6 +272,43 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#storage-classes-list">
    Storage classes list
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-standard-general-purpose">
+     S3 standard - general purpose
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-standard-infrequent-access-ia">
+     S3 Standard-infrequent access (IA)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-one-zone-infrequent-access-ia">
+     S3 One Zone-infrequent access (IA)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-glacier-instant-retrieval">
+     S3 Glacier Instant Retrieval
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-glacier-flexible-retrieval">
+     S3 Glacier Flexible Retrieval
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-glacier-deep-archive">
+     S3 Glacier Deep Archive
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-intelligent-tiering">
+     S3 Intelligent Tiering
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#durability-vs-availability">
@@ -301,6 +343,43 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#storage-classes-list">
    Storage classes list
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-standard-general-purpose">
+     S3 standard - general purpose
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-standard-infrequent-access-ia">
+     S3 Standard-infrequent access (IA)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-one-zone-infrequent-access-ia">
+     S3 One Zone-infrequent access (IA)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-glacier-instant-retrieval">
+     S3 Glacier Instant Retrieval
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-glacier-flexible-retrieval">
+     S3 Glacier Flexible Retrieval
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-glacier-deep-archive">
+     S3 Glacier Deep Archive
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-intelligent-tiering">
+     S3 Intelligent Tiering
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#durability-vs-availability">
@@ -320,43 +399,49 @@ title="Edit this page"
   <div class="section" id="what-is-it">
 <h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
 <p>S3 differs between types of storage - you can have cheaper storage class with higher read latency (i.e. glacier for backups is very cheap, but you can read data from this class after few hours only…)</p>
+<p>Storage class is assigned to objects in the bucket, by default all objects are in S3 Standard storage class, you can change it for objects by using lifecycle policies or specified on upload/put processes separately.</p>
 </div>
 <div class="section" id="storage-classes-list">
 <h1>Storage classes list<a class="headerlink" href="#storage-classes-list" title="Permalink to this heading">#</a></h1>
+<div class="section" id="s3-standard-general-purpose">
+<h2>S3 standard - general purpose<a class="headerlink" href="#s3-standard-general-purpose" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>S3 standard - general purpose</p>
-<ul>
 <li><p>99.99% availability</p></li>
 <li><p>used for frequently accessed data</p></li>
 <li><p>low latency and high throughput</p></li>
 <li><p>use cases: bigdata analytics, mobile application</p></li>
 </ul>
-</li>
-<li><p>S3 Standard-infrequent access (IA)</p>
-<ul>
+</div>
+<div class="section" id="s3-standard-infrequent-access-ia">
+<h2>S3 Standard-infrequent access (IA)<a class="headerlink" href="#s3-standard-infrequent-access-ia" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>99.9% availability</p></li>
-<li><p>use cases: disaster recovery, backups</p></li>
+<li><p>use cases: disaster recovery, backups, data retrieved monthly</p></li>
 <li><p>less frequent access, but requires rapid access when needed</p></li>
-<li><p>lower cost than S3 standard - general purpose</p></li>
+<li><p>lower storage cost than S3 standard - general purpose</p></li>
+<li><p>additional costs of writing and retrieval</p></li>
 </ul>
-</li>
-<li><p>S3 One Zone-infrequent access (IA)</p>
-<ul>
+</div>
+<div class="section" id="s3-one-zone-infrequent-access-ia">
+<h2>S3 One Zone-infrequent access (IA)<a class="headerlink" href="#s3-one-zone-infrequent-access-ia" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>still high durability, data will be lost when availability zone is destroyed</p></li>
 <li><p>99.5% availability</p></li>
 <li><p>use cases: secondary backup copies of on-premise data or data you can recreate</p></li>
 </ul>
-</li>
-<li><p>S3 Glacier Instant Retrieval</p>
-<ul>
+</div>
+<div class="section" id="s3-glacier-instant-retrieval">
+<h2>S3 Glacier Instant Retrieval<a class="headerlink" href="#s3-glacier-instant-retrieval" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>low-cost object storage for archiving backup</p></li>
 <li><p>pricing include additional object retrieval cost</p></li>
 <li><p>instant retrieval has millisecond retrieval</p></li>
 <li><p>minimum storage duration of 90 days (you pay for 90 days even object is stored for less than 90 days)</p></li>
 </ul>
-</li>
-<li><p>S3 Glacier Flexible Retrieval</p>
-<ul>
+</div>
+<div class="section" id="s3-glacier-flexible-retrieval">
+<h2>S3 Glacier Flexible Retrieval<a class="headerlink" href="#s3-glacier-flexible-retrieval" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>formerly Amazon S3 Glacier</p></li>
 <li><p>3 flexibility:</p>
 <ul>
@@ -366,26 +451,27 @@ title="Edit this page"
 </ul>
 </li>
 </ul>
-</li>
-<li><p>S3 Glacier Deep Archive</p>
-<ul>
+</div>
+<div class="section" id="s3-glacier-deep-archive">
+<h2>S3 Glacier Deep Archive<a class="headerlink" href="#s3-glacier-deep-archive" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>2 flexibilities:</p>
 <ul>
 <li><p>standard - up to 12 hours</p></li>
 <li><p>bulk - up to 48 hours</p></li>
+</ul>
+</li>
 <li><p>minimum storage duration - 180 days</p></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>S3 Intelligent Tiering</p>
-<ul>
+</div>
+<div class="section" id="s3-intelligent-tiering">
+<h2>S3 Intelligent Tiering<a class="headerlink" href="#s3-intelligent-tiering" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>move data based on monitoring of usage data</p></li>
 <li><p>there are no retrieval charges in S3 intelligent-tiering, but you pay for monitoring (per number of objects monitored)</p></li>
 </ul>
-</li>
-</ul>
 <p>object can move between classes manually or by using S3 lifecycle rules</p>
+</div>
 </div>
 <div class="section" id="durability-vs-availability">
 <h1>Durability vs Availability<a class="headerlink" href="#durability-vs-availability" title="Permalink to this heading">#</a></h1>
