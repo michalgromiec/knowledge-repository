@@ -6,7 +6,7 @@
 
 .. toctree::
    :caption: Kinesis Data Streams
-   :maxdepth: 1
+   :maxdepth: 2
    :glob:
 
    aws_certified_data_analytics_specialty/notes/00 Certification/*
