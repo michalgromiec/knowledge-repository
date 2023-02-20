@@ -1,7 +1,6 @@
 # AWS S3 (Simple Storage Service)
 
-## What is it
-S3 is one of the main building blocks of AWS, one of the earliest of AWS services
+S3 is one of the main building blocks of AWS, one of the earliest AWS services
 
 S3 is a "hard-drive for internet", advertised as "infinitely scaling" storage.
 
@@ -17,9 +16,10 @@ S3 is a "hard-drive for internet", advertised as "infinitely scaling" storage.
 
 ## AWS S3 Bucket
 * top-level directory for **objects** stored in S3
-* must have a globally unique name (accross all regions)
+* must have a globally unique name (across all regions, within whole AWS)
 * **defined at the region level** (despite looking as global service)
 * naming convention
+  * compatible with http endpoints naming convention
   * no uppercase, no underscore
   * 3-63 charactes long
   * not an IP
@@ -29,11 +29,315 @@ S3 is a "hard-drive for internet", advertised as "infinitely scaling" storage.
 
 ## AWS S3 Object
 * **full** path of object (file) within bucket
-* key is composed of prefix and object name
-* there is **no concept of directories/folders** in S3 - only tools trying to impose this to help users
-* object values is content of the body
-* maximum size of object value if 5TB (bigger files has to be splitted using multi-part upload)
+* object key is composed of prefix and object name
+* there is **no concept of directories/folders** in S3 - tools only tries to impose this to help users
+* object body is content of the object
+* maximum size of object value if 5TB (bigger files has to be split into more objects), minimim is 0 bytes (no body)
 * can contain metadata
 * can contain tags (used for security and lifecycle)
 * can contain version id if versioning is enabled
 
+## Security
+### User-Based
+selected AWS role can or cannot have permission for S3 bucket or path (using AWS IAM)
+
+### Resource-Based
+* bucket policies - created at s3 bucket level, manages permissions for bucket
+  * json-based policies
+  * can be used to grant public access to the bucket (for all principals, this can't be done using user-based permissions)
+  * can be used to cross-account access (all principals from other account)
+* object access control list (ACL) - finer grain
+* bucket access control list (ACL)
+
+### S3 Access Security waterfall
+You have a permission for object if
+* the user IAM permisions allow it **OR** the resource policy allows **AND** there is no explicit deny
+
+Or even more specific, below you will find checks in order from the top to the bottom when explicit deny or allow can occur:
+* Service Control Policy - at Organization level (account can have denied access to S3 service at all)
+* IAM Policy - IAM role can have denied access to S3 or bucket
+* Bucket ACL
+* Bucket policy
+* Object ACL
+* Object Policy
+
+Main rules:
+* implicit deny is default (if there is no explicit rules, you don't have access to the object)
+* explicit allow beats implicit deny (if there is explicit allow but no explicit deny, you have access to the object)
+* explicit deny beats explicit allow (if there is any explicit deny, you don't have access to the object)
+
+### Block all public access
+additional security layer which blocks public access for all objects (meaning only owner and user which directly granted permissions are allowed to see content of object)
+by default, all s3 bucket blocks all public access
+
+### Object lock
+Prevent objects from being deleted by storing objects using write-once-read-many (WORM) model
+
+### MFA Delete
+requires multifactor authentication in case object deletion is required, it is an additional option when object versioning is enabled.
+
+## Encryption
+by default, data are encrypted at rest using SSE-S3. You can enable encryption by purpose:
+* Server-side encryption with Amazon S3-managed keys (SSE-S3)
+* Server-side encryption with customer-provided keys (SSE-C)
+* Server-side encryption with AWS Key Management Service-managed keys (SSE-KMS)
+
+## VPC Endpoints
+you can provide S3 service for private subnets or restrict network traffic to just intra-vpc network space (therefore, all communication with such bucket will be done using AWS network not internet connection).
+
+Such protected data can still be accessed outside VPC using VPN connections.
+
+## CloudTrail logs
+All API requests are visible to cloudtrail service
+
+## CloudWatch alarms
+You can create cloudwatch alarms based on cloudwatch metrics - for example you can launch lambda function when there is huge amount of requests to S3
+
+## Versioning
+* you can version your files in Amazon S3
+* can be enabled at the bucket level
+* after enabling, object uploaded to s3 bucket with the same key will have filled in version key (literals+numbers)
+* all files put into s3 bucket before enable versioning will have null in version key
+* you can't delete versioning - you can only suspend it, previous versions of objects won't be deleted automatically
+
+### Why should I use this?
+* protect against unintended deletes
+* easy rollback to previous version
+
+### How to use
+1. Enable versioning
+2. Upload updated object
+3. You can delete selected version (show versions tick has to be enabled in AWS GUI)
+4. Deletion of objects can be undone, because deleted objects (not versions!) adds delete markers to then instead of physically delete.
+   1. in practice - deletion of versioned object ads new version of object with empty content, so you can delete this version to recover object
+
+## Replication
+asynchronous replication of data between two buckets in the same region (SRR) or in two regions (CRR)
+
+* to use replication, **both source and destination buckets has to have enabled versioning**
+* buckets can be in different AWS accounts
+* copying is asynchronous
+* proper IAM permissions is required
+* only new objects are replicated (new after enabling replication). Existing objects can be replicated using S3 Batch Operation
+* by default, delete marker are not replicated - you need to enable it on replication rule in additional replication options
+* but **deletion of selected version is not being replicated** - only deletion markers are
+
+### Types of S3 replication
+CRR = Cross Region Replication
+SRR = Same Region Replication
+
+### Use cases
+#### CRR
+* compliance
+* lower latency access (for users in different regions)
+* replication across accounts
+
+#### SRR
+* log aggregation
+* live replication between environments (prod/test/int)
+
+## Storage classes
+
+S3 differs between types of storage - you can have cheaper storage class with higher read latency (i.e. glacier for backups is very cheap, but you can read data from this class after few hours only...)
+
+Storage class is assigned to objects in the bucket, by default all objects are in S3 Standard storage class, you can change it for objects by using lifecycle policies or specified on upload/put processes separately.
+
+### Storage classes list
+#### S3 standard - general purpose
+  * 99.99% availability
+  * used for frequently accessed data
+  * low latency and high throughput
+  * use cases: bigdata analytics, mobile application
+#### S3 Standard-infrequent access (IA)
+  * 99.9% availability
+  * use cases: disaster recovery, backups, data retrieved monthly
+  * less frequent access, but requires rapid access when needed
+  * lower storage cost than S3 standard - general purpose
+  * additional costs of writing and retrieval
+#### S3 One Zone-infrequent access (IA)
+  * still high durability, data will be lost when availability zone is destroyed
+  * 99.5% availability
+  * use cases: secondary backup copies of on-premise data or data you can recreate
+#### S3 Glacier Instant Retrieval
+  * low-cost object storage for archiving backup
+  * pricing include additional object retrieval cost
+  * instant retrieval has millisecond retrieval
+  * minimum storage duration of 90 days (you pay for 90 days even object is stored for less than 90 days)
+#### S3 Glacier Flexible Retrieval
+  * formerly Amazon S3 Glacier
+  * 3 flexibility:
+    * expedited - 1 to 5 minutes
+    * standard - 3 to 5 hours
+    * bulk - 5 to 12 hours (object retrieval cost is free)
+#### S3 Glacier Deep Archive
+  * 2 flexibilities:
+    * standard - up to 12 hours
+    * bulk - up to 48 hours
+  * minimum storage duration - 180 days
+#### S3 Intelligent Tiering
+  * move data based on monitoring of usage data
+  * there are no retrieval charges in S3 intelligent-tiering, but you pay for monitoring (per number of objects monitored)
+
+object can move between classes manually or by using S3 lifecycle rules
+
+### Durability vs Availability
+* durability - measures how sure you are that object you store in S3 won't be lossed in full, it's the same for all storage classes and it's 11 9's
+* availability - measures how readily available a service is, it differs between storage classes
+
+## Lifecycle rules
+You can automate moving objects between storage classes using **lifecycle rules**
+
+### Lifecycle rules types
+
+#### Transition Actions
+move objects from one storage class to another, examples:
+* move objects from one zone to another n days after creation
+* move to glacier for archiving after 6 months after creation
+
+#### Expiration actions
+delete objects, examples:
+* delete access log files after 365 days
+* delete old versions of files
+* delete incomplete multi-part uploads
+
+### Rules examples
+* move current versions between storage classes
+* move noncurrent versions between storage classes (history of changes of objects)
+* expire current versions of objects (soft-delete when versioning is enabled or hard-delete when versioning is not enabled)
+* permanently delete noncurrent versions of objects (hard-delete)
+
+### Comments
+* rule can be created for a certain prefix (but can't be created for suffixes or glob/regex expressions)
+* rule can be created for certain object Tags
+
+### S3 Analytics
+you can create csv report with some recommendations on age of your object. Report is updated daily by AWS.
+
+## Event notifications
+events can be generated after almost all actions done on S3 bucket, i.e.: s3:ObjectCreated, s3:ObjectRemoved, s3:Replication etc.
+
+you can filter events by using name filtering, but only using prefix and suffix
+
+### When to use it
+For example, you can create thumbnails for every jpg uploaded to your bucket.
+
+Event notification can imply on one of the below service:
+* SNS - generate notification
+* SQS - put record on queue for future processing
+* Lambda - launch lambda function
+* amazon eventbridge
+
+Events are delivered typically in seconds, but can also take a minute or longer
+
+You have to create event notification manually or enable eventbridge integration (second option enable gathering all s3 events).
+
+Manual created event notification contains source and target, so you have to define which S3 events will trigger action and what destination will be for storing event data (lambda, sns or sqs)
+
+### Amazon EventBridge
+Serverless events bus service which gathers all events information. With eventbridge you can expand target services which can be implied by S3 events
+
+Eventbridge has more filtering options than classic event notifications - you can filter by metadata, object size, names etc). 
+
+You can also have multiple destinations.
+
+## Performance improvements
+* amazon S3 automatically scales to high request rates with latency 100-200ms
+* s3 allows for 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD operations per second per prefix (prefix = full path to file)
+
+### Multipart upload
+* recommended for files > 100MB, required for files > 5GB (single S3 Put have limit of 5GB of object size)
+* in practice, big file is split and parallel uploaded to S3, and when all of them are uploaded to S3, S3 concatenate them into one big file and store it like it was one big file
+* done by CLI by default under the hood, but can be done also manually, especially when SDK is used:
+  * Create Multpart Upload (CreateMultipartUpload API call, returns Bucket, Key, UploadID)
+  * Upload Parts (UploadPart API call, user needs to provide Bucket, Key, **Part Number** and UploadID returned from create mulipart upload, returns ETag). Part Number is important so AWS would know in what order parts should be merged when multipart upload is finished
+  * Complete Multipart Upload (CompleteMultipartUpload API call, tell that uploads are finished, provide bucket, key, uploadid and all part numbers and etags)
+* to gain the highest performance, use multiprocessing or threading when you do multipart upload using boto3 () 
+
+Limitations:
+* up to 10000 parts only
+* mistake leads to overwrite parts when same part number is used
+* can be lifecycle policy which closes multipart uploads after a specified time period
+* all parts except the final part must be at least 5MB (so it's not possible to multipart upload for objects smaller than 5MB)
+
+### S3 Transfer Acceleration
+* increases **upload** transfer speed 
+* user transfers data to one of hundreds edge location using public internet (low latency thanks to closure of edge location), and therefore AWS copies data between regions by using very fast AWS private network
+* can be enabled per bucket
+* to use acceleration, user have to send request to separate endpoint (changed in application - boto3 or cli)
+* generate additional costs (0.04$/GB of transferred data and 0.08$ outside US, Europe and Japan). Costs are calculated only when accelerated data is faster than a standard data transfer
+* It is compatible with multi-part upload.
+* for the issue with download speed, CloudFront cache should be used
+
+### S3 byte-range fetches
+similar to multipart upload, allows to get range of object (i.e. allows to get only head 50 bytes of object)
+
+## S3 Select
+Mechanism of filtering data on AWS server side.
+
+By using simple SQL statements you can filter object data and retrieve only this part of data which you are interested in.
+
+Amazon S3 Select works on objects stored in CSV, JSON, or Apache Parquet format. It also works with objects that are compressed with GZIP or BZIP2 (for CSV and JSON objects only), and server-side encrypted objects. You can specify the format of the results as either CSV or JSON, and you can determine how the records in the result are delimited.
+
+Costs are based on bytes scanned and bytes returned and are a bit smaller than Amazon Athena.
+
+## Encryption
+
+You can store object in one bucket encrypted by more than one key (one can be encrypted by KMS, one by client-side etc).
+You can declare default encryption, which will be applied in case when you doesn't specify encryption for uploaded object in request headers. 
+You can use bucket policy to force encryption on client uploads (protect from unencrypted uploads) or you can use default encryption to force encryption even if user tries to upload unencrypted data.
+
+### Types of at-rest-encryption in S3 data
+#### SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys
+Encryption using keys handled, managed and owned by AWS - client doesn't have access to this key.
+Objects are encrypted server-side, encryption is AES-256.
+Client must set header "x-amz-server-side-encryption":"AES256" to upload and download data from S3 bucket.
+
+By using S3-Managed Key you are able to encrypt all your s3 data with one encryption key, the key is generated specific for your AWS account.
+
+#### SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS
+Encryption using keys handled and managed by AWS KMS (Key Management Service). Client have full control over this key by using AWS KMS.
+Objects are encrypted server-side, encryption is AES-256.
+Client must set header "x-amz-server-side-encryption":"aws:kms" to upload and download data from S3 bucket.
+
+You can also use key stored in KMS in one of other AWS account (as long as you have permission for it)
+
+Limitations:
+* kms limits - each time you upload/download data you are requesting KMS API (GenerateDataKey or Decrypt), KMS has own quota per second limits (from 5500 to 30000 req per second)
+
+#### SSE-C Server-Side Encryption with Customer-Provided Keys
+Encryption using keys fully managed by client, outside of AWS. AWS doesn't store the encryption key client provides.
+Key is being sent in request headers, https must be used.
+Objects are encrypted server-side.
+Client must set header "x-amz-server-side-encryption-customer-algorithm":"AES256" and "x-amz-server-side-encryption-customer-key":"<base64-encoded-encryption-key>" to upload and download data from S3 bucket.
+
+This option can be used only with AWS CLI, AWS SDK or Amazon S3 Rest API.
+
+**SSE-C is not available for use with Amazon EMR**
+
+#### Client-Side Encryption
+Clients must encrypt/decrypt data themselves before sending/after retrieving data to Amazon S3.
+Objects are encrypted client-side and stored encrypted in S3 bucket.
+
+### Encryption in transit (SSL/TLS)
+Data are encrypted in-flight by using HTTPS connections. It is not possible to request data from S3 using non-tls requests (http).
+
+## Access Points
+It's kind of "shortcut" for prefix in S3 bucket - each access point gets its own DNS endpoint and authorization policy.
+
+It can contain one or more prefixes from certain S3 bucket.
+
+### Object Lambda
+Lets say we have two types of users which should be able to read some data from S3 bucket. One of them can see raw data, but the other one should see redacted data, let's say with deleted personal data (surnames)
+
+To do this, we can implement access point for one of the group and implement on this access point S3 Object Lambda function.
+This function is being executed on each object retrieved by user.
+
+That way we do not have two version of the same data - we store raw data and redact/modify responses for certain group of users.
+
+Same process can be used also for enrich data (e.g. add other data for retrieved data)
+
+## CLI
+
+```bash
+aws s3 ls s3://bucket-name
+```

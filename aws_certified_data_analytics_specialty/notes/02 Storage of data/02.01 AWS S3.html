@@ -34,7 +34,7 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="prev" title="Kinesis Data Firehose" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html" />
+    <link rel="prev" title="AWS Lambda" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -94,6 +94,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -104,28 +114,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -265,11 +300,6 @@ title="Edit this page"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-it">
-   What is it
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#use-cases">
    Use cases
   </a>
@@ -282,6 +312,302 @@ title="Edit this page"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aws-s3-object">
    AWS S3 Object
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#security">
+   Security
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user-based">
+     User-Based
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resource-based">
+     Resource-Based
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-access-security-waterfall">
+     S3 Access Security waterfall
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#block-all-public-access">
+     Block all public access
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-lock">
+     Object lock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mfa-delete">
+     MFA Delete
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encryption">
+   Encryption
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vpc-endpoints">
+   VPC Endpoints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudtrail-logs">
+   CloudTrail logs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudwatch-alarms">
+   CloudWatch alarms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#versioning">
+   Versioning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-should-i-use-this">
+     Why should I use this?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-use">
+     How to use
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replication">
+   Replication
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-s3-replication">
+     Types of S3 replication
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Use cases
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#crr">
+       CRR
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#srr">
+       SRR
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#storage-classes">
+   Storage classes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#storage-classes-list">
+     Storage classes list
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-standard-general-purpose">
+       S3 standard - general purpose
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-standard-infrequent-access-ia">
+       S3 Standard-infrequent access (IA)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-one-zone-infrequent-access-ia">
+       S3 One Zone-infrequent access (IA)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-glacier-instant-retrieval">
+       S3 Glacier Instant Retrieval
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-glacier-flexible-retrieval">
+       S3 Glacier Flexible Retrieval
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-glacier-deep-archive">
+       S3 Glacier Deep Archive
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-intelligent-tiering">
+       S3 Intelligent Tiering
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#durability-vs-availability">
+     Durability vs Availability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lifecycle-rules">
+   Lifecycle rules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lifecycle-rules-types">
+     Lifecycle rules types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#transition-actions">
+       Transition Actions
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expiration-actions">
+       Expiration actions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rules-examples">
+     Rules examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comments">
+     Comments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-analytics">
+     S3 Analytics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#event-notifications">
+   Event notifications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-use-it">
+     When to use it
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#amazon-eventbridge">
+     Amazon EventBridge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-improvements">
+   Performance improvements
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multipart-upload">
+     Multipart upload
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-transfer-acceleration">
+     S3 Transfer Acceleration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-byte-range-fetches">
+     S3 byte-range fetches
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3-select">
+   S3 Select
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Encryption
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-at-rest-encryption-in-s3-data">
+     Types of at-rest-encryption in S3 data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
+       SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms">
+       SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sse-c-server-side-encryption-with-customer-provided-keys">
+       SSE-C Server-Side Encryption with Customer-Provided Keys
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#client-side-encryption">
+       Client-Side Encryption
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encryption-in-transit-ssl-tls">
+     Encryption in transit (SSL/TLS)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-points">
+   Access Points
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-lambda">
+     Object Lambda
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli">
+   CLI
   </a>
  </li>
 </ul>
@@ -304,11 +630,6 @@ title="Edit this page"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-it">
-   What is it
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#use-cases">
    Use cases
   </a>
@@ -323,6 +644,302 @@ title="Edit this page"
    AWS S3 Object
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#security">
+   Security
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user-based">
+     User-Based
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resource-based">
+     Resource-Based
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-access-security-waterfall">
+     S3 Access Security waterfall
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#block-all-public-access">
+     Block all public access
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-lock">
+     Object lock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mfa-delete">
+     MFA Delete
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encryption">
+   Encryption
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vpc-endpoints">
+   VPC Endpoints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudtrail-logs">
+   CloudTrail logs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudwatch-alarms">
+   CloudWatch alarms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#versioning">
+   Versioning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-should-i-use-this">
+     Why should I use this?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-use">
+     How to use
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replication">
+   Replication
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-s3-replication">
+     Types of S3 replication
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Use cases
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#crr">
+       CRR
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#srr">
+       SRR
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#storage-classes">
+   Storage classes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#storage-classes-list">
+     Storage classes list
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-standard-general-purpose">
+       S3 standard - general purpose
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-standard-infrequent-access-ia">
+       S3 Standard-infrequent access (IA)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-one-zone-infrequent-access-ia">
+       S3 One Zone-infrequent access (IA)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-glacier-instant-retrieval">
+       S3 Glacier Instant Retrieval
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-glacier-flexible-retrieval">
+       S3 Glacier Flexible Retrieval
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-glacier-deep-archive">
+       S3 Glacier Deep Archive
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#s3-intelligent-tiering">
+       S3 Intelligent Tiering
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#durability-vs-availability">
+     Durability vs Availability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lifecycle-rules">
+   Lifecycle rules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lifecycle-rules-types">
+     Lifecycle rules types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#transition-actions">
+       Transition Actions
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expiration-actions">
+       Expiration actions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rules-examples">
+     Rules examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comments">
+     Comments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-analytics">
+     S3 Analytics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#event-notifications">
+   Event notifications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-use-it">
+     When to use it
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#amazon-eventbridge">
+     Amazon EventBridge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-improvements">
+   Performance improvements
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multipart-upload">
+     Multipart upload
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-transfer-acceleration">
+     S3 Transfer Acceleration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-byte-range-fetches">
+     S3 byte-range fetches
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3-select">
+   S3 Select
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Encryption
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-at-rest-encryption-in-s3-data">
+     Types of at-rest-encryption in S3 data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
+       SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms">
+       SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sse-c-server-side-encryption-with-customer-provided-keys">
+       SSE-C Server-Side Encryption with Customer-Provided Keys
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#client-side-encryption">
+       Client-Side Encryption
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encryption-in-transit-ssl-tls">
+     Encryption in transit (SSL/TLS)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-points">
+   Access Points
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-lambda">
+     Object Lambda
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli">
+   CLI
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -335,11 +952,8 @@ title="Edit this page"
                 
   <div class="section" id="aws-s3-simple-storage-service">
 <h1>AWS S3 (Simple Storage Service)<a class="headerlink" href="#aws-s3-simple-storage-service" title="Permalink to this heading">#</a></h1>
-<div class="section" id="what-is-it">
-<h2>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h2>
-<p>S3 is one of the main building blocks of AWS, one of the earliest of AWS services</p>
+<p>S3 is one of the main building blocks of AWS, one of the earliest AWS services</p>
 <p>S3 is a “hard-drive for internet”, advertised as “infinitely scaling” storage.</p>
-</div>
 <div class="section" id="use-cases">
 <h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -357,10 +971,11 @@ title="Edit this page"
 <h2>AWS S3 Bucket<a class="headerlink" href="#aws-s3-bucket" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>top-level directory for <strong>objects</strong> stored in S3</p></li>
-<li><p>must have a globally unique name (accross all regions)</p></li>
+<li><p>must have a globally unique name (across all regions, within whole AWS)</p></li>
 <li><p><strong>defined at the region level</strong> (despite looking as global service)</p></li>
 <li><p>naming convention</p>
 <ul>
+<li><p>compatible with http endpoints naming convention</p></li>
 <li><p>no uppercase, no underscore</p></li>
 <li><p>3-63 charactes long</p></li>
 <li><p>not an IP</p></li>
@@ -375,14 +990,427 @@ title="Edit this page"
 <h2>AWS S3 Object<a class="headerlink" href="#aws-s3-object" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>full</strong> path of object (file) within bucket</p></li>
-<li><p>key is composed of prefix and object name</p></li>
-<li><p>there is <strong>no concept of directories/folders</strong> in S3 - only tools trying to impose this to help users</p></li>
-<li><p>object values is content of the body</p></li>
-<li><p>maximum size of object value if 5TB (bigger files has to be splitted using multi-part upload)</p></li>
+<li><p>object key is composed of prefix and object name</p></li>
+<li><p>there is <strong>no concept of directories/folders</strong> in S3 - tools only tries to impose this to help users</p></li>
+<li><p>object body is content of the object</p></li>
+<li><p>maximum size of object value if 5TB (bigger files has to be split into more objects), minimim is 0 bytes (no body)</p></li>
 <li><p>can contain metadata</p></li>
 <li><p>can contain tags (used for security and lifecycle)</p></li>
 <li><p>can contain version id if versioning is enabled</p></li>
 </ul>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
+<div class="section" id="user-based">
+<h3>User-Based<a class="headerlink" href="#user-based" title="Permalink to this heading">#</a></h3>
+<p>selected AWS role can or cannot have permission for S3 bucket or path (using AWS IAM)</p>
+</div>
+<div class="section" id="resource-based">
+<h3>Resource-Based<a class="headerlink" href="#resource-based" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>bucket policies - created at s3 bucket level, manages permissions for bucket</p>
+<ul>
+<li><p>json-based policies</p></li>
+<li><p>can be used to grant public access to the bucket (for all principals, this can’t be done using user-based permissions)</p></li>
+<li><p>can be used to cross-account access (all principals from other account)</p></li>
+</ul>
+</li>
+<li><p>object access control list (ACL) - finer grain</p></li>
+<li><p>bucket access control list (ACL)</p></li>
+</ul>
+</div>
+<div class="section" id="s3-access-security-waterfall">
+<h3>S3 Access Security waterfall<a class="headerlink" href="#s3-access-security-waterfall" title="Permalink to this heading">#</a></h3>
+<p>You have a permission for object if</p>
+<ul class="simple">
+<li><p>the user IAM permisions allow it <strong>OR</strong> the resource policy allows <strong>AND</strong> there is no explicit deny</p></li>
+</ul>
+<p>Or even more specific, below you will find checks in order from the top to the bottom when explicit deny or allow can occur:</p>
+<ul class="simple">
+<li><p>Service Control Policy - at Organization level (account can have denied access to S3 service at all)</p></li>
+<li><p>IAM Policy - IAM role can have denied access to S3 or bucket</p></li>
+<li><p>Bucket ACL</p></li>
+<li><p>Bucket policy</p></li>
+<li><p>Object ACL</p></li>
+<li><p>Object Policy</p></li>
+</ul>
+<p>Main rules:</p>
+<ul class="simple">
+<li><p>implicit deny is default (if there is no explicit rules, you don’t have access to the object)</p></li>
+<li><p>explicit allow beats implicit deny (if there is explicit allow but no explicit deny, you have access to the object)</p></li>
+<li><p>explicit deny beats explicit allow (if there is any explicit deny, you don’t have access to the object)</p></li>
+</ul>
+</div>
+<div class="section" id="block-all-public-access">
+<h3>Block all public access<a class="headerlink" href="#block-all-public-access" title="Permalink to this heading">#</a></h3>
+<p>additional security layer which blocks public access for all objects (meaning only owner and user which directly granted permissions are allowed to see content of object)
+by default, all s3 bucket blocks all public access</p>
+</div>
+<div class="section" id="object-lock">
+<h3>Object lock<a class="headerlink" href="#object-lock" title="Permalink to this heading">#</a></h3>
+<p>Prevent objects from being deleted by storing objects using write-once-read-many (WORM) model</p>
+</div>
+<div class="section" id="mfa-delete">
+<h3>MFA Delete<a class="headerlink" href="#mfa-delete" title="Permalink to this heading">#</a></h3>
+<p>requires multifactor authentication in case object deletion is required, it is an additional option when object versioning is enabled.</p>
+</div>
+</div>
+<div class="section" id="encryption">
+<h2>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading">#</a></h2>
+<p>by default, data are encrypted at rest using SSE-S3. You can enable encryption by purpose:</p>
+<ul class="simple">
+<li><p>Server-side encryption with Amazon S3-managed keys (SSE-S3)</p></li>
+<li><p>Server-side encryption with customer-provided keys (SSE-C)</p></li>
+<li><p>Server-side encryption with AWS Key Management Service-managed keys (SSE-KMS)</p></li>
+</ul>
+</div>
+<div class="section" id="vpc-endpoints">
+<h2>VPC Endpoints<a class="headerlink" href="#vpc-endpoints" title="Permalink to this heading">#</a></h2>
+<p>you can provide S3 service for private subnets or restrict network traffic to just intra-vpc network space (therefore, all communication with such bucket will be done using AWS network not internet connection).</p>
+<p>Such protected data can still be accessed outside VPC using VPN connections.</p>
+</div>
+<div class="section" id="cloudtrail-logs">
+<h2>CloudTrail logs<a class="headerlink" href="#cloudtrail-logs" title="Permalink to this heading">#</a></h2>
+<p>All API requests are visible to cloudtrail service</p>
+</div>
+<div class="section" id="cloudwatch-alarms">
+<h2>CloudWatch alarms<a class="headerlink" href="#cloudwatch-alarms" title="Permalink to this heading">#</a></h2>
+<p>You can create cloudwatch alarms based on cloudwatch metrics - for example you can launch lambda function when there is huge amount of requests to S3</p>
+</div>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>you can version your files in Amazon S3</p></li>
+<li><p>can be enabled at the bucket level</p></li>
+<li><p>after enabling, object uploaded to s3 bucket with the same key will have filled in version key (literals+numbers)</p></li>
+<li><p>all files put into s3 bucket before enable versioning will have null in version key</p></li>
+<li><p>you can’t delete versioning - you can only suspend it, previous versions of objects won’t be deleted automatically</p></li>
+</ul>
+<div class="section" id="why-should-i-use-this">
+<h3>Why should I use this?<a class="headerlink" href="#why-should-i-use-this" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>protect against unintended deletes</p></li>
+<li><p>easy rollback to previous version</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-use">
+<h3>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Enable versioning</p></li>
+<li><p>Upload updated object</p></li>
+<li><p>You can delete selected version (show versions tick has to be enabled in AWS GUI)</p></li>
+<li><p>Deletion of objects can be undone, because deleted objects (not versions!) adds delete markers to then instead of physically delete.</p>
+<ol class="arabic simple">
+<li><p>in practice - deletion of versioned object ads new version of object with empty content, so you can delete this version to recover object</p></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="replication">
+<h2>Replication<a class="headerlink" href="#replication" title="Permalink to this heading">#</a></h2>
+<p>asynchronous replication of data between two buckets in the same region (SRR) or in two regions (CRR)</p>
+<ul class="simple">
+<li><p>to use replication, <strong>both source and destination buckets has to have enabled versioning</strong></p></li>
+<li><p>buckets can be in different AWS accounts</p></li>
+<li><p>copying is asynchronous</p></li>
+<li><p>proper IAM permissions is required</p></li>
+<li><p>only new objects are replicated (new after enabling replication). Existing objects can be replicated using S3 Batch Operation</p></li>
+<li><p>by default, delete marker are not replicated - you need to enable it on replication rule in additional replication options</p></li>
+<li><p>but <strong>deletion of selected version is not being replicated</strong> - only deletion markers are</p></li>
+</ul>
+<div class="section" id="types-of-s3-replication">
+<h3>Types of S3 replication<a class="headerlink" href="#types-of-s3-replication" title="Permalink to this heading">#</a></h3>
+<p>CRR = Cross Region Replication
+SRR = Same Region Replication</p>
+</div>
+<div class="section" id="id1">
+<h3>Use cases<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="section" id="crr">
+<h4>CRR<a class="headerlink" href="#crr" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>compliance</p></li>
+<li><p>lower latency access (for users in different regions)</p></li>
+<li><p>replication across accounts</p></li>
+</ul>
+</div>
+<div class="section" id="srr">
+<h4>SRR<a class="headerlink" href="#srr" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>log aggregation</p></li>
+<li><p>live replication between environments (prod/test/int)</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="storage-classes">
+<h2>Storage classes<a class="headerlink" href="#storage-classes" title="Permalink to this heading">#</a></h2>
+<p>S3 differs between types of storage - you can have cheaper storage class with higher read latency (i.e. glacier for backups is very cheap, but you can read data from this class after few hours only…)</p>
+<p>Storage class is assigned to objects in the bucket, by default all objects are in S3 Standard storage class, you can change it for objects by using lifecycle policies or specified on upload/put processes separately.</p>
+<div class="section" id="storage-classes-list">
+<h3>Storage classes list<a class="headerlink" href="#storage-classes-list" title="Permalink to this heading">#</a></h3>
+<div class="section" id="s3-standard-general-purpose">
+<h4>S3 standard - general purpose<a class="headerlink" href="#s3-standard-general-purpose" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>99.99% availability</p></li>
+<li><p>used for frequently accessed data</p></li>
+<li><p>low latency and high throughput</p></li>
+<li><p>use cases: bigdata analytics, mobile application</p></li>
+</ul>
+</div>
+<div class="section" id="s3-standard-infrequent-access-ia">
+<h4>S3 Standard-infrequent access (IA)<a class="headerlink" href="#s3-standard-infrequent-access-ia" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>99.9% availability</p></li>
+<li><p>use cases: disaster recovery, backups, data retrieved monthly</p></li>
+<li><p>less frequent access, but requires rapid access when needed</p></li>
+<li><p>lower storage cost than S3 standard - general purpose</p></li>
+<li><p>additional costs of writing and retrieval</p></li>
+</ul>
+</div>
+<div class="section" id="s3-one-zone-infrequent-access-ia">
+<h4>S3 One Zone-infrequent access (IA)<a class="headerlink" href="#s3-one-zone-infrequent-access-ia" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>still high durability, data will be lost when availability zone is destroyed</p></li>
+<li><p>99.5% availability</p></li>
+<li><p>use cases: secondary backup copies of on-premise data or data you can recreate</p></li>
+</ul>
+</div>
+<div class="section" id="s3-glacier-instant-retrieval">
+<h4>S3 Glacier Instant Retrieval<a class="headerlink" href="#s3-glacier-instant-retrieval" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>low-cost object storage for archiving backup</p></li>
+<li><p>pricing include additional object retrieval cost</p></li>
+<li><p>instant retrieval has millisecond retrieval</p></li>
+<li><p>minimum storage duration of 90 days (you pay for 90 days even object is stored for less than 90 days)</p></li>
+</ul>
+</div>
+<div class="section" id="s3-glacier-flexible-retrieval">
+<h4>S3 Glacier Flexible Retrieval<a class="headerlink" href="#s3-glacier-flexible-retrieval" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>formerly Amazon S3 Glacier</p></li>
+<li><p>3 flexibility:</p>
+<ul>
+<li><p>expedited - 1 to 5 minutes</p></li>
+<li><p>standard - 3 to 5 hours</p></li>
+<li><p>bulk - 5 to 12 hours (object retrieval cost is free)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="s3-glacier-deep-archive">
+<h4>S3 Glacier Deep Archive<a class="headerlink" href="#s3-glacier-deep-archive" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>2 flexibilities:</p>
+<ul>
+<li><p>standard - up to 12 hours</p></li>
+<li><p>bulk - up to 48 hours</p></li>
+</ul>
+</li>
+<li><p>minimum storage duration - 180 days</p></li>
+</ul>
+</div>
+<div class="section" id="s3-intelligent-tiering">
+<h4>S3 Intelligent Tiering<a class="headerlink" href="#s3-intelligent-tiering" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>move data based on monitoring of usage data</p></li>
+<li><p>there are no retrieval charges in S3 intelligent-tiering, but you pay for monitoring (per number of objects monitored)</p></li>
+</ul>
+<p>object can move between classes manually or by using S3 lifecycle rules</p>
+</div>
+</div>
+<div class="section" id="durability-vs-availability">
+<h3>Durability vs Availability<a class="headerlink" href="#durability-vs-availability" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>durability - measures how sure you are that object you store in S3 won’t be lossed in full, it’s the same for all storage classes and it’s 11 9’s</p></li>
+<li><p>availability - measures how readily available a service is, it differs between storage classes</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="lifecycle-rules">
+<h2>Lifecycle rules<a class="headerlink" href="#lifecycle-rules" title="Permalink to this heading">#</a></h2>
+<p>You can automate moving objects between storage classes using <strong>lifecycle rules</strong></p>
+<div class="section" id="lifecycle-rules-types">
+<h3>Lifecycle rules types<a class="headerlink" href="#lifecycle-rules-types" title="Permalink to this heading">#</a></h3>
+<div class="section" id="transition-actions">
+<h4>Transition Actions<a class="headerlink" href="#transition-actions" title="Permalink to this heading">#</a></h4>
+<p>move objects from one storage class to another, examples:</p>
+<ul class="simple">
+<li><p>move objects from one zone to another n days after creation</p></li>
+<li><p>move to glacier for archiving after 6 months after creation</p></li>
+</ul>
+</div>
+<div class="section" id="expiration-actions">
+<h4>Expiration actions<a class="headerlink" href="#expiration-actions" title="Permalink to this heading">#</a></h4>
+<p>delete objects, examples:</p>
+<ul class="simple">
+<li><p>delete access log files after 365 days</p></li>
+<li><p>delete old versions of files</p></li>
+<li><p>delete incomplete multi-part uploads</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="rules-examples">
+<h3>Rules examples<a class="headerlink" href="#rules-examples" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>move current versions between storage classes</p></li>
+<li><p>move noncurrent versions between storage classes (history of changes of objects)</p></li>
+<li><p>expire current versions of objects (soft-delete when versioning is enabled or hard-delete when versioning is not enabled)</p></li>
+<li><p>permanently delete noncurrent versions of objects (hard-delete)</p></li>
+</ul>
+</div>
+<div class="section" id="comments">
+<h3>Comments<a class="headerlink" href="#comments" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>rule can be created for a certain prefix (but can’t be created for suffixes or glob/regex expressions)</p></li>
+<li><p>rule can be created for certain object Tags</p></li>
+</ul>
+</div>
+<div class="section" id="s3-analytics">
+<h3>S3 Analytics<a class="headerlink" href="#s3-analytics" title="Permalink to this heading">#</a></h3>
+<p>you can create csv report with some recommendations on age of your object. Report is updated daily by AWS.</p>
+</div>
+</div>
+<div class="section" id="event-notifications">
+<h2>Event notifications<a class="headerlink" href="#event-notifications" title="Permalink to this heading">#</a></h2>
+<p>events can be generated after almost all actions done on S3 bucket, i.e.: s3:ObjectCreated, s3:ObjectRemoved, s3:Replication etc.</p>
+<p>you can filter events by using name filtering, but only using prefix and suffix</p>
+<div class="section" id="when-to-use-it">
+<h3>When to use it<a class="headerlink" href="#when-to-use-it" title="Permalink to this heading">#</a></h3>
+<p>For example, you can create thumbnails for every jpg uploaded to your bucket.</p>
+<p>Event notification can imply on one of the below service:</p>
+<ul class="simple">
+<li><p>SNS - generate notification</p></li>
+<li><p>SQS - put record on queue for future processing</p></li>
+<li><p>Lambda - launch lambda function</p></li>
+<li><p>amazon eventbridge</p></li>
+</ul>
+<p>Events are delivered typically in seconds, but can also take a minute or longer</p>
+<p>You have to create event notification manually or enable eventbridge integration (second option enable gathering all s3 events).</p>
+<p>Manual created event notification contains source and target, so you have to define which S3 events will trigger action and what destination will be for storing event data (lambda, sns or sqs)</p>
+</div>
+<div class="section" id="amazon-eventbridge">
+<h3>Amazon EventBridge<a class="headerlink" href="#amazon-eventbridge" title="Permalink to this heading">#</a></h3>
+<p>Serverless events bus service which gathers all events information. With eventbridge you can expand target services which can be implied by S3 events</p>
+<p>Eventbridge has more filtering options than classic event notifications - you can filter by metadata, object size, names etc).</p>
+<p>You can also have multiple destinations.</p>
+</div>
+</div>
+<div class="section" id="performance-improvements">
+<h2>Performance improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>amazon S3 automatically scales to high request rates with latency 100-200ms</p></li>
+<li><p>s3 allows for 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD operations per second per prefix (prefix = full path to file)</p></li>
+</ul>
+<div class="section" id="multipart-upload">
+<h3>Multipart upload<a class="headerlink" href="#multipart-upload" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>recommended for files &gt; 100MB, required for files &gt; 5GB (single S3 Put have limit of 5GB of object size)</p></li>
+<li><p>in practice, big file is split and parallel uploaded to S3, and when all of them are uploaded to S3, S3 concatenate them into one big file and store it like it was one big file</p></li>
+<li><p>done by CLI by default under the hood, but can be done also manually, especially when SDK is used:</p>
+<ul>
+<li><p>Create Multpart Upload (CreateMultipartUpload API call, returns Bucket, Key, UploadID)</p></li>
+<li><p>Upload Parts (UploadPart API call, user needs to provide Bucket, Key, <strong>Part Number</strong> and UploadID returned from create mulipart upload, returns ETag). Part Number is important so AWS would know in what order parts should be merged when multipart upload is finished</p></li>
+<li><p>Complete Multipart Upload (CompleteMultipartUpload API call, tell that uploads are finished, provide bucket, key, uploadid and all part numbers and etags)</p></li>
+</ul>
+</li>
+<li><p>to gain the highest performance, use multiprocessing or threading when you do multipart upload using boto3 ()</p></li>
+</ul>
+<p>Limitations:</p>
+<ul class="simple">
+<li><p>up to 10000 parts only</p></li>
+<li><p>mistake leads to overwrite parts when same part number is used</p></li>
+<li><p>can be lifecycle policy which closes multipart uploads after a specified time period</p></li>
+<li><p>all parts except the final part must be at least 5MB (so it’s not possible to multipart upload for objects smaller than 5MB)</p></li>
+</ul>
+</div>
+<div class="section" id="s3-transfer-acceleration">
+<h3>S3 Transfer Acceleration<a class="headerlink" href="#s3-transfer-acceleration" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>increases <strong>upload</strong> transfer speed</p></li>
+<li><p>user transfers data to one of hundreds edge location using public internet (low latency thanks to closure of edge location), and therefore AWS copies data between regions by using very fast AWS private network</p></li>
+<li><p>can be enabled per bucket</p></li>
+<li><p>to use acceleration, user have to send request to separate endpoint (changed in application - boto3 or cli)</p></li>
+<li><p>generate additional costs (0.04$/GB of transferred data and 0.08$ outside US, Europe and Japan). Costs are calculated only when accelerated data is faster than a standard data transfer</p></li>
+<li><p>It is compatible with multi-part upload.</p></li>
+<li><p>for the issue with download speed, CloudFront cache should be used</p></li>
+</ul>
+</div>
+<div class="section" id="s3-byte-range-fetches">
+<h3>S3 byte-range fetches<a class="headerlink" href="#s3-byte-range-fetches" title="Permalink to this heading">#</a></h3>
+<p>similar to multipart upload, allows to get range of object (i.e. allows to get only head 50 bytes of object)</p>
+</div>
+</div>
+<div class="section" id="s3-select">
+<h2>S3 Select<a class="headerlink" href="#s3-select" title="Permalink to this heading">#</a></h2>
+<p>Mechanism of filtering data on AWS server side.</p>
+<p>By using simple SQL statements you can filter object data and retrieve only this part of data which you are interested in.</p>
+<p>Amazon S3 Select works on objects stored in CSV, JSON, or Apache Parquet format. It also works with objects that are compressed with GZIP or BZIP2 (for CSV and JSON objects only), and server-side encrypted objects. You can specify the format of the results as either CSV or JSON, and you can determine how the records in the result are delimited.</p>
+<p>Costs are based on bytes scanned and bytes returned and are a bit smaller than Amazon Athena.</p>
+</div>
+<div class="section" id="id2">
+<h2>Encryption<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>You can store object in one bucket encrypted by more than one key (one can be encrypted by KMS, one by client-side etc).
+You can declare default encryption, which will be applied in case when you doesn’t specify encryption for uploaded object in request headers.
+You can use bucket policy to force encryption on client uploads (protect from unencrypted uploads) or you can use default encryption to force encryption even if user tries to upload unencrypted data.</p>
+<div class="section" id="types-of-at-rest-encryption-in-s3-data">
+<h3>Types of at-rest-encryption in S3 data<a class="headerlink" href="#types-of-at-rest-encryption-in-s3-data" title="Permalink to this heading">#</a></h3>
+<div class="section" id="sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
+<h4>SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys<a class="headerlink" href="#sse-s3-server-side-encryption-with-amazon-s3-managed-keys" title="Permalink to this heading">#</a></h4>
+<p>Encryption using keys handled, managed and owned by AWS - client doesn’t have access to this key.
+Objects are encrypted server-side, encryption is AES-256.
+Client must set header “x-amz-server-side-encryption”:”AES256” to upload and download data from S3 bucket.</p>
+<p>By using S3-Managed Key you are able to encrypt all your s3 data with one encryption key, the key is generated specific for your AWS account.</p>
+</div>
+<div class="section" id="sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms">
+<h4>SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS<a class="headerlink" href="#sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms" title="Permalink to this heading">#</a></h4>
+<p>Encryption using keys handled and managed by AWS KMS (Key Management Service). Client have full control over this key by using AWS KMS.
+Objects are encrypted server-side, encryption is AES-256.
+Client must set header “x-amz-server-side-encryption”:”aws:kms” to upload and download data from S3 bucket.</p>
+<p>You can also use key stored in KMS in one of other AWS account (as long as you have permission for it)</p>
+<p>Limitations:</p>
+<ul class="simple">
+<li><p>kms limits - each time you upload/download data you are requesting KMS API (GenerateDataKey or Decrypt), KMS has own quota per second limits (from 5500 to 30000 req per second)</p></li>
+</ul>
+</div>
+<div class="section" id="sse-c-server-side-encryption-with-customer-provided-keys">
+<h4>SSE-C Server-Side Encryption with Customer-Provided Keys<a class="headerlink" href="#sse-c-server-side-encryption-with-customer-provided-keys" title="Permalink to this heading">#</a></h4>
+<p>Encryption using keys fully managed by client, outside of AWS. AWS doesn’t store the encryption key client provides.
+Key is being sent in request headers, https must be used.
+Objects are encrypted server-side.
+Client must set header “x-amz-server-side-encryption-customer-algorithm”:”AES256” and “x-amz-server-side-encryption-customer-key”:”<base64-encoded-encryption-key>” to upload and download data from S3 bucket.</p>
+<p>This option can be used only with AWS CLI, AWS SDK or Amazon S3 Rest API.</p>
+<p><strong>SSE-C is not available for use with Amazon EMR</strong></p>
+</div>
+<div class="section" id="client-side-encryption">
+<h4>Client-Side Encryption<a class="headerlink" href="#client-side-encryption" title="Permalink to this heading">#</a></h4>
+<p>Clients must encrypt/decrypt data themselves before sending/after retrieving data to Amazon S3.
+Objects are encrypted client-side and stored encrypted in S3 bucket.</p>
+</div>
+</div>
+<div class="section" id="encryption-in-transit-ssl-tls">
+<h3>Encryption in transit (SSL/TLS)<a class="headerlink" href="#encryption-in-transit-ssl-tls" title="Permalink to this heading">#</a></h3>
+<p>Data are encrypted in-flight by using HTTPS connections. It is not possible to request data from S3 using non-tls requests (http).</p>
+</div>
+</div>
+<div class="section" id="access-points">
+<h2>Access Points<a class="headerlink" href="#access-points" title="Permalink to this heading">#</a></h2>
+<p>It’s kind of “shortcut” for prefix in S3 bucket - each access point gets its own DNS endpoint and authorization policy.</p>
+<p>It can contain one or more prefixes from certain S3 bucket.</p>
+<div class="section" id="object-lambda">
+<h3>Object Lambda<a class="headerlink" href="#object-lambda" title="Permalink to this heading">#</a></h3>
+<p>Lets say we have two types of users which should be able to read some data from S3 bucket. One of them can see raw data, but the other one should see redacted data, let’s say with deleted personal data (surnames)</p>
+<p>To do this, we can implement access point for one of the group and implement on this access point S3 Object Lambda function.
+This function is being executed on each object retrieved by user.</p>
+<p>That way we do not have two version of the same data - we store raw data and redact/modify responses for certain group of users.</p>
+<p>Same process can be used also for enrich data (e.g. add other data for retrieved data)</p>
+</div>
+</div>
+<div class="section" id="cli">
+<h2>CLI<a class="headerlink" href="#cli" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>s3<span class="w"> </span>ls<span class="w"> </span>s3://bucket-name
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -394,11 +1422,11 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Kinesis Data Firehose</p>
+            <p class="prev-next-title">AWS Lambda</p>
         </div>
     </a>
 </div>

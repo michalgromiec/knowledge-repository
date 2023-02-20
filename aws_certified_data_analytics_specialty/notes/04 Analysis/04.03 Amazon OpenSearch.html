@@ -93,6 +93,16 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -103,28 +113,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -289,6 +324,16 @@ title="Edit this page"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-query-openseach-indexes">
+   How to query Openseach indexes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization-results">
+   Visualization results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#integration-with-other-aws-services">
    Integration with other AWS Services
   </a>
@@ -319,8 +364,8 @@ title="Edit this page"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-rollups">
-   Index rollups
+  <a class="reference internal nav-link" href="#index-rollup">
+   Index rollup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -388,6 +433,16 @@ title="Edit this page"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-query-openseach-indexes">
+   How to query Openseach indexes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization-results">
+   Visualization results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#integration-with-other-aws-services">
    Integration with other AWS Services
   </a>
@@ -418,8 +473,8 @@ title="Edit this page"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#index-rollups">
-   Index rollups
+  <a class="reference internal nav-link" href="#index-rollup">
+   Index rollup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -459,12 +514,13 @@ title="Edit this page"
 <p>Large scale analysis and reporting at petabyte scale</p>
 <p>At the beginning it was made for search engine, but now it’s not only for search anymore.
 Now its primarily for reporting.</p>
-<p>Can analyze massive data set a lot faster than i.e. APache Spark.</p>
+<p>Can analyze massive data set a lot faster than i.e. Apache Spark.</p>
 <ul class="simple">
 <li><p>OpenSearch if fork of Elasticsearch and Kibana (visualization tool), of which ElasticSearch was actually build on top of Lucene</p></li>
 <li><p>fundamentally is search engine, used for searching using json and fuzzy matching</p></li>
+<li><p>not the best tool for storage, specialized in searching the index (so if you e.g. scrap data from web and want to be able to search and still have persisted data storage, it is a good practice to store them first e.g. in dynamodb table and then, based on dynamodb events use lambda to put new documents to elasticsearch index)</p></li>
 <li><p>scalable, distributed horizontally</p></li>
-<li><p>over years, thanks to addition of new tools, it has became analysis tool</p></li>
+<li><p>over years, thanks to addition of new tools, it has become analysis tool</p></li>
 <li><p>can be used as data pipeline by using Kinesis (it replaces Beats &amp; LogStash from Elastic Stack)</p></li>
 <li><p>managed solution, but not serverless, simillar to EMR (user is not responsible for i.e. server upgrades), instead of installing opensource elasticsearch on many EC2 instances and managed them by user</p></li>
 <li><p>can scale up or ddown without downtime, but it is not automatic</p></li>
@@ -489,35 +545,50 @@ Now its primarily for reporting.</p>
 <h2>Main Concepts<a class="headerlink" href="#main-concepts" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>documents = data are stored as a document (because basically opensearch was for full-text search…). But it is not limited to text - you can store data in json files. Every document has a unique ID and a type</p></li>
-<li><p>types = defines schema and mapping shared by documents that represent the same soft of thing/format. But in newer elasticsearch version types are limited and going to be ddeprecated, because schemas will be derived automatically in future</p></li>
-<li><p>indices = index powers search into all documents within a collection of type, in opensearch we have one type per indedx</p></li>
+<li><p>types = defines schema and mapping shared by documents that represent the same soft of thing/format. But in newer elasticsearch version types are limited and going to be deprecated, because schemas will be derived automatically in future</p></li>
+<li><p>indices/indexes = index powers search into all documents within a collection of type, in opensearch we have one type per index. In practice, indexes are list of every word found in documents, thanks to indexes searching documents is very easy (word is connected with documents in which words exist)</p></li>
 </ul>
 </div>
 <div class="section" id="how-does-it-work">
 <h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>index is splitted into shards (allows for horizontal scalling)</p></li>
+<li><p>index is split into shards (allows for horizontal scaling)</p></li>
 <li><p>document is hashed and stored in particular shard</p></li>
 <li><p>every shard may be on a different node in a cluster</p></li>
 <li><p>in opensearch every shard is a self-contained Lucene index of its own (every shard is kindd of separate search engine)</p></li>
 <li><p>each index has own primary shard and replicas</p></li>
-<li><p>writes are first writed to primary shard and then replicated to replica shards</p></li>
-<li><p>reads are routed to the primary shard or any of replica shardds, opensearch tries to distribute the load of read request between all possible shardsd (both primary and replicas)</p></li>
+<li><p>writes are first written to primary shard and then replicated to replica shards</p></li>
+<li><p>reads are routed to the primary shard or any of replica shards, opensearch tries to distribute the load of read request between all possible shardsd (both primary and replicas)</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-query-openseach-indexes">
+<h2>How to query Openseach indexes<a class="headerlink" href="#how-to-query-openseach-indexes" title="Permalink to this heading">#</a></h2>
+<p>OpenSearch allow for query data using REST API. So you can use i.e. elasticsearch python package to send those API requests.</p>
+<p>You can also use Kibana, which is graphic interface and allow for query data without knowing API endpoints structure (which is still used under the hood).
+Kibana also allows for simple SQL query, which still is translated to API payloads and send asf API requests.</p>
+</div>
+<div class="section" id="visualization-results">
+<h2>Visualization results<a class="headerlink" href="#visualization-results" title="Permalink to this heading">#</a></h2>
+<p>You can visualize Opensearch results using:</p>
+<ul class="simple">
+<li><p>Kibana - builtin tool in Opensearch</p></li>
+<li><p>D3JS - easily embedded in external applications, can visualize any JSON formatted data</p></li>
 </ul>
 </div>
 <div class="section" id="integration-with-other-aws-services">
 <h2>Integration with other AWS Services<a class="headerlink" href="#integration-with-other-aws-services" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>S3 buckets (via Lambda to Kinesis)</p></li>
-<li><p>Kinesis Data Streams</p></li>
+<li><p>Kinesis Data Streams / Kinesis Firehose</p></li>
 <li><p>DynamoDB Streams</p></li>
-<li><p>Cloudwatch / cloudtrail</p></li>
+<li><p>Cloudwatch / cloudtrail (logs subscription can deliver to OpenSearch directly)</p></li>
+<li><p>IoT</p></li>
 </ul>
 </div>
 <div class="section" id="deployment-options">
 <h2>Deployment options<a class="headerlink" href="#deployment-options" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>dedicated master node (doesn’t hold data, it aim is to manage work on primary and replica shards)</p></li>
+<li><p>dedicated master node (doesn’t hold data, its aim is to manage work on primary and replica shards)</p></li>
 <li><p>domains = in AWS opensearch domain is a collection of nodes which can work as a opensearch cluster</p></li>
 <li><p>snapshot to S3 - it is possible to make a snapshot of opensearch indices to S3, to prevent from losing data on accidentally delete opensearch cluster</p></li>
 </ul>
@@ -525,24 +596,24 @@ Now its primarily for reporting.</p>
 <div class="section" id="security">
 <h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>resource-based policies (so you can grant operations on certain domain for certain role)</p></li>
+<li><p>resource-based policies (so you can grant operations on certain domain for certain IAM role)</p></li>
 <li><p>identity-based policies</p></li>
 <li><p>ip-based policies (you can restrict access to selected IP numbers)</p></li>
-<li><p>VPC restriction (you can place cluter in VPC with no internet access). You cannot change this option on running cluster, you have to decide it when creating the cluster</p></li>
+<li><p>VPC restriction (you can place cluster in VPC with no internet access). You cannot change this option on running cluster, you have to decide it when creating the cluster</p></li>
 <li><p>Cognito can be used to grant separate authentication (both using Active Directory, social media identity services or Cognito user pool)</p></li>
 </ul>
 </div>
 <div class="section" id="anti-patterns">
 <h2>Anti-patterns<a class="headerlink" href="#anti-patterns" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>OLTP = opensearch doesnt have transation support, use RDS or DynamoDB instead</p></li>
+<li><p>OLTP = opensearch doesn’t have transaction support, use RDS or DynamoDB instead</p></li>
 <li><p>ad-hoc data querying = you can do this, but athena is better for this</p></li>
 </ul>
 </div>
 <div class="section" id="storage-types">
 <h2>Storage types<a class="headerlink" href="#storage-types" title="Permalink to this heading">#</a></h2>
 <p>This is one of the difference vs Elasticsearch - AWS introduce storage types</p>
-<p>By default, your data nores use “hot” storage - with EBS volumes, fastest performance, but the most expensive</p>
+<p>By default, your data nodes use “hot” storage - with EBS volumes, faster performance, but the most expensive</p>
 <p>As an alternative, you can choose other storage types:</p>
 <ul class="simple">
 <li><p>ultrawarm/warm - uses S3 and caching, best for indices with few writes, slower performance but much lower costs (uses S3 instead of EBS)</p></li>
@@ -556,7 +627,7 @@ Now its primarily for reporting.</p>
 <li><p>automates index management policies - in other words automate operations which can be done on index, for example:</p>
 <ul>
 <li><p>delete old indices after a period of time</p></li>
-<li><p>move inddices into read only state</p></li>
+<li><p>move indices into read only state</p></li>
 <li><p>move indices between storage types</p></li>
 <li><p>reduce replica count over time</p></li>
 <li><p>automate index snapshots</p></li>
@@ -565,27 +636,27 @@ Now its primarily for reporting.</p>
 </ul>
 <p>ISM policies run every 30-48 minutes, you can send notifications when done</p>
 </div>
-<div class="section" id="index-rollups">
-<h2>Index rollups<a class="headerlink" href="#index-rollups" title="Permalink to this heading">#</a></h2>
+<div class="section" id="index-rollup">
+<h2>Index rollup<a class="headerlink" href="#index-rollup" title="Permalink to this heading">#</a></h2>
 <p>You can automatically periodically roll up old data into summarized indices - it allows you save storage costs.</p>
 <p>New rolled-up index may have fewer fields.</p>
 </div>
 <div class="section" id="index-transforms">
 <h2>Index transforms<a class="headerlink" href="#index-transforms" title="Permalink to this heading">#</a></h2>
-<p>like rollups but purpose is to create a different view to analyze data differently</p>
+<p>like rollup but purpose is to create a different view to analyze data differently</p>
 </div>
 <div class="section" id="cross-cluster-replication">
 <h2>Cross-cluster replication<a class="headerlink" href="#cross-cluster-replication" title="Permalink to this heading">#</a></h2>
-<p>You can repliace indices across domains, to ensure high availability (prevent from losing data) or to reduce latency (replicate data geographically).</p>
+<p>You can replace indices across domains, to ensure high availability (prevent from losing data) or to reduce latency (replicate data geographically).</p>
 <p>You set up follower index which pulls data from leader index.</p>
 <p>You can also copy index on demand by using Remote Reindex functionality.</p>
 </div>
 <div class="section" id="stability">
 <h2>Stability<a class="headerlink" href="#stability" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>3 dedicated master nodeds is best practice (avoids split brain when you have two master nodes and they have different state - who is master then?)</p></li>
-<li><p>pay attention on disk space - minimum storage requiremens is roughly <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">data</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">replicas)</span> <span class="pre">*</span> <span class="pre">1.45</span></code>, so with 45% of overhead</p></li>
-<li><p>choose correct number of shards (many times needs to be done by try and error method)</p></li>
+<li><p>3 dedicated master nodes is best practice (avoids split brain when you have two master nodes, and they have different state - who is master then?)</p></li>
+<li><p>pay attention on disk space - minimum storage requirements is roughly <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">data</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">replicas)</span> <span class="pre">*</span> <span class="pre">1.45</span></code>, so with 45% of overhead</p></li>
+<li><p>choose correct number of shards (many times needs to be done by trial and error method)</p></li>
 <li><p>choose correct instance types (mostly about storage requirements, not about CPU and memory, cause opensearch is storage-heavy). Instances for search have suffix <code class="docutils literal notranslate"><span class="pre">.search</span></code></p></li>
 </ul>
 </div>

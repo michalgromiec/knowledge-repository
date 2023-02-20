@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scaling &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS Lambda &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,8 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Handling duplicates" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html" />
-    <link rel="prev" title="Consumers" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html" />
+    <link rel="next" title="AWS S3 (Simple Storage Service)" href="../02%20Storage%20of%20data/02.01%20AWS%20S3.html" />
+    <link rel="prev" title="AWS Snow (family)" href="09.01%20AWS%20Snow%20Family.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -95,6 +95,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -105,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
+  <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
+   Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
-   Kinesis Data Firehose
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -224,7 +259,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/01.05 Kinesis Data Streams Scaling.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/11.01 Lambda, API and Cloudfront.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -265,29 +300,36 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#add-shard">
-   Add Shard
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   AWS Lambda
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lambda-events">
+     Lambda events
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-cases">
+     Use cases
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limitations">
+     Limitations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-gateway">
+   API Gateway
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#remove-shard">
-   Remove Shard
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#out-of-order-records-after-resharding">
-   Out-of-order records after resharding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#autoscaling">
-   Autoscaling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scaling-limitations">
-   Scaling Limitations
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudfront">
+   Cloudfront
   </a>
  </li>
 </ul>
@@ -299,7 +341,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Scaling</h1>
+                <h1>AWS Lambda</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -309,29 +351,36 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#add-shard">
-   Add Shard
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   AWS Lambda
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lambda-events">
+     Lambda events
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-cases">
+     Use cases
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limitations">
+     Limitations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-gateway">
+   API Gateway
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#remove-shard">
-   Remove Shard
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#out-of-order-records-after-resharding">
-   Out-of-order records after resharding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#autoscaling">
-   Autoscaling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scaling-limitations">
-   Scaling Limitations
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloudfront">
+   Cloudfront
   </a>
  </li>
 </ul>
@@ -344,53 +393,52 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="scaling">
-<h1>Scaling<a class="headerlink" href="#scaling" title="Permalink to this heading">#</a></h1>
-<div class="section" id="add-shard">
-<h2>Add Shard<a class="headerlink" href="#add-shard" title="Permalink to this heading">#</a></h2>
-<p>also called “shard splitting”</p>
+  <div class="section" id="aws-lambda">
+<h1>AWS Lambda<a class="headerlink" href="#aws-lambda" title="Permalink to this heading">#</a></h1>
+<p>Serverless service which allow to run programmatic code without managing servers, with pay-as-you-use pricing option</p>
+<div class="section" id="lambda-events">
+<h2>Lambda events<a class="headerlink" href="#lambda-events" title="Permalink to this heading">#</a></h2>
+<p>every lambda function can be trigger by event. This event is input parameter for lambda function which also supplies some information about event as event parameters, so you can utilize facts/data about this event inside Lambda function code.</p>
+<p>Lambda function do processing and return another event or destination (by returning another event lambda pipelines is allowed)</p>
+<p>Most useful events examples in area of Big Data:</p>
 <ul class="simple">
-<li><p>used to increase Stream capacity (throughput)</p></li>
-<li><p>used to divide a hot shard</p></li>
-</ul>
-<p>old shard is closed and deleted once the data is expired</p>
-<p>in practice, below steps happened when adding shard</p>
-<ul class="simple">
-<li><p>completely new shards are created</p></li>
-<li><p>new data are stored in created shards, old one doesn’t receive any data from producers (old shard is closed)</p></li>
-<li><p>there is a move process which moves data from old shard to newly created one</p></li>
-<li><p>old shard will dissapear when move process is done</p></li>
-</ul>
-<p><img alt="img_1.png" src="../../../_images/img_11.png" /></p>
-</div>
-<div class="section" id="remove-shard">
-<h2>Remove Shard<a class="headerlink" href="#remove-shard" title="Permalink to this heading">#</a></h2>
-<p>also called “shard merging”</p>
-<ul class="simple">
-<li><p>used to save costs</p></li>
-<li><p>decreases the stream capacity</p></li>
-<li><p>used when two low traffic shards can be merged into new one - that way we reduce costs because we pay for number of shards in stream</p></li>
-</ul>
-<p>in practice it works similar to shard splitting - old shards dissapear after retention period and new merged shard start receiving data from produces imediately after creation</p>
-</div>
-<div class="section" id="out-of-order-records-after-resharding">
-<h2>Out-of-order records after resharding<a class="headerlink" href="#out-of-order-records-after-resharding" title="Permalink to this heading">#</a></h2>
-<p>When splitting shards it can be a situation when consumer starts reading from new shards without finishing reading data from historical shard.</p>
-<p>Solution for dealing with this is to read entirely from the parent until you don’t have new records after resharding.</p>
-<p>KCL has built-in this logic, even after resharding operations</p>
-</div>
-<div class="section" id="autoscaling">
-<h2>Autoscaling<a class="headerlink" href="#autoscaling" title="Permalink to this heading">#</a></h2>
-<p>there is no native autoscaling functionality - there is an api endpoint UpdateShardCount and can be used in custom lambda, but still lambda has to be developed manually</p>
-</div>
-<div class="section" id="scaling-limitations">
-<h2>Scaling Limitations<a class="headerlink" href="#scaling-limitations" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>resharding operations can’t be done in parallel - so only one split or merge operations can be done at a time (meaning one shard splitted to two or two partitions merged to one)</p></li>
-<li><p>one resharding (split or merge) partitions at a time - i.e. if you have 10 partitions and want to increase this number to 20, 10 operations is needded</p></li>
-<li><p>each resharding operation takes a few seconds, depends on size of changed shard</p></li>
+<li><p>S3 - new objects put to S3</p></li>
+<li><p>DynamoDB - new row</p></li>
+<li><p>Kinesis Streams</p></li>
+<li><p>Kinesis Firehose - allow for transforming data put into firehose</p></li>
+<li><p>Redshift</p></li>
+<li><p>IoT</p></li>
+<li><p>Elasticsearch</p></li>
+<li><p>Data Pipeline</p></li>
+<li><p>many others out of scope for big data environments</p></li>
 </ul>
 </div>
+<div class="section" id="use-cases">
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>real time log processing (combine lambda and kinesis firehose)</p></li>
+<li><p>etl pipeline (when data comes to S3, run some process…)</p></li>
+<li><p>cron jobs (daily batch jobs, weekly batches etc.)</p></li>
+</ul>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>execution time limit = 15 minutes (900 seconds), hard limit</p></li>
+<li><p>request and response payload = 6MB (synchronous) and 256KB (asynchronous)</p></li>
+<li><p>3GB of memory RAM</p></li>
+<li><p>1000 concurrent executions (soft limit, can be increased by AWS support)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="api-gateway">
+<h1>API Gateway<a class="headerlink" href="#api-gateway" title="Permalink to this heading">#</a></h1>
+<p>Serverless service allowing run API endpoints without managing servers</p>
+</div>
+<div class="section" id="cloudfront">
+<h1>Cloudfront<a class="headerlink" href="#cloudfront" title="Permalink to this heading">#</a></h1>
+<p>Content Delivery Network utilizing edge locations and cache to deliver data faster to end users.
+use case: caching data for users reading data from AWS services</p>
 </div>
 
 
@@ -401,17 +449,17 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="09.01%20AWS%20Snow%20Family.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Consumers</p>
+            <p class="prev-next-title">AWS Snow (family)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html" title="next page">
+    <a class='right-next' id="next-link" href="../02%20Storage%20of%20data/02.01%20AWS%20S3.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Handling duplicates</p>
+        <p class="prev-next-title">AWS S3 (Simple Storage Service)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

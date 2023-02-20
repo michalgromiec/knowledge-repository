@@ -1,7 +1,7 @@
 # Identity Federation
 
 * lets user outside of AWS to assume temporary role for accessing AWS resources
-* those users doesn't have to have user in AWS - they assume identity provided access role
+* those users don't have to have user in AWS - they assume identity provided access role
 * in practice, it's a process when 3rd party identity manager, trusted by AWS, is able to return to the user temporary credentials which allows to access to AWS
 * types of possibly trusted identity managers:
   * LDAP

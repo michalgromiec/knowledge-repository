@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>S3DictCP &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>Kinesis Video Streams &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Cloudwatch Logs Subscription Filter" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html" />
+    <link rel="prev" title="Kinesis Data Firehose" href="02.01%20Kinesis%20Data%20Firehose.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,40 +93,75 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.02%20Kinesis%20Data%20Streams.html">
+  <a class="reference internal" href="01.02%20Kinesis%20Data%20Streams.html">
    Kinesis Data Streams
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
+  <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -222,7 +259,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/03 Processing/03.06 AWS EMR Other.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/02.50 Kinesis Video Streams.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -263,24 +300,9 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   S3DictCP
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-tools">
-   Other Tools
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#emr-security">
-   EMR Security
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#emr-instance-types">
-   EMR instance types
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-cases">
+   Use cases
   </a>
  </li>
 </ul>
@@ -292,7 +314,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>S3DictCP</h1>
+                <h1>Kinesis Video Streams</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -302,24 +324,9 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   S3DictCP
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-tools">
-   Other Tools
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#emr-security">
-   EMR Security
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#emr-instance-types">
-   EMR instance types
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-cases">
+   Use cases
   </a>
  </li>
 </ul>
@@ -332,54 +339,23 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="s3dictcp">
-<h1>S3DictCP<a class="headerlink" href="#s3dictcp" title="Permalink to this heading">#</a></h1>
+  <div class="section" id="kinesis-video-streams">
+<h1>Kinesis Video Streams<a class="headerlink" href="#kinesis-video-streams" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>used for copying large amounts of data from S3 to HDFS or in the opposite way</p></li>
-<li><p>uses MapReduce to copy data in a distribute manner</p></li>
-<li><p>copies data in distrbuted manner by using all nodes in your cluster</p></li>
+<li><p>separated from other basic Kinesis services by AWS</p></li>
+<li><p>pay for what you use</p></li>
+<li><p>used for video streaming (i.e. home monitoring)</p></li>
+<li><p>uses rekognition video, AWS SNS and AWS Lambda’s to notify about events seen on video stream</p></li>
+<li><p>can do real-time stream analytics or batch-oriented video analytics</p></li>
+<li><p>in opposite to other kinesis services, video streams are high level service</p></li>
+</ul>
+<div class="section" id="use-cases">
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>smart city - matching car license plates real-time</p></li>
+<li><p>predictive maintenance - analysis thermal images of machine</p></li>
 </ul>
 </div>
-<div class="section" id="other-tools">
-<h1>Other Tools<a class="headerlink" href="#other-tools" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p>ganglia (monitoring cluster status)</p></li>
-<li><p>mahout (machine learning on clusters, competitor of spark mllib)</p></li>
-<li><p>accumulo (another nosql database)</p></li>
-<li><p>sqoop (relational database connector, used for importing data from external databases in distributed manner)</p></li>
-<li><p>hcatalog (table and storage management for hive metastore)</p></li>
-<li><p>kinesis connector ()</p></li>
-<li><p>tachyon (accelerator for Spark, addon)</p></li>
-<li><p>derby (open-source relational DB in java)</p></li>
-<li><p>ranger (data security manager for Hadoop)</p></li>
-<li><p>other software (you can install any external library, as node is EC2 instance…)</p></li>
-</ul>
-</div>
-<div class="section" id="emr-security">
-<h1>EMR Security<a class="headerlink" href="#emr-security" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p>IAM policies - permissions for EMR for Users</p></li>
-<li><p>Kerberos - user authentication</p></li>
-<li><p>SSH - secure connection to command line of nodes, can be used for tunneling to web interfaces</p></li>
-<li><p>IAM roles</p></li>
-<li><p>“block public access” - you can prevent public access to data stored on EMR cluster, can be set before creating the cluster, block access to cluster, not for data</p></li>
-</ul>
-</div>
-<div class="section" id="emr-instance-types">
-<h1>EMR instance types<a class="headerlink" href="#emr-instance-types" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p>for master node, AWS recommend m5.xlarge if cluster contains less than 50 nodes, above this limit WS recommend larger master node</p></li>
-<li><p>for core&amp;task nodes,</p>
-<ul>
-<li><p>AWS recommend m5.xlarge</p></li>
-<li><p>if node have external dependencies (e.g. web crawlers), AWS recommend less expensive t2.medium</p></li>
-<li><p>if you need improved performance, use m4.xlarge</p></li>
-<li><p>obviously, for more computational intensive application, choose instances with higher number of VCPu</p></li>
-</ul>
-</li>
-<li><p>spot instances are always good choice for task nodes</p></li>
-<li><p>AWS do not recommend spot instances for core&amp;master node (risk of data loss)</p></li>
-</ul>
 </div>
 
 
@@ -390,6 +366,20 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02.01%20Kinesis%20Data%20Firehose.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Kinesis Data Firehose</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cloudwatch Logs Subscription Filter</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

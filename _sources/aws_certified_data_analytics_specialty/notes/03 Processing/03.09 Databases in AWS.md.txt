@@ -1,0 +1,84 @@
+# Databases in AWS
+* used for preprocessing data, collecting or storage
+* exam doesnt go deeply in this area, but can include those topics in wrong answers for exam questions
+* available types of databases in AWS:
+  * relational (postgres, mariadb, aurora, sql server, oracle etc)
+    * row (for OLTP, transations)
+    * columnar (for analysis, OLAP)
+  * non-relational (no-sql)
+    * key-value (elasticache, dynamodb)
+    * document (dybamodb, documentdb)
+  * graph (neptune)
+
+## RDS
+* no operating system access
+* SaaS (software-as-a-service)
+* managed service
+* in practice, EC2 instances are created underneath, available indirect via route53 endpoint and management API
+
+### Available Engines
+* Amazon Aurora (mySQL or Postgres) - databases in clusters
+* MySQL 
+* MariaDB
+* PostgreSQL
+* SQLServer
+* Oracle
+
+### Multi-AZ deployment
+Created for disaster recovery.
+
+User can create two "instances" of databases, working in two separate availability zones. One of them are treated as primary replica and is working with users requests, whilst the other one is "sleeping" and is repliacted at the block storage level (storage connected to EC2). This means, replication is not done at the database level, thanks to which replication is very fast.
+
+RDS is constantly monitoring both replicas, and if any of database engine, ec2 or ebs volume corrupt, whole replica is being destroyed and secondary replica is promoted to primary (database engine on secondary replica is woken up). Next, new secondary replica is being created (with inactive engine) and replication at storage level (EBS) is started.
+
+Despite we can run rds in single availability zone, it is highly not recommended. In such case, failure of any part of rds will lead to full data loss.
+
+## Neptune DB
+Graph database service.
+
+Interference language:
+* Apache TinkerPop Gremlin, with interface via WebSocket
+* W3C SPARQL Protocol and RDF Query Language, with interface via HTTP rest and query pattern similar to SQL
+
+## DocumentDB
+* MongoDB **compatible** (it is not mongodb, it's only compatible)
+* filly managed like RDS (saas)
+* storage auto-scaling is possible
+* able to index json data structures
+* in opposite to rdbs, data are stored in denormalized way, so redundancy is often used
+
+### Use cases
+* social media profiles
+* object catalogues
+* content management system
+* not good for transaction systems
+
+## Aurora (serverless)
+leveraging aurora architecture and allow clusters to be serverless 
+
+## DynamoDB (Serverless)
+key-value nosql database, full serverless
+
+
+
+## Athena
+it is not a database, it is a query interface based on AWS Glue which is presto.
+
+Available in GUI, CLI and SDK. 
+
+## S3 Select
+in practice, it is not a database, it's API call which allow for making SQL selects on data stored in S3 buckets.
+
+Used only for filtering data, any aggregation of data is not possible.
+
+Available in AWS CLI and SDK's.
+
+Can read data from CSV, JSON or Parquet. Data must be encoded in UTF8.
+
+Compression is possible (GZIP, BZIP for CSV and JSON only).
+
+Encryption on server-side is supported (client side encryption is not possible)
+
+```commandline
+aws s3api select-object-content --bucket DAS_Bucket --key DAS_Data.csv --expression "SELECT * FROM s3object" --expression-type "SQL" --input-serialization '{"CSV": {}, "CompressionType": "NONE"}' --output-serialization '{"CSV": {}}' "DAS_OUTPUT.csv"
+```

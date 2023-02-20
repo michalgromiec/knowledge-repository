@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS MSK (Managed Streaming for Apache Kafka) &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AWS SQS (Simple Queue Service)" href="05.01%20SQS.html" />
+    <link rel="prev" title="Cloudwatch Logs Subscription Filter" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,7 +93,17 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
@@ -103,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -222,7 +259,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/07.01 Data Migration Service.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/04.01 AWS MSK (Managed Streaming for Apache Kafka).md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -263,31 +300,34 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#security">
+   Security
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sources-and-targets">
-   Sources and targets
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monitoring">
+   Monitoring
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sources">
-     Sources
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#targets">
-     Targets
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aws-schema-conversion-tool">
-   AWS Schema Conversion Tool
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#costs">
+   Costs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#msk-connect">
+   MSK Connect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#serverless">
+   Serverless
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differences-vs-kinesis">
+   Differences vs Kinesis
   </a>
  </li>
 </ul>
@@ -299,7 +339,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>AWS MSK (Managed Streaming for Apache Kafka)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -309,31 +349,34 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#security">
+   Security
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sources-and-targets">
-   Sources and targets
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monitoring">
+   Monitoring
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sources">
-     Sources
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#targets">
-     Targets
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aws-schema-conversion-tool">
-   AWS Schema Conversion Tool
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#costs">
+   Costs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#msk-connect">
+   MSK Connect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#serverless">
+   Serverless
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differences-vs-kinesis">
+   Differences vs Kinesis
   </a>
  </li>
 </ul>
@@ -346,48 +389,88 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
-<p>other option for collection of data</p>
+  <div class="section" id="aws-msk-managed-streaming-for-apache-kafka">
+<h1>AWS MSK (Managed Streaming for Apache Kafka)<a class="headerlink" href="#aws-msk-managed-streaming-for-apache-kafka" title="Permalink to this heading">#</a></h1>
+<p>Alternative to AWS Kinesis, it’s a serverless, fully managed Apache Kafka on AWS.</p>
 <ul class="simple">
-<li><p>quick and secure migration of database</p></li>
-<li><p>works on ec2 instance</p></li>
-<li><p>allows for migrate database from source (can be even on-premise) to AWS database</p></li>
-<li><p>supports both homogeneous (oracle to oracle) and heterogeneous (oracle to aurora, mssql to aurora) migration</p></li>
-<li><p>allows for continuous data replication using CDC (change data capture)</p></li>
+<li><p>allows to create, update and delete Kafka Clusters without taking care about kafka brokers nodes &amp; zookeeper nodes (MSK do it for you)</p></li>
+<li><p>MSK clusters are deployed in VPC, multi-az</p></li>
+<li><p>automatic recovery from common kafka failures</p></li>
+<li><p>data is stored on EBS (elastic block storage) volumes</p></li>
+</ul>
+<p>MSK allows you to create custom configurations for your clusters, i.e. <strong>allows to increase maximum size of message (default=1MB)</strong></p>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>in-flight encryption using TLS between the brokers (<strong>kafka instances allowing message replication</strong>)</p></li>
+<li><p>in-flight encryption using TLS between clients and brokers</p></li>
+<li><p>at-rest encryption for EBS volumes using KMS</p></li>
+<li><p>network security - authorize specific security groups</p></li>
+<li><p>authentication &amp; Authorization - read/write to topics</p>
+<ul>
+<li><p>authentication:</p>
+<ul>
+<li><p>mutual tls</p></li>
+<li><p>sasl/scram</p></li>
+<li><p>iam access control</p></li>
+</ul>
+</li>
+<li><p>authorization:</p>
+<ul>
+<li><p>iam access control</p></li>
+<li><p>kafka acl’s</p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
-<div class="section" id="sources-and-targets">
-<h1>Sources and targets<a class="headerlink" href="#sources-and-targets" title="Permalink to this heading">#</a></h1>
-<div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this heading">#</a></h2>
+<div class="section" id="monitoring">
+<h2>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>on-premise and ec2 instances databases</p></li>
-<li><p>azure sql databases</p></li>
-<li><p>amazon rds</p></li>
-<li><p>amazon s3</p></li>
+<li><p>basic monitoring</p></li>
+<li><p>enhanced monitoring</p></li>
+<li><p>topic-level monitoring</p></li>
+<li><p>prometheus</p></li>
+<li><p>broker log delivery (to kinesis data streams, s3 or cloudwatch logs)</p></li>
 </ul>
 </div>
-<div class="section" id="targets">
-<h2>Targets<a class="headerlink" href="#targets" title="Permalink to this heading">#</a></h2>
+<div class="section" id="costs">
+<h2>Costs<a class="headerlink" href="#costs" title="Permalink to this heading">#</a></h2>
+<p>Kafka MSK clusters are paid by hour.</p>
+<p>Additional costs:</p>
 <ul class="simple">
-<li><p>on-premise and ec2 instance databases</p></li>
-<li><p>amazon rds</p></li>
-<li><p>amazon redshift</p></li>
-<li><p>amazon dynamodb</p></li>
-<li><p>amazon s3</p></li>
-<li><p>elasticsearch services</p></li>
-<li><p>kinesis data streams</p></li>
-<li><p>documentdb</p></li>
+<li><p>EBS (storage)</p></li>
+<li><p>data transfer</p></li>
 </ul>
-<p>So you can i.e. replicate on-premise sql server to kinesis data stream and process changes as stream of changes</p>
 </div>
+<div class="section" id="msk-connect">
+<h2>MSK Connect<a class="headerlink" href="#msk-connect" title="Permalink to this heading">#</a></h2>
+<p>managed Kafka Connect workers on AWS (Kafka Connect = functionality which allows to retrieve data from source to kafka topic or put data from kafka topic to other location)</p>
+<ul class="simple">
+<li><p>auto-scalling capabilities for workers</p></li>
+<li><p>any kafka connector can be deployed to msk connect workers</p></li>
+<li><p>pricing: per worker per hour</p></li>
+</ul>
 </div>
-<div class="section" id="aws-schema-conversion-tool">
-<h1>AWS Schema Conversion Tool<a class="headerlink" href="#aws-schema-conversion-tool" title="Permalink to this heading">#</a></h1>
-<p>converts database schema from one engine to another</p>
-<p>not needed to use when migrate database of the same db engine</p>
-<p>in other words - it translates one db engine to other</p>
+<div class="section" id="serverless">
+<h2>Serverless<a class="headerlink" href="#serverless" title="Permalink to this heading">#</a></h2>
+<p>you can run msk without managing the capacity
+you just define your topics, your partitions, and you can use kafka
+security = iam access control for all clusters</p>
+</div>
+<div class="section" id="differences-vs-kinesis">
+<h2>Differences vs Kinesis<a class="headerlink" href="#differences-vs-kinesis" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>allows sending bigger objects than kinesis (1MB, hard limit)</p></li>
+<li><p>use topics and partitions - kinesis names them as data streams and shards</p></li>
+<li><p>has more difficult managing of topics - Kinesis allows for shards splitting &amp; merging</p></li>
+<li><p>have an option to disable tls in-flight encryption (kinesis not)</p></li>
+<li><p>have more option for security (authentication/authorization)</p></li>
+<li><p>retention time - MSK has unlimited maximum retention (Kinesis data streams default max is 365 days)</p></li>
+<li><p>integration - Kinesis has a lot of integration, in MSK you need to use 3rd party tools</p></li>
+</ul>
+</div>
 </div>
 
 
@@ -398,6 +481,20 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Cloudwatch Logs Subscription Filter</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05.01%20SQS.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS SQS (Simple Queue Service)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

@@ -93,6 +93,16 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -103,28 +113,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -277,6 +312,25 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#architecture">
    Architecture
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-types">
+     Node types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#leader-node">
+       leader node
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#compute-node-worker">
+       compute node / worker
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#spectrum">
@@ -302,11 +356,57 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#distribution-styles">
    Distribution Styles
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auto">
+     AUTO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#even">
+     EVEN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-distkey">
+     KEY (distkey)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all">
+     ALL
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sort-keys">
    Sort Keys
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-redshift-cluster">
+   Create Redshift cluster
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cli-example">
+     CLI example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Create Redshift cluster
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     CLI example
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-flows">
@@ -366,9 +466,21 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#vacuum">
    Vacuum
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#automatic-vacuuming">
+     Automatic Vacuuming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-copy">
+     Deep Copy
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#id3">
    Scaling
   </a>
   <ul class="nav section-nav flex-column">
@@ -393,6 +505,11 @@ title="Edit this page"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backup-restore">
+   Backup, restore
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#features-introduced-after-2020">
@@ -481,6 +598,25 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#architecture">
    Architecture
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-types">
+     Node types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#leader-node">
+       leader node
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#compute-node-worker">
+       compute node / worker
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#spectrum">
@@ -506,11 +642,57 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#distribution-styles">
    Distribution Styles
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auto">
+     AUTO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#even">
+     EVEN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-distkey">
+     KEY (distkey)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all">
+     ALL
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sort-keys">
    Sort Keys
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-redshift-cluster">
+   Create Redshift cluster
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cli-example">
+     CLI example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Create Redshift cluster
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     CLI example
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-flows">
@@ -570,9 +752,21 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#vacuum">
    Vacuum
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#automatic-vacuuming">
+     Automatic Vacuuming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-copy">
+     Deep Copy
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#id3">
    Scaling
   </a>
   <ul class="nav section-nav flex-column">
@@ -597,6 +791,11 @@ title="Edit this page"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backup-restore">
+   Backup, restore
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#features-introduced-after-2020">
@@ -675,7 +874,7 @@ title="Edit this page"
 </ul>
 </li>
 <li><p>designed for <strong>OLAP</strong> not OLTP</p></li>
-<li><p>cost effective (no upfront costs, pay as you go)</p></li>
+<li><p>cost-effective (no upfront costs, pay as you go, but still can be very expensive)</p></li>
 <li><p>SQL, ODBC/JDBC interfaces</p></li>
 <li><p>scale up or down on demand</p></li>
 <li><p>builtin replication &amp; backups</p></li>
@@ -695,50 +894,56 @@ title="Edit this page"
 </div>
 <div class="section" id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this heading">#</a></h2>
+<p>redshift aggregates all objects into cluster
+cluster contains nodes</p>
+<div class="section" id="node-types">
+<h3>Node types<a class="headerlink" href="#node-types" title="Permalink to this heading">#</a></h3>
+<div class="section" id="leader-node">
+<h4>leader node<a class="headerlink" href="#leader-node" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
-<li><p>redshift aggregates all objects into cluster</p></li>
-<li><p>cluster contains nodes:</p>
-<ul>
-<li><p>leader node - managing communication between clients and compute nodes (so clients send requests to leader node only)</p>
-<ul>
+<li><p>manages communication between clients and compute nodes (so clients send requests to leader node only)</p></li>
 <li><p>receives client requests</p></li>
+<li><p>manages the objects schema</p></li>
+<li><p>plans query executions</p></li>
 <li><p>parses requests</p></li>
 <li><p>develops execution plans</p></li>
 <li><p>coordinates parallel execution of developed plan</p></li>
 <li><p>return results to client</p></li>
 </ul>
-</li>
-<li><p>compute node(s) - one or more</p>
-<ul>
+</div>
+<div class="section" id="compute-node-worker">
+<h4>compute node / worker<a class="headerlink" href="#compute-node-worker" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>one or more in cluster</p></li>
 <li><p>executing commands/steps received from leader node</p></li>
 <li><p>transmitting data between compute nodes to serve queries</p></li>
 <li><p>sends intermediate results to leader node</p></li>
 <li><p>cluster can contain up to 128 compute nodes and one leader node (so it’s not “infinetely scalable”)</p></li>
 <li><p>compute nodes can be one of below types:</p>
 <ul>
-<li><p>dense storage node = allows for very large warehouses and uses HDDs (low price, lower performance), available two versions with 2TB and 16TB of storage and different number of vCPU and RAM</p></li>
-<li><p>dense compute node = allows for very high performance nodes (SSD)</p></li>
+<li><p><strong>dense storage</strong> node = allows for very large warehouses and uses HDDs (low price, lower performance), available two versions with 2TB and 16TB of storage and different number of vCPU and RAM (ds2 family)</p></li>
+<li><p><strong>dense compute</strong> node = allows for very high performance nodes (SSD), have less capacity than compute dense storage node (dc2 family)</p></li>
 </ul>
 </li>
-<li><p>every compute node is divided into slices</p>
+<li><p>every worker node is divided into <strong>slices</strong></p>
 <ul>
 <li><p>portion of each node CPU and memory is allocated to each slice</p></li>
 <li><p>number of slices per node is determined by node size</p></li>
-<li><p>queries executed by node are splitted into slices to have more parallel processing</p></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><p>queries executed by node are splitted into slices to have more parallel processing so in practice slice executes script and returing results (not the node)</p></li>
 </ul>
 </li>
 </ul>
 <p><img alt="img.png" src="../../../_images/img3.png" /></p>
 </div>
+</div>
+</div>
 <div class="section" id="spectrum">
 <h2>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>allows to query exabytes of unstructured data in S3 without loading</p></li>
+<li><p>allows querying exabytes of unstructured data in S3 without COPY to the redshift itself</p></li>
+<li><p>support <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> and <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> but doesnt support <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> and <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> operation</p></li>
 <li><p>do the same type of work like Athena does with AWS Glue Datacatalog (so it can be treated as replacement for Presto)</p></li>
+<li><p>when creating table in spectrum, in reality table is created in glue data catalog</p></li>
 <li><p>limitless concurrency</p></li>
 <li><p>horizontal scaling</p></li>
 <li><p>responsible only for computing (storage is S3)</p></li>
@@ -751,8 +956,8 @@ title="Edit this page"
 <p>redshift is fast because of three aspects:</p>
 <ul class="simple">
 <li><p>massively parallel processing (MPP)</p></li>
-<li><p>columnar data storage (splitable)</p></li>
-<li><p>column compression (thanks to columnar data storage repeatable data in column need less space)</p></li>
+<li><p>columnar data storage (splitable, querying one column is faster than all columns)</p></li>
+<li><p>column compression (thanks to columnar data storage repeatable data in column need less space, also additional compression is possible)</p></li>
 </ul>
 </div>
 <div class="section" id="durability">
@@ -762,7 +967,7 @@ title="Edit this page"
 <li><p>data continuously backed up to S3</p></li>
 <li><p>in effect data are stored in 3 different places: original, replica and S3</p></li>
 <li><p>automatic replace failed drives/nodes</p></li>
-<li><p>however - cluster is limited to a single AZ (in november 22 AWS announced multi-az support for cluters which are in AWS preview)</p></li>
+<li><p>however - cluster is limited to a single AZ (on November 2022 AWS announced multi-az support for cluters which are in AWS preview)</p></li>
 </ul>
 </div>
 <div class="section" id="scaling">
@@ -771,7 +976,7 @@ title="Edit this page"
 <li><p>supports both vertical and horizontal scaling</p></li>
 <li><p>scaling is done in specific way:</p>
 <ul>
-<li><p>new cluter is created while old one remains available for reads</p></li>
+<li><p>new cluster is created while old one remains available for reads</p></li>
 <li><p>CNAME is moved from old to new cluster (which results in few minutes of downtime, done during some sort of maintenance window)</p></li>
 <li><p>then redshift move data from old cluster to new cluster in parallel way</p></li>
 </ul>
@@ -780,15 +985,25 @@ title="Edit this page"
 </div>
 <div class="section" id="distribution-styles">
 <h2>Distribution Styles<a class="headerlink" href="#distribution-styles" title="Permalink to this heading">#</a></h2>
-<p>When data is loaded to table, redshift is distributing data across the compute nodes and slices according to the distribution style defined when creating the table.</p>
-<p>The main aim of data distribution is to distribute workload among the nodes and to minimize data movement during query execution.</p>
+<p>When data is loaded to table, <strong>redshift is distributing data across the compute nodes into slices</strong> according to the distribution style defined when creating the table.</p>
+<p>The main aim of data distribution is to distribute workload among the nodes and to minimize data movement during query execution. What’s more, thanks to this massive parallel computing is possible.</p>
 <p>There are four distribution styles:</p>
-<ul class="simple">
-<li><p>AUTO - default, based on the size of the table redshift assign optimal distribution for user. If can be EVEN, KEY or ALL</p></li>
-<li><p>EVEN - regardless of the record value, all records are divided into nodes and slices evenly (round robin). Best solution when table is not joined with other table or when it’s difficult to decide between KEY and ALL distribution styles.</p></li>
-<li><p>KEY - rows distributed based on values of one column, the best when most queries are requested with filter on one column</p></li>
-<li><p>ALL - entire table is copied to all nodes. It multiplies storage, insert or updates in tables with this distribution styles lasts longer than other, best solution when table is often joined with other table (because all data are present in current node/slice). Appropriate only for slow moving tables.</p></li>
-</ul>
+<div class="section" id="auto">
+<h3>AUTO<a class="headerlink" href="#auto" title="Permalink to this heading">#</a></h3>
+<p>default, based on the size of the table redshift assign optimal distribution for user. If can be EVEN, KEY or ALL</p>
+</div>
+<div class="section" id="even">
+<h3>EVEN<a class="headerlink" href="#even" title="Permalink to this heading">#</a></h3>
+<p>default. Regardless of the record value, all records are divided into slices evenly (round robin). Best solution when table is not joined with other table or when it’s difficult to decide between KEY and ALL distribution styles.</p>
+</div>
+<div class="section" id="key-distkey">
+<h3>KEY (distkey)<a class="headerlink" href="#key-distkey" title="Permalink to this heading">#</a></h3>
+<p>rows distributed based on values of one column, the best when most queries are requested with filter on one column</p>
+</div>
+<div class="section" id="all">
+<h3>ALL<a class="headerlink" href="#all" title="Permalink to this heading">#</a></h3>
+<p>entire table is copied to all nodes. It multiplies storage, insert or updates in tables with this distribution styles lasts longer than other, best solution when table is often joined with other table (because all data are present in current node/slice). Appropriate only for slow moving tables.</p>
+</div>
 </div>
 <div class="section" id="sort-keys">
 <h2>Sort Keys<a class="headerlink" href="#sort-keys" title="Permalink to this heading">#</a></h2>
@@ -797,9 +1012,35 @@ title="Edit this page"
 <p>Types of sort key:</p>
 <ul class="simple">
 <li><p>single - one field, useful when only one field is used in filtering or joins</p></li>
-<li><p>compound - default, <strong>all fields</strong>, order of fields are important (index is build in this way). Performance will be lower when only second field is used in filtering, without the first one.</p></li>
-<li><p>interleaved - all fields, of which all are equally important (so fields order is not important)</p></li>
+<li><p>compound - default, <strong>all fields</strong>, order of fields are important (index is build in this way). Performance will be lower when only second field is used in filtering, without the first one. Most helpful in SORT BY/ORDER BY/PARTITION BY operations, works well for multi-column sorting</p></li>
+<li><p>interleaved - all fields, of which all are equally important (so fields order is not important), most helpful for WHERE predicates</p></li>
 </ul>
+</div>
+<div class="section" id="create-redshift-cluster">
+<h2>Create Redshift cluster<a class="headerlink" href="#create-redshift-cluster" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>possible using Management Console, CLI and SDK</p></li>
+</ul>
+<div class="section" id="cli-example">
+<h3>CLI example<a class="headerlink" href="#cli-example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>redshift<span class="w"> </span>create-cluster<span class="w"> </span>--node-type<span class="w"> </span>dc2.large<span class="w"> </span>--cluster-type<span class="w"> </span>multi-node<span class="w"> </span>--number-of-nodes<span class="w"> </span><span class="m">2</span><span class="w"> </span>--master-username<span class="w"> </span>uzytkownik<span class="w"> </span>--master-user-password<span class="w"> </span>haslo<span class="w"> </span>--cluster-identifier<span class="w"> </span>demo-cli-cluster
+</pre></div>
+</div>
+<p>Cluster can’t have nodes with different node types - all of them needs to be the same.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Create Redshift cluster<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>possible using Management Console, CLI and SDK</p></li>
+</ul>
+<div class="section" id="id2">
+<h3>CLI example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>redshift<span class="w"> </span>create-cluster<span class="w"> </span>--node-type<span class="w"> </span>dc2.large<span class="w"> </span>--cluster-type<span class="w"> </span>multi-node<span class="w"> </span>--number-of-nodes<span class="w"> </span><span class="m">2</span><span class="w"> </span>--master-username<span class="w"> </span>uzytkownik<span class="w"> </span>--master-user-password<span class="w"> </span>haslo<span class="w"> </span>--cluster-identifier<span class="w"> </span>demo-cli-cluster
+</pre></div>
+</div>
+<p>Cluster can’t have nodes with different node types - all of them needs to be the same.</p>
+</div>
 </div>
 <div class="section" id="data-flows">
 <h2>Data Flows<a class="headerlink" href="#data-flows" title="Permalink to this heading">#</a></h2>
@@ -811,8 +1052,9 @@ title="Edit this page"
 <li><p>can read data from S3, EMR, DynamoDB or remote hosts (using SSH)</p></li>
 <li><p>COPY command include table name, source of data (or Manifest file containing sources of data), authorization</p></li>
 <li><p>authorization can be IAM role or key-secret (this is included in COPY command)</p></li>
+<li><p>redshift cluster can have more than one IAM role attached</p></li>
 <li><p>COPY can decrypt data as it is loaded from S3</p></li>
-<li><p>compression is supported to speed up (gzip, lzop and bzip2)</p></li>
+<li><p>compression in-transit is supported to speed up (gzip, lzop and bzip2)</p></li>
 <li><p>automatic compression at target is possible - redshift can decide what is the best option for storing data on cluster</p></li>
 <li><p>narrow tables (lots of rows, few columns) should be done by one and only one COPY command (due to overhead of hidden metadata columns which consumes too much space)</p></li>
 </ul>
@@ -861,7 +1103,7 @@ title="Edit this page"
 <div class="section" id="manual-workload-management">
 <h3>Manual Workload Management<a class="headerlink" href="#manual-workload-management" title="Permalink to this heading">#</a></h3>
 <p>Creates one queue with concurrency level of 5 (5 queries at once) and additional superuser queue with concurrency level 1.</p>
-<p>You can define up to 8 queues, up to concurrency level 50.</p>
+<p>You can define up to 8 queues, total number of slots for all manual queues is 50 and cannot be changed.</p>
 </div>
 <div class="section" id="short-query-acceleration-sqa">
 <h3>Short Query Acceleration (SQA)<a class="headerlink" href="#short-query-acceleration-sqa" title="Permalink to this heading">#</a></h3>
@@ -872,34 +1114,72 @@ title="Edit this page"
 <div class="section" id="vacuum">
 <h2>Vacuum<a class="headerlink" href="#vacuum" title="Permalink to this heading">#</a></h2>
 <p>Used to recover space from deleted rows and to restore the sort order.</p>
+<p>It is required because deletion of row doesnt deletes data in fact. Rows are marked as deleted, e.g. in update commands updated data are marked as deleted and new version of row is inserted into table.</p>
+<p>By executing VACUUM FULL with no tables, you will resort rows and reclaim space for <strong>all</strong> tables in redshift cluster.</p>
 <p>Typs of vacuum:</p>
 <ul class="simple">
 <li><p>FULL - default, re-sort rows and reclaim space from deleted rows</p></li>
-<li><p>DELETE ONLY - like full but without re-sorting rows</p></li>
-<li><p>SORT ONLY - like full but without reclaiming space</p></li>
-<li><p>REINDEX - used for reinitializing interleaved indexes</p></li>
+<li><p>SORT ONLY - like full but without reclaiming space, include threshold for percentage of sorted rows (default 95%)</p></li>
+<li><p>DELETE ONLY - like full but without re-sorting rows, include threshold for rows marked for deletion (default 5%)</p></li>
+<li><p>REINDEX - used explicitly for reinitializing interleaved indexes (see above description of indexes types)</p></li>
 </ul>
+<p>We can overwrite percentage threshold with <code class="docutils literal notranslate"><span class="pre">TO</span> <span class="pre">threshold</span> <span class="pre">PERCENT</span></code> option</p>
+<p>Normally, all above commands takes no priority before other commands, you can change it by <code class="docutils literal notranslate"><span class="pre">BOOST</span></code> option, with which vacuum option uses all cluster resources</p>
+<div class="section" id="automatic-vacuuming">
+<h3>Automatic Vacuuming<a class="headerlink" href="#automatic-vacuuming" title="Permalink to this heading">#</a></h3>
+<p>Redshift do automatic vacuuming based on special criteria. It monitors when cluter is not used by queries and run those commands based on threshold of rows marked for deletion and percentage of unsorted rows.</p>
+<p>Redshift automaticall ypdates table statistics.</p>
 </div>
-<div class="section" id="id1">
-<h2>Scaling<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="section" id="deep-copy">
+<h3>Deep Copy<a class="headerlink" href="#deep-copy" title="Permalink to this heading">#</a></h3>
+<p>It’s a process which can be done on unsorted table or table with lots of records marked for deletion with which we will have new table with sorted and non-markeed for deletion rows, but it’s not as expensive as full vacuum.</p>
+<p>In practice:</p>
+<ol class="arabic simple">
+<li><p>create new table with the same schema as existing table</p></li>
+<li><p>copy data to new table (redshift automatically skip rows marked for deletion and sort data)</p></li>
+<li><p>delete source table</p></li>
+<li><p>rename target atble to the same name as source table</p></li>
+</ol>
+<p>Deep Copy requires source table is not actively queried during this process.</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>Scaling<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>Mostly we scale up redshift cluster to have more storage space (as it uses storage attached to node)</p>
+<ul class="simple">
+<li><p>supports both vertical and horizontal scaling</p></li>
+<li><p>scaling is done in specific way:</p>
+<ul>
+<li><p>new cluster is created while old one remains available for reads</p></li>
+<li><p>Redshift move data from old cluster to new cluster in parallel way</p></li>
+<li><p>CNAME is moved from old to new cluster (which results in few minutes of downtime, done during some sort of maintenance window)</p></li>
+</ul>
+</li>
+</ul>
 <div class="section" id="concurrency-scalling">
 <h3>Concurrency scalling<a class="headerlink" href="#concurrency-scalling" title="Permalink to this heading">#</a></h3>
 <p>automatically adds cluster capacity to handle increase in concurrent read queries</p>
-<p>You can choose which queries take advantage of this feature, as it obviously not cheap.</p>
+<p>You can choose which queries take advantage of this feature, still it obviously not cheap.</p>
 </div>
 <div class="section" id="elastic-resize">
 <h3>Elastic resize<a class="headerlink" href="#elastic-resize" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>quickly add or remove nodes of same type</p></li>
-<li><p>cluster is unavailable only for few minutes, but tries to keep connections open during the downtime and resume them after capacity is added to cluster</p></li>
-<li><p>for some dc2 and ra3 node types you can only double of halve number of instances</p></li>
+<li><p>quickly add or remove nodes of same type only (precisely, in the same “family” so we can’t for example change dc2 to bigger dc2 node)</p></li>
+<li><p>cluster is <strong>read-only only for few minutes</strong>, but tries to keep connections open during the downtime and resume them after capacity is added to cluster</p></li>
+<li><p>for some dc2 and ra3 node types you can only double or halve number of instances</p></li>
+<li><p>in practice, cluster snapshot is created and then is restored to newly created resized cluster, then cluter endpoint is switched to resized cluster</p></li>
+<li><p>can’t be used on single-node clusters</p></li>
+<li><p>new resized cluster must be in the same VPC as old cluster</p></li>
 </ul>
 </div>
 <div class="section" id="classic-resize">
 <h3>Classic resize<a class="headerlink" href="#classic-resize" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>can add nodes of other type</p></li>
-<li><p>cluster is read-only for <strong>hours to days</strong></p></li>
+<li><p>cluster is <strong>read-only for hours to days</strong>, depending mostly by size of data, but creating empty cluter is also time consuming</p></li>
+<li><p>read-only duration depends also on source cluster activity (other queries consume computing power)</p></li>
+<li><p>resized cluster is in practice the whole new cluster</p></li>
+<li><p>once all schemas, tables and mostly data are copied to new cluster, endpoint leading to cluster is switch to the new cluster</p></li>
 </ul>
 </div>
 <div class="section" id="workaround-snapshot-restore-resize">
@@ -907,8 +1187,21 @@ title="Edit this page"
 <ul class="simple">
 <li><p>strategy for keeping cluster available during classic resize</p></li>
 <li><p>you can do snapshot of old cluster, create a new cluster as you require and restore snapshot to newly created cluster</p></li>
+<li><p>very similar to elastic resize</p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="backup-restore">
+<h2>Backup, restore<a class="headerlink" href="#backup-restore" title="Permalink to this heading">#</a></h2>
+<p>Snapshot is full point-in-time backup of full cluster, stored in S3 service.
+Can be manually triggered or automatically created by Redshift on schedule.</p>
+<p>Restore snapshot is:</p>
+<ul class="simple">
+<li><p>create cluster</p></li>
+<li><p>restore snapshot from S3</p></li>
+<li><p>you can’t change type of node on restoring snapshot</p></li>
+</ul>
+<p>You can also back up single table by using UNLOAD command and restore it using LOAD command.</p>
 </div>
 <div class="section" id="features-introduced-after-2020">
 <h2>Features introduced after 2020<a class="headerlink" href="#features-introduced-after-2020" title="Permalink to this heading">#</a></h2>
@@ -935,7 +1228,7 @@ title="Edit this page"
 <div class="section" id="cross-region-data-sharing">
 <h3>Cross-Region data sharing<a class="headerlink" href="#cross-region-data-sharing" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>share live data across Redshift clu\ters without copying</p></li>
+<li><p>share live data across Redshift clusters without copying</p></li>
 <li><p>requires RA3 node types</p></li>
 </ul>
 </div>
@@ -969,13 +1262,15 @@ title="Edit this page"
 <li><p>workload management doesn’t work (obvious as it is serverless)</p></li>
 <li><p>maintenance windows - not supported, you dont know when updates will be applied</p></li>
 <li><p>no public endpoints (yet) - must access within VPC</p></li>
-<li><p>access permissions are granted or revoked as simply as in every postgresql - by <code class="docutils literal notranslate"><span class="pre">GRANT</span></code> or <code class="docutils literal notranslate"><span class="pre">REVOKE</span></code> command</p></li>
 </ul>
 </div>
 </div>
 </div>
 <div class="section" id="security">
 <h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>access permissions are granted or revoked as simply as in every postgresql - by <code class="docutils literal notranslate"><span class="pre">GRANT</span></code> or <code class="docutils literal notranslate"><span class="pre">REVOKE</span></code> command</p></li>
+</ul>
 </div>
 <div class="section" id="antipatterns">
 <h2>Antipatterns<a class="headerlink" href="#antipatterns" title="Permalink to this heading">#</a></h2>

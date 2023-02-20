@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Types of data at-rest-encryption in S3 data &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS DMS (Database Migration Service) &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AWS Direct Connect (DX)" href="08.01%20Direct%20Connect%20%28DX%29.html" />
+    <link rel="prev" title="AWS IOT" href="06.01%20IOT.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,44 +93,79 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.02%20Kinesis%20Data%20Streams.html">
+  <a class="reference internal" href="01.02%20Kinesis%20Data%20Streams.html">
    Kinesis Data Streams
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
+  <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02.01%20AWS%20S3.html">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02%20Storage%20of%20data/02.01%20AWS%20S3.html">
    AWS S3 (Simple Storage Service)
   </a>
  </li>
@@ -222,7 +259,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/02 Storage of data/02.10 S3 Envryption.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/07.01 Database Migration Service.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -263,43 +300,24 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Types of data at-rest-encryption in S3 data
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#available-sources">
+   Available Sources
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sse-server-side-encryption">
-     SSE - Server-Side Encryption
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
-       SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms">
-       SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sse-c-server-side-encryption-with-customer-provided-keys">
-       SSE-C Server-Side Encryption with Customer-Provided Keys
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#client-side-encryption">
-     Client-Side Encryption
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#encryption-in-transit-ssl-tls">
-   Encryption in transit (SSL/TLS)
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#available-targets">
+   Available Targets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aws-schema-conversion-tool">
+   AWS Schema Conversion Tool
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pricing-model">
+   Pricing model
   </a>
  </li>
 </ul>
@@ -311,7 +329,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Types of data at-rest-encryption in S3 data</h1>
+                <h1>AWS DMS (Database Migration Service)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -321,43 +339,24 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Types of data at-rest-encryption in S3 data
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#available-sources">
+   Available Sources
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sse-server-side-encryption">
-     SSE - Server-Side Encryption
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
-       SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms">
-       SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#sse-c-server-side-encryption-with-customer-provided-keys">
-       SSE-C Server-Side Encryption with Customer-Provided Keys
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#client-side-encryption">
-     Client-Side Encryption
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#encryption-in-transit-ssl-tls">
-   Encryption in transit (SSL/TLS)
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#available-targets">
+   Available Targets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aws-schema-conversion-tool">
+   AWS Schema Conversion Tool
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pricing-model">
+   Pricing model
   </a>
  </li>
 </ul>
@@ -370,49 +369,60 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="types-of-data-at-rest-encryption-in-s3-data">
-<h1>Types of data at-rest-encryption in S3 data<a class="headerlink" href="#types-of-data-at-rest-encryption-in-s3-data" title="Permalink to this heading">#</a></h1>
-<p>You can store object in one bucket encrypted by more than one key (one can be encrypted by KMS, one by client-side etc).
-You can declare default encryption, which will be applied in case when you doesn’t specify encryption for uploaded object in request headers.
-You can use bucket policy to force encryption on client uploads (protect from unencrypted uploads) or you can use default encryption to force encyption even if user tries to upload unencrypted data.</p>
-<div class="section" id="sse-server-side-encryption">
-<h2>SSE - Server-Side Encryption<a class="headerlink" href="#sse-server-side-encryption" title="Permalink to this heading">#</a></h2>
-<div class="section" id="sse-s3-server-side-encryption-with-amazon-s3-managed-keys">
-<h3>SSE-S3 Server-Side Encryption with Amazon S3-Managed Keys<a class="headerlink" href="#sse-s3-server-side-encryption-with-amazon-s3-managed-keys" title="Permalink to this heading">#</a></h3>
-<p>Encryption using keys handled, managed and owned by AWS - client doesn’t have access to this key.
-Objects are encrypted server-side, encryption is AES-256.
-Client must set header “x-amz-server-side-encryption”:”AES256” to upload and download data from S3 bucket.</p>
-<p>By using S3-Managed Key you are able to encrypt all your s3 data with one encryption key, the key is generated specific for your AWS account.</p>
-</div>
-<div class="section" id="sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms">
-<h3>SSE-KMS Server-Side Encryption with KMS Keys stored in AWS KMS<a class="headerlink" href="#sse-kms-server-side-encryption-with-kms-keys-stored-in-aws-kms" title="Permalink to this heading">#</a></h3>
-<p>Encryption using keys handled and managed by AWS KMS (Key Management Service). Client have full control over this key by using AWS KMS.
-Objects are encrypted server-side, encryption is AES-256.
-Client must set header “x-amz-server-side-encryption”:”aws:kms” to upload and download data from S3 bucket.</p>
-<p>You can also use key stored in KMS in one of other AWS account (as long as you have permission for it)</p>
-<p>Limitations:</p>
+  <div class="section" id="aws-dms-database-migration-service">
+<h1>AWS DMS (Database Migration Service)<a class="headerlink" href="#aws-dms-database-migration-service" title="Permalink to this heading">#</a></h1>
+<p>other option for collection of data, in practice for copy or move data from source to target</p>
 <ul class="simple">
-<li><p>kms limits - each time you upload/download data you are requesting KMS API (GenerateDataKey or Decrypt), KMS has own quota per second limits (from 5500 to 30000 req per second)</p></li>
+<li><p>quick and secure migration of database</p></li>
+<li><p>underneath, works using ec2 instance</p></li>
+<li><p>allows for <strong>migrate database</strong> from source (can be even on-premise) to AWS database</p></li>
+<li><p>supports both</p>
+<ul>
+<li><p>homogeneous (e.g. oracle to oracle)</p></li>
+<li><p>heterogeneous (e.g. oracle to aurora, mssql to aurora) migration</p></li>
+</ul>
+</li>
+<li><p>allows for <strong>continuous data replication</strong> using CDC (change data capture)</p></li>
+<li><p>minimizes downtime - databases stay fully operational during the migration</p></li>
+</ul>
+<div class="section" id="available-sources">
+<h2>Available Sources<a class="headerlink" href="#available-sources" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>on-premise and ec2 instances databases</p></li>
+<li><p>azure sql databases</p></li>
+<li><p>amazon rds</p></li>
+<li><p>amazon s3</p></li>
 </ul>
 </div>
-<div class="section" id="sse-c-server-side-encryption-with-customer-provided-keys">
-<h3>SSE-C Server-Side Encryption with Customer-Provided Keys<a class="headerlink" href="#sse-c-server-side-encryption-with-customer-provided-keys" title="Permalink to this heading">#</a></h3>
-<p>Encryption using keys fully managed by client, outside of AWS. AWS doesn’t store the encryption key client provides.
-Key is being sent in request headers, https must be used.
-Objects are encrypted server-side.
-Client must set header “x-amz-server-side-encryption-customer-algorithm”:”AES256” and “x-amz-server-side-encryption-customer-key”:”<base64-encoded-encryption-key>” to upload and download data from S3 bucket.</p>
-<p>This option can be used only with AWS CLI, AWS SDK or Amazon S3 Rest API.</p>
+<div class="section" id="available-targets">
+<h2>Available Targets<a class="headerlink" href="#available-targets" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>on-premise and ec2 instance databases</p></li>
+<li><p>amazon rds</p></li>
+<li><p>amazon redshift</p></li>
+<li><p>amazon dynamodb</p></li>
+<li><p>amazon s3</p></li>
+<li><p>elasticsearch services</p></li>
+<li><p><strong>kinesis data streams</strong></p></li>
+<li><p>documentdb</p></li>
+</ul>
+<p>So you can e.g. replicate on-premise sql server to kinesis data stream and process changes as stream of changes</p>
 </div>
+<div class="section" id="aws-schema-conversion-tool">
+<h2>AWS Schema Conversion Tool<a class="headerlink" href="#aws-schema-conversion-tool" title="Permalink to this heading">#</a></h2>
+<p>allow for converting database schema from one database engine to another</p>
+<p>not needed to use when migrate database of the same db engine (homogeneous migration)</p>
+<p>in other words - it translates one db engine to other</p>
 </div>
-<div class="section" id="client-side-encryption">
-<h2>Client-Side Encryption<a class="headerlink" href="#client-side-encryption" title="Permalink to this heading">#</a></h2>
-<p>Clients must encrypt/decrypt data themselves before sending/after retrieving data to Amazon S3.
-Objects are encrypted client-side and stored encrypted in S3 bucket.</p>
+<div class="section" id="pricing-model">
+<h2>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>pay for EC2 on-demand instances that are run underneath the service</p></li>
+<li><p>all data transfer into DMS is free</p></li>
+<li><p>data transfered between DMS and RDBS in the same Availability Zone (AZ) is also free</p></li>
+<li><p>so in the end - pay for data transfered outside AZ, Region and AWS only</p></li>
+</ul>
 </div>
-</div>
-<div class="section" id="encryption-in-transit-ssl-tls">
-<h1>Encryption in transit (SSL/TLS)<a class="headerlink" href="#encryption-in-transit-ssl-tls" title="Permalink to this heading">#</a></h1>
-<p>Data are encrypted in-flight by using HTTPS connections. It is not possible to request data from S3 using non-tls requests (http).</p>
 </div>
 
 
@@ -423,6 +433,20 @@ Objects are encrypted client-side and stored encrypted in S3 bucket.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="06.01%20IOT.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">AWS IOT</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="08.01%20Direct%20Connect%20%28DX%29.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS Direct Connect (DX)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

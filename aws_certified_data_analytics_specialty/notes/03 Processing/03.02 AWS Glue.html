@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS Glue &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -93,6 +93,16 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -103,28 +113,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -263,74 +298,104 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#available-data-sources">
+   Available data sources
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aws-glue-subservices">
-   AWS Glue subservices
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glue-data-catalog">
+   Glue Data Catalog
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#glue-crawler-data-catalog">
-     Glue Crawler / Data Catalog
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glue-crawler">
+   Glue Crawler
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aws-glue-partitions">
    AWS Glue partitions
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#glue-and-hive">
    Glue and Hive
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aws-glue-etl">
-   AWS Glue ETL
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aws-glue-studio-etl-jobs">
+   AWS Glue Studio (ETL, jobs)
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#workers-setup-data-processing-units-dpu-s">
+     Workers setup / Data Processing Units (DPU’s)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-frame">
      Dynamic Frame
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#available-transformations">
      Available Transformations
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aws-glue-data-catalog-modify">
      AWS Glue Data Catalog modify
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#development-endpoints">
      Development Endpoints
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#running-glue-jobs">
      Running Glue jobs
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cost-model">
-   Cost model
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pricing-model">
+   Pricing model
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#antipatterns">
    Antipatterns
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aws-glue-new-functionalities">
+   AWS Glue New functionalities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-glue-studio">
+     AWS Glue Studio
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-glue-databrew">
+     AWS Glue DataBrew
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-glue-elastic-views">
+     AWS Glue Elastic Views
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-lake-formation">
+     AWS Lake Formation
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -341,7 +406,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>AWS Glue</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -351,74 +416,104 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#available-data-sources">
+   Available data sources
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aws-glue-subservices">
-   AWS Glue subservices
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glue-data-catalog">
+   Glue Data Catalog
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#glue-crawler-data-catalog">
-     Glue Crawler / Data Catalog
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glue-crawler">
+   Glue Crawler
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aws-glue-partitions">
    AWS Glue partitions
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#glue-and-hive">
    Glue and Hive
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aws-glue-etl">
-   AWS Glue ETL
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aws-glue-studio-etl-jobs">
+   AWS Glue Studio (ETL, jobs)
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#workers-setup-data-processing-units-dpu-s">
+     Workers setup / Data Processing Units (DPU’s)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-frame">
      Dynamic Frame
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#available-transformations">
      Available Transformations
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aws-glue-data-catalog-modify">
      AWS Glue Data Catalog modify
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#development-endpoints">
      Development Endpoints
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#running-glue-jobs">
      Running Glue jobs
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cost-model">
-   Cost model
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pricing-model">
+   Pricing model
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#antipatterns">
    Antipatterns
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aws-glue-new-functionalities">
+   AWS Glue New functionalities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-glue-studio">
+     AWS Glue Studio
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-glue-databrew">
+     AWS Glue DataBrew
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-glue-elastic-views">
+     AWS Glue Elastic Views
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-lake-formation">
+     AWS Lake Formation
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -430,63 +525,94 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
+  <div class="section" id="aws-glue">
+<h1>AWS Glue<a class="headerlink" href="#aws-glue" title="Permalink to this heading">#</a></h1>
 <p>Serverless system used as a central metadata and schema repository for datalake.</p>
 <p>The purpose is to extract structure (schema) from unstructured data and serve extracted structure as a schema for other tools - Athena, Redshift, EMR.
-So in other way - if you have unstructered data, glue allow you to query those data using structured query language (SQL)</p>
+So in other way - if you have unstructured data, glue allow you to query those data using structured query language (SQL)</p>
 <p>The other thing Glue does is custom ETL jobs (using Apache Spark under the hood) - Glue can process schema using event driven processes or schedules.</p>
+<div class="section" id="available-data-sources">
+<h2>Available data sources<a class="headerlink" href="#available-data-sources" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>S3</p></li>
+<li><p>DynamoDB</p></li>
+<li><p>RDS</p></li>
+<li><p>Redshift</p></li>
+<li><p>Database on EC2</p></li>
+<li><p>on-premises databases using JDBC connection</p></li>
+<li><p>DocumentDB/mongoDB</p></li>
+</ul>
 </div>
-<div class="section" id="aws-glue-subservices">
-<h1>AWS Glue subservices<a class="headerlink" href="#aws-glue-subservices" title="Permalink to this heading">#</a></h1>
-<div class="section" id="glue-crawler-data-catalog">
-<h2>Glue Crawler / Data Catalog<a class="headerlink" href="#glue-crawler-data-catalog" title="Permalink to this heading">#</a></h2>
+<div class="section" id="glue-data-catalog">
+<h2>Glue Data Catalog<a class="headerlink" href="#glue-data-catalog" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>persistent metadata store (similar to Apache Hive metastore)</p></li>
+<li><p>centralized repository - there is only one data catalog per AWS region</p></li>
+<li><p>beside schema you can have custom properties describing your table</p></li>
+<li><p>provides comprehensive audit - you can track schema changes and data access control in one place</p></li>
+</ul>
+</div>
+<div class="section" id="glue-crawler">
+<h2>Glue Crawler<a class="headerlink" href="#glue-crawler" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>crawler scans data in S3, creates schema automatically</p></li>
-<li><p>can be run periodically or on demand</p></li>
-<li><p>populates Data Catalog</p></li>
-<li><p>data are not copied, stays in their places on S3, just schema is added on them</p></li>
+<li><p>can be run periodically or on demand (manually), cron expression can be used to define schedule</p></li>
+<li><p>populates Data Catalog with tables and partitions</p></li>
+<li><p>data are not copied, stays in their places on S3, just schema is added on them in Glue Data Catalog</p></li>
+<li><p>crawler get access to source data by using proper IAM role (each crawler can be run using different IAM role)
+<img alt="img.png" src="../../../_images/img2.png" /></p></li>
 </ul>
-<p><img alt="img.png" src="../../../_images/img2.png" /></p>
-</div>
 </div>
 <div class="section" id="aws-glue-partitions">
-<h1>AWS Glue partitions<a class="headerlink" href="#aws-glue-partitions" title="Permalink to this heading">#</a></h1>
+<h2>AWS Glue partitions<a class="headerlink" href="#aws-glue-partitions" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Crawler can extract partitions based on how data is organized in S3</p></li>
-<li><p>you need to think about how you will be querying datalake and implement this in your s3 structure</p></li>
+<li><p>you need to think about how you will be querying datalake and implement this hierarchy/structure in your s3 location</p></li>
 <li><p>partitions should be ordered from the most often queried to less often queried, because by using partitions it will limit amount of data which has to be scanned by bigdata tools</p></li>
 </ul>
 </div>
 <div class="section" id="glue-and-hive">
-<h1>Glue and Hive<a class="headerlink" href="#glue-and-hive" title="Permalink to this heading">#</a></h1>
+<h2>Glue and Hive<a class="headerlink" href="#glue-and-hive" title="Permalink to this heading">#</a></h2>
 <p>Hive can query AWS Glue databases and their schemas - you can use HiveQL (similar language to SQL) to query data crawled into AWS Glue metastore.</p>
 <p>You can also import hive metadata store into AWS Glue.</p>
 </div>
-<div class="section" id="aws-glue-etl">
-<h1>AWS Glue ETL<a class="headerlink" href="#aws-glue-etl" title="Permalink to this heading">#</a></h1>
+<div class="section" id="aws-glue-studio-etl-jobs">
+<h2>AWS Glue Studio (ETL, jobs)<a class="headerlink" href="#aws-glue-studio-etl-jobs" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>automatically generate code for interfaces created by user to transform data</p></li>
-<li><p>before Glue Studio introduction, user had to write his custom code based on boilerplate shared by AWS</p></li>
-<li><p>uses Scala or Python and run generated code in Apache Spark (uses custom AWS code - awsglue library)</p></li>
+<li><p>before Glue Studio introduction, user had to write his custom code based on boilerplate shared by AWS (Glue Studio allows for creating jobs using graphic interface)</p></li>
+<li><p>uses Scala or Python and run generated code in Apache Spark (uses custom AWS code - <code class="docutils literal notranslate"><span class="pre">awsglue</span></code> library)</p></li>
 <li><p>you can provide your own Apache Spark code (scala or python)</p></li>
 <li><p>handles encryption</p></li>
 <li><p>can be event driven (so you can have processes which are started automatically after certain change in your AWS account is made)</p></li>
 <li><p>can provision additional “DPU’s” (data procesisng units) when builtin aws glue etl efficiency is not enough</p></li>
 <li><p>errors are reported directly to cloudwatch</p></li>
 <li><p>targets can be S3, JDBC (RDS, Redshift) or Glue Data Catalog (create table in glue metastore)</p></li>
-<li><p>fully managed, cost effective (pay only for the resources consumed)</p></li>
+<li><p>fully managed, cost-effective (pay only for the resources consumed)</p></li>
 <li><p>apache spark platform used in etl jobs is serverless</p></li>
 <li><p>job created in AWS Glue Studio is under the hood json file - so you can store it outside in version control (there is also option of Version Control directly in AWS Glue Studio)</p></li>
 <li><p>in 2022 AWS added Data Quality steps which allows you to implement Data Quality inside jobs</p></li>
 </ul>
+<div class="section" id="workers-setup-data-processing-units-dpu-s">
+<h3>Workers setup / Data Processing Units (DPU’s)<a class="headerlink" href="#workers-setup-data-processing-units-dpu-s" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>you can use worker type standard, G.1X for memory intensive jobs or G.2X for jobs with ML transforms</p></li>
+<li><p>you can define number of workers (DPU) you want to use in this job (default=10)</p></li>
+<li><p>minimum DPUs for Spark and Spark Streaming job is 2, for python shell is 1 or 0.625</p></li>
+<li><p>maximum DPUs for Spark and Spark Streaming is 100, python shell if 1</p></li>
+<li><p>running more DPU should lead to faster processing</p></li>
+<li><p>cost per DPU is region dependent, but 0.44$/hour/DPU is the most common</p></li>
+<li><p>depend on AWS Glue Job version, pricing model is different (AWS Glue version 2.0 is billed on a 1-second increments with a 1-minute minimum, while AWS Glue 1.0 and 0.9 billed on 1-minute increments with a 10-minute minimum)</p></li>
+<li><p>you can use cloudwatch metrics to determine under or over provisioned DPUs in the cluster</p></li>
+</ul>
+</div>
 <div class="section" id="dynamic-frame">
-<h2>Dynamic Frame<a class="headerlink" href="#dynamic-frame" title="Permalink to this heading">#</a></h2>
+<h3>Dynamic Frame<a class="headerlink" href="#dynamic-frame" title="Permalink to this heading">#</a></h3>
 <p>basic object used in glue studio etl jobs - it’s a spark dataframe with additional etl functions which expands default functionality of dataframe</p>
-<p>in simillar way as spark dataframe contains many datarows, dynamicframe contains one or mode <code class="docutils literal notranslate"><span class="pre">DynamicRecord</span></code>. Each dynamicrecord contains fields/columns.</p>
+<p>in simillar way as spark dataframe contains many datarows, dynamicframe contains one or mode <code class="docutils literal notranslate"><span class="pre">DynamicRecord</span></code>. Each dynamic record contains fields/columns.</p>
 </div>
 <div class="section" id="available-transformations">
-<h2>Available Transformations<a class="headerlink" href="#available-transformations" title="Permalink to this heading">#</a></h2>
+<h3>Available Transformations<a class="headerlink" href="#available-transformations" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>bundled transformations:</p>
 <ul>
@@ -518,7 +644,7 @@ So in other way - if you have unstructered data, glue allow you to query those d
 </ul>
 </div>
 <div class="section" id="aws-glue-data-catalog-modify">
-<h2>AWS Glue Data Catalog modify<a class="headerlink" href="#aws-glue-data-catalog-modify" title="Permalink to this heading">#</a></h2>
+<h3>AWS Glue Data Catalog modify<a class="headerlink" href="#aws-glue-data-catalog-modify" title="Permalink to this heading">#</a></h3>
 <p>it is possible to update Glue Metastore based on glue etl jobs:</p>
 <ul class="simple">
 <li><p>to add new partitions, you rerun glue crawler or enable option Data Catalog update options to do this automatically based on data in job run</p></li>
@@ -536,13 +662,13 @@ So in other way - if you have unstructered data, glue allow you to query those d
 </ul>
 </div>
 <div class="section" id="development-endpoints">
-<h2>Development Endpoints<a class="headerlink" href="#development-endpoints" title="Permalink to this heading">#</a></h2>
+<h3>Development Endpoints<a class="headerlink" href="#development-endpoints" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>allows for develop etl scripts using notebook environements, but it looks like engine only, you need to have client which can connect to this instance.</p></li>
 </ul>
 </div>
 <div class="section" id="running-glue-jobs">
-<h2>Running Glue jobs<a class="headerlink" href="#running-glue-jobs" title="Permalink to this heading">#</a></h2>
+<h3>Running Glue jobs<a class="headerlink" href="#running-glue-jobs" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>time-based schedules (like any cron style runs)</p></li>
 <li><p>Job bookmarks</p>
@@ -550,7 +676,14 @@ So in other way - if you have unstructered data, glue allow you to query those d
 <li><p>used to persist state from the job run</p></li>
 <li><p>allows for running job for increment processing</p></li>
 <li><p>prevents from reprocessing of old data</p></li>
-<li><p>only handles new rows, not updated rows</p></li>
+<li><p>only handles new rows, not updated rows, new objects in S3 not old objects etc</p></li>
+<li><p>job bookmark can be:</p>
+<ul>
+<li><p>enabled - process only new objects</p></li>
+<li><p>disabled - (default), allways process entire dataset</p></li>
+<li><p>pause - processing objects processed in job runs marked by <code class="docutils literal notranslate"><span class="pre">from-value</span></code> and <code class="docutils literal notranslate"><span class="pre">to-value</span></code> parameters (effectively - to not process new objects)</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>CloudWatch events</p>
@@ -562,8 +695,8 @@ So in other way - if you have unstructered data, glue allow you to query those d
 </ul>
 </div>
 </div>
-<div class="section" id="cost-model">
-<h1>Cost model<a class="headerlink" href="#cost-model" title="Permalink to this heading">#</a></h1>
+<div class="section" id="pricing-model">
+<h2>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h2>
 <p>You pay for:</p>
 <ul class="simple">
 <li><p>Glue Data Catalog - for number of objects and access to the Glue Data Catalog (first million is free)</p></li>
@@ -574,11 +707,63 @@ So in other way - if you have unstructered data, glue allow you to query those d
 </ul>
 </div>
 <div class="section" id="antipatterns">
-<h1>Antipatterns<a class="headerlink" href="#antipatterns" title="Permalink to this heading">#</a></h1>
+<h2>Antipatterns<a class="headerlink" href="#antipatterns" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>if you need to use other engines than Spark (use Data Pipeline or EMR)</p></li>
 <li><p>before 2020 streaming was antipattern, but since April 2020 Glue started support streaming ETL by using APache Spark Structured Streaming</p></li>
 </ul>
+</div>
+<div class="section" id="aws-glue-new-functionalities">
+<h2>AWS Glue New functionalities<a class="headerlink" href="#aws-glue-new-functionalities" title="Permalink to this heading">#</a></h2>
+<p>below functionality have been introduced in 2020 or newer years, so it may be they wont be present on the exam</p>
+<div class="section" id="aws-glue-studio">
+<h3>AWS Glue Studio<a class="headerlink" href="#aws-glue-studio" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>visual interface for etl workflows</p></li>
+<li><p>visual job editor</p></li>
+<li><p>create DAG’s for complex workflows</p></li>
+<li><p>more option for sources and targets</p></li>
+<li><p>have visual job overviews, status and run times analysis</p></li>
+<li><p>allows also for monitoring jobs in a graphical dashboard</p></li>
+</ul>
+</div>
+<div class="section" id="aws-glue-databrew">
+<h3>AWS Glue DataBrew<a class="headerlink" href="#aws-glue-databrew" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>user interface for pre-processing large datasets</p></li>
+<li><p>input from s3, warehouse (redshift) or database, output to S3 only</p></li>
+<li><p>contains over 250 ready-made transformations</p></li>
+<li><p>it more simple than glue studio - it allows for very simple transformation (declare source, choose transformation from transformation set and declare target)</p></li>
+<li><p>contains projects within which jobs are stored with one or more transformations</p></li>
+<li><p>security</p>
+<ul>
+<li><p>can integrate with KMS</p></li>
+<li><p>SSL in transit</p></li>
+<li><p>IAM restricts authorization (who can what)</p></li>
+</ul>
+</li>
+<li><p>costs are calculated based on number of session (1USD/each session). Jobs costs are calculated similar to AWS interactive sessions (per node hour)</p></li>
+<li><p>interface looks similar to Microsoft PowerQuery</p></li>
+<li><p>you can use it as a tool (implement steps and download processed data in csv file) or you can create ETL DataBrew job based on what you’ve created in the tool</p></li>
+</ul>
+<p><img alt="img_3.png" src="../../../_images/img_31.png" /></p>
+</div>
+<div class="section" id="aws-glue-elastic-views">
+<h3>AWS Glue Elastic Views<a class="headerlink" href="#aws-glue-elastic-views" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>materialized views on data based from Aurora/RDS/DynamoDB/Redshift</p></li>
+</ul>
+</div>
+<div class="section" id="aws-lake-formation">
+<h3>AWS Lake Formation<a class="headerlink" href="#aws-lake-formation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>built on top of Glue</p></li>
+<li><p>“makes it easy to set up a secure data lake in days”</p></li>
+<li><p>it’s a blueprint/automated option to do everything connected to data lake in one service</p></li>
+<li><p>doesn’t cost anything, only services used under the hood are paid</p></li>
+</ul>
+</div>
+</div>
 </div>
 
 

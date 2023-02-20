@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AWS MSK (Managed Streaming for Apache Kafka)" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html" />
+    <link rel="prev" title="Kinesis Video Streams" href="02.50%20Kinesis%20Video%20Streams.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,7 +93,17 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
@@ -103,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -332,15 +369,15 @@ title="Edit this page"
 </ul>
 <div class="section" id="kinesis-data-streams">
 <h2>Kinesis Data Streams<a class="headerlink" href="#kinesis-data-streams" title="Permalink to this heading">#</a></h2>
-<p>you can write your own alarm solution based on your custom code. You can have more than one consumer consumes same data stream</p>
+<p>Your data are put into kinesis stream, so you can e.g. write your own alarm solution based on your custom code. You can have more than one consumer consumes same data stream.</p>
 </div>
 <div class="section" id="kinesis-firehose">
 <h2>Kinesis Firehose<a class="headerlink" href="#kinesis-firehose" title="Permalink to this heading">#</a></h2>
-<p>You can write aggregation of your logs to S3, using builtin aws lambda transformation functionality</p>
+<p>You can write aggregation of your logs to S3, using builtin aws lambda transformation functionality.</p>
 </div>
 <div class="section" id="aws-lambda">
 <h2>AWS Lambda<a class="headerlink" href="#aws-lambda" title="Permalink to this heading">#</a></h2>
-<p>you can write your own processing code, you will achieve real time in this case.</p>
+<p>you can write your own processing code, you will achieve real time in this case, looks similar to kinesis data stream but you can have only one “point of processing” (whereas you can have more than one consumer attached to data stream)</p>
 </div>
 </div>
 
@@ -352,6 +389,20 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02.50%20Kinesis%20Video%20Streams.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Kinesis Video Streams</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS MSK (Managed Streaming for Apache Kafka)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

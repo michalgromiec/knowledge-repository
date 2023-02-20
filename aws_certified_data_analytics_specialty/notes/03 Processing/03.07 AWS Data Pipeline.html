@@ -93,6 +93,16 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -103,28 +113,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -268,14 +303,26 @@ title="Edit this page"
   <div class="section" id="what-is-it">
 <h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
 <p>Task scheduling like oozie which can schedule some operations in AWS (e.g. copy data between S3, execute Spark Application etc)</p>
-<p>Web service help process and move data between AWS compute and processing services.</p>
+<p><strong>Web service</strong> help process and move data between AWS compute and processing services and also on-premises tools.</p>
 <ul class="simple">
 <li><p>destinations: S3, RDS, DynamoDB, Redshift, EMR</p></li>
 <li><p>manages task dependencies</p></li>
-<li><p>included retries andd notification on failures</p></li>
+<li><p>included retries and notification on failures</p></li>
 <li><p>has precondition checks</p></li>
 <li><p>data sources may be on premises</p></li>
+<li><p>includes templates of processes which helps in quick start process (e.g. export dynamodb table to s3, migrate rdbs mysql to s3 etc)</p></li>
+<li><p>it looks like this service can be taken down by AWS because it’s overlapping usage with AWS Lambda</p></li>
+<li><p>create and close EC2 or emr cluster automatically, underneath the pipeline</p></li>
+<li><p>you can run data pipeline also on-premise, by installing Task Runner. In such case, your on-premise server will poll task from data pipeline service and run shell script</p></li>
 </ul>
+<p>Contains 4 object types:</p>
+<ul class="simple">
+<li><p>datanodes</p></li>
+<li><p>activities</p></li>
+<li><p>preconditions (e.g. to check if source is available or is s3 key present)</p></li>
+<li><p>schedules</p></li>
+</ul>
+<p><img alt="img_7.png" src="../../../_images/img_7.png" /></p>
 </div>
 
 

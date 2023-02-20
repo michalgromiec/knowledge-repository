@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS IOT &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AWS DMS (Database Migration Service)" href="07.01%20Database%20Migration%20Service.html" />
+    <link rel="prev" title="AWS SQS (Simple Queue Service)" href="05.01%20SQS.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,7 +93,17 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
@@ -103,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -263,12 +300,7 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aws-services">
    AWS Services
   </a>
@@ -282,7 +314,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>AWS IOT</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -292,12 +324,7 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#aws-services">
    AWS Services
   </a>
@@ -312,21 +339,21 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
+  <div class="section" id="aws-iot">
+<h1>AWS IOT<a class="headerlink" href="#aws-iot" title="Permalink to this heading">#</a></h1>
 <p>IoT services, internet of things</p>
 <ul class="simple">
 <li><p>deployed as IoT Thing (thermostat, car, lightbulb etc, connected device)</p></li>
 <li><p>IoT thing is being registered in Thing Registry</p>
 <ul>
-<li><p>each devide gets unique ID</p></li>
+<li><p>each device gets unique ID</p></li>
 <li><p>supports metadata for each device</p></li>
 <li><p>allows to group devices and apply permission</p></li>
 </ul>
 </li>
 <li><p>thing communicates with cloud via Device gateway (it’s a level of communication between IoT things)</p>
 <ul>
-<li><p>Things can be not-connected and visible to each other, but they can communicate throught Device Gateway (i.e. controller can send command to gateway and gateway processes command and make an action to other IoT thing)</p></li>
+<li><p>Things can be not-connected and visible to each other, but they can communicate through Device Gateway (i.e. controller can send command to gateway and gateway processes command and make an action to other IoT thing)</p></li>
 </ul>
 </li>
 <li><p>Device Gateway have own API which allows to communicate with all IoT Things</p></li>
@@ -335,7 +362,7 @@ title="Edit this page"
 <ul>
 <li><p>supports pub/sub messaging pattern</p></li>
 <li><p>devices can communicate via broker despite lack of direct communication between them</p></li>
-<li><p>messages send using MQtt, websockets ot http</p></li>
+<li><p>messages send using MQtt, websockets or http</p></li>
 <li><p>reroute messages to one of below:</p>
 <ul>
 <li><p>IoT Rules Engine</p>
@@ -362,10 +389,10 @@ title="Edit this page"
 </li>
 <li><p>fully serverless and scales automatically</p></li>
 </ul>
-</div>
 <div class="section" id="aws-services">
-<h1>AWS Services<a class="headerlink" href="#aws-services" title="Permalink to this heading">#</a></h1>
+<h2>AWS Services<a class="headerlink" href="#aws-services" title="Permalink to this heading">#</a></h2>
 <p>there is a seperate service group called Internet of Things, but for the exam there is no need to know all of them.</p>
+</div>
 </div>
 
 
@@ -376,6 +403,20 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="05.01%20SQS.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">AWS SQS (Simple Queue Service)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07.01%20Database%20Migration%20Service.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS DMS (Database Migration Service)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

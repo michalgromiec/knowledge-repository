@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS SQS (Simple Queue Service) &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AWS IOT" href="06.01%20IOT.html" />
+    <link rel="prev" title="AWS MSK (Managed Streaming for Apache Kafka)" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,7 +93,17 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
@@ -103,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -263,144 +300,134 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-produce-message">
    How to produce message
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-consume-message">
    How to consume message
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fifo-queue">
    FIFO queue
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visibility-timeout">
-   Visibility timeout
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#important-configuration-options">
+   Important configuration options
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#delivery-delay">
-   Delivery Delay
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#receive-message-wait-time">
-   Receive message wait time
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dead-letter-queues">
-   Dead-letter queues
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sqs-extended-client">
-   SQS extended client
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-cases">
-   Use cases
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pricing">
-   Pricing
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#security">
-   Security
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#differences-to-kinesis">
-   Differences to Kinesis
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sqs-use-cases">
-     SQS use cases
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visibility-timeout">
+     Visibility timeout
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#kinesis-data-streams-use-cases">
-     Kinesis Data Streams use cases:
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#delivery-delay">
+     Delivery Delay
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#receive-message-wait-time">
+     Receive message wait time
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dead-letter-queues">
+     Dead-letter queues
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sqs-extended-client">
+   SQS extended client
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-cases">
+   Use cases
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pricing">
+   Pricing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#security">
+   Security
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differences-to-kinesis">
+   Differences to Kinesis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to">
    How to…
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#send-message-to-queue">
      Send message to queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#retrieve-message-from-queue">
      Retrieve message from queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#delete-message-from-queue">
      Delete message from queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#manually-move-message-to-dead-letter-queue">
      Manually move message to dead-letter queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-number-of-messages-in-queue">
      Get number of messages in queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-number-of-processed-messages-for-queue">
      Get number of processed messages for queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-data-of-oldest-and-the-newest-message-in-queue">
      Get data of oldest and the newest message in queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#check-if-message-is-present-in-queue-based-on-body">
      Check if message is present in queue (based on body)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-number-of-processing-time-of-waiting-messages-and-calculate-histogram">
      Get number of processing time of waiting messages and calculate histogram
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-how-many-times-message-were-consumed-by-consumers-tries">
      Get how many times message were consumed by consumers (tries)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-all-queue-attributes-in-one-request">
      Get all queue attributes in one request
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#purge-queues">
      Purge queues
     </a>
@@ -416,7 +443,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>AWS SQS (Simple Queue Service)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -426,144 +453,134 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-produce-message">
    How to produce message
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-consume-message">
    How to consume message
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fifo-queue">
    FIFO queue
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visibility-timeout">
-   Visibility timeout
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#important-configuration-options">
+   Important configuration options
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#delivery-delay">
-   Delivery Delay
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#receive-message-wait-time">
-   Receive message wait time
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dead-letter-queues">
-   Dead-letter queues
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sqs-extended-client">
-   SQS extended client
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-cases">
-   Use cases
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pricing">
-   Pricing
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#security">
-   Security
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#differences-to-kinesis">
-   Differences to Kinesis
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sqs-use-cases">
-     SQS use cases
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visibility-timeout">
+     Visibility timeout
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#kinesis-data-streams-use-cases">
-     Kinesis Data Streams use cases:
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#delivery-delay">
+     Delivery Delay
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#receive-message-wait-time">
+     Receive message wait time
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dead-letter-queues">
+     Dead-letter queues
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sqs-extended-client">
+   SQS extended client
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-cases">
+   Use cases
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pricing">
+   Pricing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#security">
+   Security
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differences-to-kinesis">
+   Differences to Kinesis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to">
    How to…
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#send-message-to-queue">
      Send message to queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#retrieve-message-from-queue">
      Retrieve message from queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#delete-message-from-queue">
      Delete message from queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#manually-move-message-to-dead-letter-queue">
      Manually move message to dead-letter queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-number-of-messages-in-queue">
      Get number of messages in queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-number-of-processed-messages-for-queue">
      Get number of processed messages for queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-data-of-oldest-and-the-newest-message-in-queue">
      Get data of oldest and the newest message in queue
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#check-if-message-is-present-in-queue-based-on-body">
      Check if message is present in queue (based on body)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-number-of-processing-time-of-waiting-messages-and-calculate-histogram">
      Get number of processing time of waiting messages and calculate histogram
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-how-many-times-message-were-consumed-by-consumers-tries">
      Get how many times message were consumed by consumers (tries)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-all-queue-attributes-in-one-request">
      Get all queue attributes in one request
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#purge-queues">
      Purge queues
     </a>
@@ -580,77 +597,80 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
-<p>SQS is a Simple Queue Service.</p>
-<p>You can have producers which write to queue and consumers reads from queue.</p>
+  <div class="section" id="aws-sqs-simple-queue-service">
+<h1>AWS SQS (Simple Queue Service)<a class="headerlink" href="#aws-sqs-simple-queue-service" title="Permalink to this heading">#</a></h1>
+<p>SQS is a Simple Queue Service, is a message bus like RabbitMQ or MQTT</p>
+<p>You can have producers which write to queue and consumers read from queue.</p>
 <ul class="simple">
 <li><p>AWS oldest offering (since first version)</p></li>
-<li><p>scales from 1 message/second to 10000 per second</p></li>
+<li><p>scales from 1 message/second to 10000’s per second</p></li>
 <li><p>default retention = 4 days, maximum = 14 days, minimum = 1 minute</p></li>
 <li><p>extreme low latency (&lt;10ms)</p></li>
 <li><p>no messages number limit</p></li>
-<li><p>you can add consumers to horizontally scalling solution</p></li>
+<li><p>you can add consumers to horizontally scaling solution</p></li>
 <li><p>can have duplicate messages (at-least-once-delivery)</p></li>
-<li><p>can have out of order messages (best effort ordering)</p></li>
+<li><p>can have out of order messages (the best effort ordering)</p></li>
 <li><p>limit of message size = 256KB maximum</p></li>
-<li><p>by default, sqs queue doesnt take into account order of messages (there is a new type of queue - fifo, which takes it into account)</p></li>
+<li><p>by default, sqs queue doesn’t take into account order of messages (there is a new type of queue - fifo, which takes it into account)</p></li>
 </ul>
-</div>
 <div class="section" id="how-to-produce-message">
-<h1>How to produce message<a class="headerlink" href="#how-to-produce-message" title="Permalink to this heading">#</a></h1>
-<ol class="arabic simple">
+<h2>How to produce message<a class="headerlink" href="#how-to-produce-message" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>Define body (string, up to 256KB of size)</p></li>
 <li><p>optionally add metadata (key-value attributes)</p></li>
 <li><p>optionally provide delay delivery</p></li>
-</ol>
+</ul>
 <p>SQS returns:</p>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>Message identifier</p></li>
 <li><p>MD5 hash of the body</p></li>
-</ol>
+</ul>
 </div>
 <div class="section" id="how-to-consume-message">
-<h1>How to consume message<a class="headerlink" href="#how-to-consume-message" title="Permalink to this heading">#</a></h1>
-<ol class="arabic simple">
+<h2>How to consume message<a class="headerlink" href="#how-to-consume-message" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>application polls sqs for messages (receives up to 10 messages at a time)</p></li>
 <li><p>application process messages within the visibility timeout</p></li>
-<li><p>SQS delete message using message ID</p></li>
-</ol>
+<li><p>application send delete command for messages using message ID and SQS delete them from queue</p></li>
+</ul>
 </div>
 <div class="section" id="fifo-queue">
-<h1>FIFO queue<a class="headerlink" href="#fifo-queue" title="Permalink to this heading">#</a></h1>
+<h2>FIFO queue<a class="headerlink" href="#fifo-queue" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>first-in-first-out</p></li>
 <li><p>guarantees order of messages</p></li>
-<li><p>lower throughput than the default queue (up to 3000 messages per second with batching or 300 mess/second without batching)</p></li>
+<li><p>lower throughput than the default queue (up to 3000 messages per second with batching or 300 messages per second without batching)</p></li>
 <li><p>name of the queue <strong>must</strong> end with <code class="docutils literal notranslate"><span class="pre">.fifo</span></code> suffix</p></li>
 </ul>
 </div>
+<div class="section" id="important-configuration-options">
+<h2>Important configuration options<a class="headerlink" href="#important-configuration-options" title="Permalink to this heading">#</a></h2>
 <div class="section" id="visibility-timeout">
-<h1>Visibility timeout<a class="headerlink" href="#visibility-timeout" title="Permalink to this heading">#</a></h1>
+<h3>Visibility timeout<a class="headerlink" href="#visibility-timeout" title="Permalink to this heading">#</a></h3>
 <p>Describes amount of time after which message consumed by consumer and not deleted by consumer are back and available to other consumers. It begins when SQS return a message for consumer.
+In other words = amount of time for consumer to fully process message and confirm success to SQS.
 You should set the visibility timeout to the maximum amount of time that consumer needs to process and delete a message from the queue.
 Default = 30 seconds, maximum = 12 hours</p>
 </div>
 <div class="section" id="delivery-delay">
-<h1>Delivery Delay<a class="headerlink" href="#delivery-delay" title="Permalink to this heading">#</a></h1>
-<p>Amout of time to delay delivery of message produced by producer to queue. In practce, message send to queue remains invisible to consumers for this duration.
+<h3>Delivery Delay<a class="headerlink" href="#delivery-delay" title="Permalink to this heading">#</a></h3>
+<p>Amount of time to delay delivery of message produced by producer to queue. In practice, message send to queue remains invisible to consumers for this duration.
 Default = 0 seconds, maximum = 15 minutes</p>
 </div>
 <div class="section" id="receive-message-wait-time">
-<h1>Receive message wait time<a class="headerlink" href="#receive-message-wait-time" title="Permalink to this heading">#</a></h1>
-<p>You can delay queue polling processes to reduce the costs. Setting this option helps in getting more items in one request (up to 10 messages) and it eliminates number of empty responses. If a reveive request collects the maximum number of messages, it doesn’t wait for the polling to timeout, it returns batch of results immediately.
+<h3>Receive message wait time<a class="headerlink" href="#receive-message-wait-time" title="Permalink to this heading">#</a></h3>
+<p>You can delay queue polling processes to reduce the costs. Setting this option helps in getting more items in one request (up to 10 messages) and it eliminates number of empty responses. If a received request collects the maximum number of messages, it doesn’t wait for the polling to timeout, it returns batch of results immediately.
 Default = 0 seconds, maximum = 20 seconds.</p>
 </div>
 <div class="section" id="dead-letter-queues">
-<h1>Dead-letter queues<a class="headerlink" href="#dead-letter-queues" title="Permalink to this heading">#</a></h1>
-<p>You can rewrite messages which can’t be consumed succesfully to separate queue which is called dead-letter queue. Dead-letter queue is not created automatically, you have to create it by yourself. Dead-letter queue type (standard/fifo) must match the source queue.
-Message is sent to dead-letter queue when Maximum receive values is exceeded. If the ReceiveCount exceeds this threshold (set up on creating the queue), message is sent do dead-letter queue.
+<h3>Dead-letter queues<a class="headerlink" href="#dead-letter-queues" title="Permalink to this heading">#</a></h3>
+<p>You can rewrite messages which can’t be successfully consumed to separate queue which is called dead-letter queue. Dead-letter queue is not created automatically, you have to create it by yourself. Dead-letter queue type (standard/fifo) must match the source queue type.
+Message is sent to dead-letter queue when Maximum receive values is exceeded. If the ReceiveCount number exceeds this threshold (set up on creating the queue), message is sent do dead-letter queue.
 Dead-letter queue must exist within the same AWS account and resides in the same region as the source queue.</p>
 </div>
+</div>
 <div class="section" id="sqs-extended-client">
-<h1>SQS extended client<a class="headerlink" href="#sqs-extended-client" title="Permalink to this heading">#</a></h1>
+<h2>SQS extended client<a class="headerlink" href="#sqs-extended-client" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>allows for processing objects bigger than 256KB of size</p></li>
 <li><p>producer puts object into S3 and add only small metadata message to SQS queue, consumer receives metadata and retrieve large object from S3</p></li>
@@ -658,24 +678,24 @@ Dead-letter queue must exist within the same AWS account and resides in the same
 </ul>
 </div>
 <div class="section" id="use-cases">
-<h1>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h1>
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>decouple applications (allow application to be asynchronous)</p></li>
 <li><p>buffer writes to database</p></li>
-<li><p>handle large loads of messages comming in (for example on peaks for database writes)</p></li>
+<li><p>handle large loads of messages coming in (for example on peaks for database writes)</p></li>
 </ul>
 </div>
 <div class="section" id="pricing">
-<h1>Pricing<a class="headerlink" href="#pricing" title="Permalink to this heading">#</a></h1>
+<h2>Pricing<a class="headerlink" href="#pricing" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>pay per api request and per network usage</p></li>
 </ul>
 </div>
 <div class="section" id="security">
-<h1>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h1>
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>encryption in flight by using https endpoints</p></li>
-<li><p>encryption at rest by using server side enctyption using KMS</p></li>
+<li><p>encryption at rest by using server side encryption using KMS</p></li>
 <li><p>iam policy must allow usage of sqs in general</p></li>
 <li><p>sqs queue access policy can verify if certain role can access to certain queue</p>
 <ul>
@@ -686,46 +706,46 @@ Dead-letter queue must exist within the same AWS account and resides in the same
 </ul>
 </div>
 <div class="section" id="differences-to-kinesis">
-<h1>Differences to Kinesis<a class="headerlink" href="#differences-to-kinesis" title="Permalink to this heading">#</a></h1>
+<h2>Differences to Kinesis<a class="headerlink" href="#differences-to-kinesis" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Message body is string, Kinesis have bytes</p></li>
 <li><p>Message size limit is 256KB, Kinesis has 1MB</p></li>
 <li><p>As consumers deletes messages when processing done, one SQS message cannot be processed by more than one application, Kinesis doesn’t delete messages so one kinesis stream message can be processed by more than one application or processed more than once</p></li>
 <li><p>So in general, data can be consumed once, in Kinesis they can be deleted many times</p></li>
-<li><p>and in general, allows for multiple applcations reading from one stream (pub-sub architecture)</p></li>
+<li><p>and in general, allows for multiple applications reading from one stream (pub-sub architecture)</p></li>
 <li><p>SQS deletes messages when processed by consumer, Kinesis delete only after the retention period</p></li>
-<li><p>SQS by default doesnt pay attention on messages order, Kinesis store messages in shards ordered by incoming timestamp</p></li>
-<li><p>SQS doesnt have option for checkpointing to store where application finished reading</p></li>
+<li><p>SQS by default doesn’t pay attention on messages order, Kinesis store messages in shards ordered by incoming timestamp</p></li>
+<li><p>SQS doesn’t have option for checkpointing to store where application finished reading</p></li>
 <li><p>SQS have one pricing option similar to kinesis provisioned, kinesis has provisioned/on-demand mode</p></li>
 </ol>
 <p>In general, we can recognize below use-cases:</p>
-<div class="section" id="sqs-use-cases">
-<h2>SQS use cases<a class="headerlink" href="#sqs-use-cases" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
+<li><p>SQS use cases</p>
+<ul>
 <li><p>processing objects</p></li>
 <li><p>application decoupling</p></li>
 </ul>
-</div>
-<div class="section" id="kinesis-data-streams-use-cases">
-<h2>Kinesis Data Streams use cases:<a class="headerlink" href="#kinesis-data-streams-use-cases" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
+</li>
+<li><p>Kinesis Data Streams use cases:</p>
+<ul>
 <li><p>fast data collection and processing</p></li>
 <li><p>data capture</p></li>
 <li><p>real time data analytics</p></li>
 <li><p>complex stream processing</p></li>
 </ul>
-</div>
+</li>
+</ul>
 </div>
 <div class="section" id="how-to">
-<h1>How to…<a class="headerlink" href="#how-to" title="Permalink to this heading">#</a></h1>
+<h2>How to…<a class="headerlink" href="#how-to" title="Permalink to this heading">#</a></h2>
 <div class="section" id="send-message-to-queue">
-<h2>Send message to queue<a class="headerlink" href="#send-message-to-queue" title="Permalink to this heading">#</a></h2>
+<h3>Send message to queue<a class="headerlink" href="#send-message-to-queue" title="Permalink to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>send-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--message-body<span class="w"> </span><span class="s2">&quot;testowy&quot;</span><span class="w"> </span>--profile<span class="w"> </span>mg-priv
 </pre></div>
 </div>
 </div>
 <div class="section" id="retrieve-message-from-queue">
-<h2>Retrieve message from queue<a class="headerlink" href="#retrieve-message-from-queue" title="Permalink to this heading">#</a></h2>
+<h3>Retrieve message from queue<a class="headerlink" href="#retrieve-message-from-queue" title="Permalink to this heading">#</a></h3>
 <p>Default function, which retrieves one message from queue:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>receive-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--profile<span class="w"> </span>mg-priv
 </pre></div>
@@ -736,7 +756,7 @@ Dead-letter queue must exist within the same AWS account and resides in the same
 </div>
 </div>
 <div class="section" id="delete-message-from-queue">
-<h2>Delete message from queue<a class="headerlink" href="#delete-message-from-queue" title="Permalink to this heading">#</a></h2>
+<h3>Delete message from queue<a class="headerlink" href="#delete-message-from-queue" title="Permalink to this heading">#</a></h3>
 <p>To delete one selected message:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>delete-message<span class="w"> </span>--receipt-handle<span class="w"> </span>AQEBUjqhol2b6R0OzsWBtONbDhk8wVlnU4bRJsUOnHIorUZZijTXydsOSBKI2+D4MVoPApMp+Dm8Y6T77IwNJan001/wS0GEpMg6eemDnj7IcuiGFlEc1M64YzuqMyirbdPb6ZsDucfethSAxzu7QsIqHjb0L9y9ePUBnDi1JFNHtgUlzRYMUdroP9QaQebAsaSoPkbUmXKqxheAq9EkNDrYN6AYZ8T1VPzpM0Gn/fU7HVMl+40PTwY21hk7H5dWYoE5xd21ug3i8HycxMIfy/2YRE46MmEYJSmK0bPqYJj+7E/Kq/R/UklnTNrIpdlfbojUDcXoo/sBOWrZv57NQ8NyPgiWkfZttqgsrOUvVirLkV+VyrvXQlKmOG/M0tA3Rd0364lCLmWJU/8SvraJM0zKng<span class="o">==</span><span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg
 </pre></div>
@@ -747,7 +767,7 @@ Dead-letter queue must exist within the same AWS account and resides in the same
 </div>
 </div>
 <div class="section" id="manually-move-message-to-dead-letter-queue">
-<h2>Manually move message to dead-letter queue<a class="headerlink" href="#manually-move-message-to-dead-letter-queue" title="Permalink to this heading">#</a></h2>
+<h3>Manually move message to dead-letter queue<a class="headerlink" href="#manually-move-message-to-dead-letter-queue" title="Permalink to this heading">#</a></h3>
 <p>There is no direct option for moving message to dead-letter queue. What you could do is:</p>
 <ol class="arabic simple">
 <li><p>Receive message data</p></li>
@@ -756,48 +776,49 @@ Dead-letter queue must exist within the same AWS account and resides in the same
 </ol>
 </div>
 <div class="section" id="get-number-of-messages-in-queue">
-<h2>Get number of messages in queue<a class="headerlink" href="#get-number-of-messages-in-queue" title="Permalink to this heading">#</a></h2>
+<h3>Get number of messages in queue<a class="headerlink" href="#get-number-of-messages-in-queue" title="Permalink to this heading">#</a></h3>
 <p>You can retrieve <strong>approximate</strong> number of messages waiting for consumption in queue. Approximate because at the end SQS uses a distribute system to process messages, so the actual number of messages in the queue may differ from this number</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>get-queue-attributes<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--attribute-names<span class="w"> </span>ApproximateNumberOfMessages<span class="w"> </span>--profile<span class="w"> </span>mg-priv
 </pre></div>
 </div>
 </div>
 <div class="section" id="get-number-of-processed-messages-for-queue">
-<h2>Get number of processed messages for queue<a class="headerlink" href="#get-number-of-processed-messages-for-queue" title="Permalink to this heading">#</a></h2>
+<h3>Get number of processed messages for queue<a class="headerlink" href="#get-number-of-processed-messages-for-queue" title="Permalink to this heading">#</a></h3>
 <p>It is not possible to get it directly from SQS - this service is only for distribution of messages so it doesn’t store number of processed messages anywhere.</p>
 </div>
 <div class="section" id="get-data-of-oldest-and-the-newest-message-in-queue">
-<h2>Get data of oldest and the newest message in queue<a class="headerlink" href="#get-data-of-oldest-and-the-newest-message-in-queue" title="Permalink to this heading">#</a></h2>
+<h3>Get data of oldest and the newest message in queue<a class="headerlink" href="#get-data-of-oldest-and-the-newest-message-in-queue" title="Permalink to this heading">#</a></h3>
 <p>SQS doesn’t support such requests, you can use Cloudwatch metric ApproximateAgeOfOldestMessage to monitor this value</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>cloudwatch<span class="w"> </span>get-metric-statistics<span class="w"> </span>--namespace<span class="w"> </span>AWS/SQS<span class="w"> </span>--metric-name<span class="w"> </span>ApproximateAgeOfOldestMessage<span class="w"> </span>--start-time<span class="w"> </span><span class="m">2022</span>-01-06T17:10:00<span class="w"> </span>--end-time<span class="w"> </span><span class="m">2022</span>-01-06T17:15:00<span class="w"> </span>--period<span class="w"> </span><span class="m">1</span><span class="w"> </span>--profile<span class="w"> </span>mg-priv<span class="w"> </span>--region<span class="w"> </span>eu-central-1<span class="w"> </span>--statistics<span class="w"> </span>Maximum
 </pre></div>
 </div>
 </div>
 <div class="section" id="check-if-message-is-present-in-queue-based-on-body">
-<h2>Check if message is present in queue (based on body)<a class="headerlink" href="#check-if-message-is-present-in-queue-based-on-body" title="Permalink to this heading">#</a></h2>
+<h3>Check if message is present in queue (based on body)<a class="headerlink" href="#check-if-message-is-present-in-queue-based-on-body" title="Permalink to this heading">#</a></h3>
 <p>(?)</p>
 </div>
 <div class="section" id="get-number-of-processing-time-of-waiting-messages-and-calculate-histogram">
-<h2>Get number of processing time of waiting messages and calculate histogram<a class="headerlink" href="#get-number-of-processing-time-of-waiting-messages-and-calculate-histogram" title="Permalink to this heading">#</a></h2>
+<h3>Get number of processing time of waiting messages and calculate histogram<a class="headerlink" href="#get-number-of-processing-time-of-waiting-messages-and-calculate-histogram" title="Permalink to this heading">#</a></h3>
 <p>(?)</p>
 </div>
 <div class="section" id="get-how-many-times-message-were-consumed-by-consumers-tries">
-<h2>Get how many times message were consumed by consumers (tries)<a class="headerlink" href="#get-how-many-times-message-were-consumed-by-consumers-tries" title="Permalink to this heading">#</a></h2>
+<h3>Get how many times message were consumed by consumers (tries)<a class="headerlink" href="#get-how-many-times-message-were-consumed-by-consumers-tries" title="Permalink to this heading">#</a></h3>
 <p>There is no direct command to retrieve this number, however it is possible to retrieve message and include this number as an attributes of the response</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>receive-message<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--attribute-names<span class="w"> </span>All<span class="w"> </span>--profile<span class="w"> </span>mg-priv
 </pre></div>
 </div>
 </div>
 <div class="section" id="get-all-queue-attributes-in-one-request">
-<h2>Get all queue attributes in one request<a class="headerlink" href="#get-all-queue-attributes-in-one-request" title="Permalink to this heading">#</a></h2>
+<h3>Get all queue attributes in one request<a class="headerlink" href="#get-all-queue-attributes-in-one-request" title="Permalink to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>get-queue-attributes<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--attribute-names<span class="w"> </span>All
 </pre></div>
 </div>
 </div>
 <div class="section" id="purge-queues">
-<h2>Purge queues<a class="headerlink" href="#purge-queues" title="Permalink to this heading">#</a></h2>
+<h3>Purge queues<a class="headerlink" href="#purge-queues" title="Permalink to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>sqs<span class="w"> </span>purge-queue<span class="w"> </span>--queue-url<span class="w"> </span>https://sqs.eu-west-1.amazonaws.com/662419442876/test-queue-mg<span class="w"> </span>--profile<span class="w"> </span>mg-priv
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -810,6 +831,20 @@ Dead-letter queue must exist within the same AWS account and resides in the same
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">AWS MSK (Managed Streaming for Apache Kafka)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06.01%20IOT.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS IOT</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

@@ -11,12 +11,14 @@
 * serverless
 
 ## Data sources
-* redshift
+* redshift/redshift spectrum
 * aurora/rds
 * athena
 * EC2-hosted databases (via ODBC/JDBC)
+* on-premise databases
 * files (S3 or on-premises): Excel, CSVs etc
 * data preparation allows limited ETL (change field names, add calculated files, change data types etc)
+* software as a service (Jira, Github, Salesforce, Twitter)
 
 ## SPICE
 SPICE = Super-fast, Parallel, In-memory Calculation Engine
@@ -24,7 +26,7 @@ SPICE = Super-fast, Parallel, In-memory Calculation Engine
 * It's a way of copy data from Athena into a more optimized format required by Quicksight
 * in practice, it's copies data from sources to quicksight, so every user gets 10 gigabytes of storage for SPICE data.
 * can accelerate large queries that would timeout in direct query mode
-* it behave similar to local cache. It means that it prevents from querying datasource many times, instead of this quicksight checks if data is already stored in SPICE.  
+* behaves similar to local cache. It means that it prevents from querying datasource many times, instead of this quicksight checks if data is already stored in SPICE
 
 ## Use cases
 * interactive ad-hoc exploration
@@ -35,15 +37,28 @@ SPICE = Super-fast, Parallel, In-memory Calculation Engine
 * ETL - use Glue instead
 
 ## Security
-* VPC connectivity
+* VPC connectivity - to allow for network communication with source databases you can add quicksight's IP address range to your database security groups
 * Row-level security
 * private VPC access
 * quicksight should have permissions for S3 and Athena (can be managed right from quicksight console)
+* access to S3 or Athena resources for Quicksight in general are managed directly from Quicksight console (Manage Quicksight / Security & Permissions)
+* access for specific user can be restricted using IAM policies in which we can state that selected user hasn't access to specific S3 bucket or athena object
+
+## Quicksight vs AWS Regions
+* by default, Quicksight can only access data stored **in the same region* as the one Quicksight is running within
+* VPC configured to work across AWS regions wont work
+* you need to create a new security group with an inbound rule authorizing access from the IP range of Quicksight servers in that region
+
+## Data encryption
+* All metadata and data in SPICE is encrypted with AWS-managed keys (only in Enterprise version)
+* Encryption in transit supported in both versions (ssl, https)
 
 ## User Management
+* viewers = limited access, viewing, filtering and sorting
+* owners = develppers/engineer, create dashboards
 
 ## Pricing model
-* there are two version of quicksight - Standard and Enterprise
+* there are **two version of quicksight** - Standard and Enterprise
 * enterprise allows for:
   * encryption at rest (for results of queries and SPICE)
   * MS Active Directory integration

@@ -34,7 +34,7 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Consumers" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html" />
+    <link rel="next" title="Kinesis Data Firehose" href="02.01%20Kinesis%20Data%20Firehose.html" />
     <link rel="prev" title="Collection of data - intro" href="01.01%20Data%20Collection%20intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -95,6 +95,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -105,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -298,28 +333,9 @@ title="Edit this page"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hands-on">
-     Hands-on
+    <a class="reference internal nav-link" href="#handling-duplicates-on-producer-side">
+     Handling duplicates on producer side
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#aws-sdk-cli">
-       AWS SDK (CLI)
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#stream-management">
-         Stream Management
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#produce-records">
-         Produce records
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -327,6 +343,52 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#consumers">
    Consumers
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#consumer-types">
+     Consumer types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       AWS SDK
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#classic-standard">
+         Classic/Standard
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fan-out-enhanced-fan-out">
+         Fan-out enhanced (fan out)
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-kcl">
+       AWS KCL
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-kinesis-connector-library">
+       AWS Kinesis Connector Library
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-lambda">
+       AWS Lambda
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-duplicates-on-consumer-side">
+     Handling duplicates on consumer side
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-characteristics">
@@ -337,11 +399,84 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#capacity-modes">
    Capacity modes
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#provisioned-mode-older">
+     provisioned mode (older)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#on-demand-mode-newer">
+     on-demand mode (newer)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scaling">
+   Scaling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-shard">
+     Add Shard
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#remove-shard">
+     Remove Shard
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#out-of-order-records-after-resharding">
+     Out-of-order records after resharding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autoscaling">
+     Autoscaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-limitations">
+     Scaling Limitations
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#security">
    Security
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hands-on">
+   Hands-on
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-sdk-cli">
+     AWS SDK (CLI)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stream-management">
+       Stream Management
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#produce-records">
+       Produce records
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#consume-records">
+       Consume records
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -395,28 +530,9 @@ title="Edit this page"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hands-on">
-     Hands-on
+    <a class="reference internal nav-link" href="#handling-duplicates-on-producer-side">
+     Handling duplicates on producer side
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#aws-sdk-cli">
-       AWS SDK (CLI)
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#stream-management">
-         Stream Management
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#produce-records">
-         Produce records
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -424,6 +540,52 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#consumers">
    Consumers
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#consumer-types">
+     Consumer types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       AWS SDK
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#classic-standard">
+         Classic/Standard
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fan-out-enhanced-fan-out">
+         Fan-out enhanced (fan out)
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-kcl">
+       AWS KCL
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-kinesis-connector-library">
+       AWS Kinesis Connector Library
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-lambda">
+       AWS Lambda
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-duplicates-on-consumer-side">
+     Handling duplicates on consumer side
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-characteristics">
@@ -434,11 +596,84 @@ title="Edit this page"
   <a class="reference internal nav-link" href="#capacity-modes">
    Capacity modes
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#provisioned-mode-older">
+     provisioned mode (older)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#on-demand-mode-newer">
+     on-demand mode (newer)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scaling">
+   Scaling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-shard">
+     Add Shard
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#remove-shard">
+     Remove Shard
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#out-of-order-records-after-resharding">
+     Out-of-order records after resharding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autoscaling">
+     Autoscaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-limitations">
+     Scaling Limitations
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#security">
    Security
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hands-on">
+   Hands-on
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aws-sdk-cli">
+     AWS SDK (CLI)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stream-management">
+       Stream Management
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#produce-records">
+       Produce records
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#consume-records">
+       Consume records
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -454,20 +689,22 @@ title="Edit this page"
 <h1>Kinesis Data Streams<a class="headerlink" href="#kinesis-data-streams" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>required for processing stream data</p></li>
-<li><p>able to scale horizontally</p></li>
-<li><p>when creating data stream, number of shards has to be declared by creator.</p></li>
-<li><p>By the number of shard you define consumption rate and ability to ingestion of big data (shards are used to split incoming data and create parallel processing)</p></li>
-<li><p>Kinesis Data Streams is a proprietary product developed by AWS and is not based on open-source Apache Kafka</p></li>
+<li><p>able to scale horizontally by specifying number of stream shards</p></li>
+<li><p>when creating data stream, number of shards is declared by creator</p></li>
+<li><p>by the number of shard you define consumption rate and ability to ingestion of big data (shards are used to split incoming data and create parallel processing)</p></li>
+<li><p>Kinesis Data Streams is a proprietary product developed by AWS and is <strong>not</strong> based on open-source Apache Kafka</p></li>
+<li><p>Kinesis Data Streams synchronously replicates data across three Availability Zones, providing high availability and data durability</p></li>
 </ul>
+<p>https://aws.amazon.com/kinesis/data-streams/faqs/</p>
 <div class="section" id="producers">
 <h2>Producers<a class="headerlink" href="#producers" title="Permalink to this heading">#</a></h2>
-<p>Used for gettting data into AWS Kinesis stream</p>
+<p>Used for getting data into AWS Kinesis stream</p>
 <ul class="simple">
 <li><p>data are created by producers</p></li>
 <li><p>producer can be an application, other client, AWS SDK command or Kinesis Agent</p></li>
-<li><p>producer send <strong>record</strong> to Kinesis Stream</p></li>
-<li><p><strong>record</strong> contain Partition Key and Data Blob (up to 1MB)</p></li>
-<li><p>partition key define which shard record will be sent to</p></li>
+<li><p>producer sends <strong>record</strong> to Kinesis Stream</p></li>
+<li><p><strong>record</strong> contains Partition Key and Data Blob (up to 1MB, limit which can’t be changed)</p></li>
+<li><p>partition key defines which shard record will be sent to (so this is the first step when you can do a hot partition when you choose partition key in which most records are one value)</p></li>
 <li><p>one shard can ingest 1MB of data per second or 1000 messages per second (AWS limit, see more https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)</p></li>
 </ul>
 <div class="section" id="producer-types">
@@ -477,12 +714,12 @@ title="Edit this page"
 <p>you can use AWS CLI to send records to Kinesis Stream</p>
 <ul class="simple">
 <li><p>you can send record to stream using <code class="docutils literal notranslate"><span class="pre">put-record</span></code> (one record) or <code class="docutils literal notranslate"><span class="pre">put-records</span></code> (many records) cli command (see examples below)</p></li>
-<li><p>PutRecords increase your throughput - it generates less HTTP requests</p></li>
+<li><p><strong>PutRecords increase throughput</strong> - it generates less HTTP requests</p></li>
 <li><p>can be used on mobile app (Ios, android)</p></li>
-<li><p>USE CASE: low throughput, higher latency accepted, simple API, Lambda</p></li>
+<li><p>USE CASE: low throughput, <strong>synchronous</strong>, higher latency accepted, simple API, Lambda</p></li>
 <li><p>raises ProvisionedThroughputExceeded exemption when go over the limits</p>
 <ul>
-<li><p>kinesis simply rejects records exceeding limits, itself not repeat the put operation</p></li>
+<li><p><strong>kinesis rejects records exceeding limits</strong>, it does not repeat the put operation</p></li>
 <li><p>can be solved by exponential backoff retry (i.e. after 2,4,8,16 seconds) or by increasing number of shards</p></li>
 <li><p>make sure you don’t have hot shard (shard for which the most record partition keys are send)</p></li>
 </ul>
@@ -491,38 +728,40 @@ title="Edit this page"
 </div>
 <div class="section" id="aws-kpl">
 <h4>AWS KPL<a class="headerlink" href="#aws-kpl" title="Permalink to this heading">#</a></h4>
-<p>Kinesis Producer Library, have more option than SDK and are able to solve advanced issues</p>
+<p>Kinesis Producer Library, have <strong>more option than SDK</strong> and are able to solve advanced issues</p>
 <ul class="simple">
 <li><p>easy to implement C++/Java library (the most often Java is used)</p></li>
-<li><p>USE CASE: high throughput, low latency, asynchronous, long running producers, but no in cases when you are focused on very low latency (due to default mini-batch functionality)</p></li>
-<li><p>includes automated retry mechanism</p></li>
+<li><p>USE CASE: high throughput, low latency, asynchronous, long-running producers, but not in cases when you are focused on very low latency (due to default mini-batch functionality)</p></li>
+<li><p>includes <strong>automated retry mechanism</strong></p></li>
 <li><p>both synchronous and asynchronous API are available - in opposition to AWS SDK when only synchronous is possible</p></li>
 <li><p>by default, also submit metrics to cloudwatch, so you can monitor kinesis data stream</p></li>
-<li><p>supports mini-batching, enabled by default, used to improve throughput and decrease costs</p>
+<li><p>supports <strong>mini-batching, enabled by default</strong>, used to improve throughput and decrease costs</p>
 <ul>
-<li><p>collects records and send to Kinesis Stream in one record (executing on one PutRecords API call)</p></li>
+<li><p>collects records and sends to Kinesis Stream in one record (executing on one PutRecords API call)</p></li>
 <li><p>aggregate records to fill 1MB/sec limit, and then send them using one PutRecords API call</p></li>
 <li><p>uses RecordMaxBufferedTime option, default 100ms, which states how long Kinesis has to wait to implement batching on produced records</p></li>
-<li><p>by batching, latency is increased</p></li>
+<li><p>by batching, latency is increased but throughput increases (so if you want to decrease latency, lower RecordMaxBufferedTime)</p></li>
 </ul>
 </li>
-<li><p>compression has to be still implemented by user - uncompression has to be implemented in consumer solution</p></li>
+<li><p>compression has to be implemented by user manually - decompression has to be implemented in consumer solution</p></li>
 <li><p><strong>records handled by KPL can be consumed only by KCL</strong> (Kinesis Consumer Library) or special helper library</p></li>
 </ul>
 </div>
 <div class="section" id="kinesis-agent">
 <h4>Kinesis Agent<a class="headerlink" href="#kinesis-agent" title="Permalink to this heading">#</a></h4>
-<p>linux tool which can be used on external linux server and i.e. send logs from this server</p>
-<p>java-based agent, built on top of KPL. Monitors server logs and send new records to Kinesis Stream</p>
+<p>Linux tool which can be used on external linux server and i.e. send logs from this server automatically</p>
+<p>Java based agent, built on top of KPL. Monitors server logs and send new records to Kinesis Stream</p>
 <ul class="simple">
 <li><p>available only for linux servers</p></li>
+<li><p>configured by config file with parameters (simple unix text file)
+<img alt="img_8.png" src="../../../_images/img_8.png" /></p></li>
 <li><p>features:</p>
 <ul>
-<li><p>can write from multiple locations to multiple Kinesis Streams</p></li>
+<li><p>can write from multiple locations to multiple Kinesis Streams or Firehoses</p></li>
 <li><p>can route based on directory/log file</p></li>
-<li><p>can preprocess data before sending to streams (csv to json, json to csv etc)</p></li>
+<li><p>can preprocess data before sending to streams (simple format change, csv to json, json to csv, log to json for common log formats etc, custom field names, apply delimiter when csv is target etc)</p></li>
 <li><p>handles file rotation, retry upon failures…</p></li>
-<li><p>store own metrics in cloudwatch</p></li>
+<li><p>can store own metrics in cloudwatch</p></li>
 </ul>
 </li>
 </ul>
@@ -531,12 +770,263 @@ title="Edit this page"
 <h4>3rd party applications (Spark, Flume, Kafka Connect, NiFi)<a class="headerlink" href="#rd-party-applications-spark-flume-kafka-connect-nifi" title="Permalink to this heading">#</a></h4>
 </div>
 </div>
+<div class="section" id="handling-duplicates-on-producer-side">
+<h3>Handling duplicates on producer side<a class="headerlink" href="#handling-duplicates-on-producer-side" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>duplicates can occur due to network timeouts of producer</p>
+<ul>
+<li><p>producer tries to put record</p></li>
+<li><p>kinesis saves records in shard, but response to the producer is not received by producer</p></li>
+<li><p>producer can’t be sure record is saved, so retries put record</p></li>
+<li><p>kinesis saves record in shard and confirm to the producer, response is received by producer</p></li>
+<li><p>producer think record is saved once, in reality record is stored in shard twice</p></li>
+<li><p>what’s more, both records contains equal data, but are stored as a separate record with other sequential number</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="img_2.png" src="../../../_images/img_21.png" /></p>
+<p>To fix it:</p>
+<ul class="simple">
+<li><p>include unique record id on producer side to be able to deduplicate it on consumer side</p>
+<ul>
+<li><p>doesn’t mean record won’t be stored twice in stream - it will be stored twice but can be deduplicated using this unique record id (can be even uuid generated on producer side)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="consumers">
+<h2>Consumers<a class="headerlink" href="#consumers" title="Permalink to this heading">#</a></h2>
+<p>Used for getting data from stream to clients/apps</p>
+<ul class="simple">
+<li><p>data ingested by shards of Kinesis Stream can be retrieved by other application - called Consumer</p></li>
+<li><p>consumer can be an application, AWS Lambda (by event), Kinesis Data Firehose or Kinesis Data Analytics</p></li>
+<li><p>additionally to record created by producer, consumer see <strong>sequence number</strong> field which describe the position of record within shard</p></li>
+<li><p>there are two types of limits for consumers</p>
+<ul>
+<li><p>2MB/sec per shard for <strong>all</strong> consumers in total (legacy, standard)</p></li>
+<li><p>2MB/sec per shard <strong>per</strong> consumer - if you enable <strong>enhanced consumer mode</strong></p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="consumer-types">
+<h3>Consumer types<a class="headerlink" href="#consumer-types" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>SDK - you can use AWS CLI to read records from Kinesis Stream</p></li>
+<li><p>KCL - Kinesis Consumer Library, have more option than SDK and are able to solve advanced issues</p></li>
+<li><p>Kinesis Collector Library</p></li>
+<li><p>AWS Lambda</p></li>
+<li><p>3rd party applications (Spark - even directly, Kafka, NiFi)</p></li>
+<li><p>Kinesis Firehose</p></li>
+</ul>
+<p>Values of kinesis streams records data are base64 encoded - therefore consumers has to encode them to see proper values.</p>
+<div class="section" id="id1">
+<h4>AWS SDK<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<div class="section" id="classic-standard">
+<h5>Classic/Standard<a class="headerlink" href="#classic-standard" title="Permalink to this heading">#</a></h5>
+<ul class="simple">
+<li><p>you can read/poll record from stream using <code class="docutils literal notranslate"><span class="pre">get-records</span></code> (many records) CLI command</p></li>
+<li><p>GetRecords polls records from Kinesis Stream with limits for one poll:</p>
+<ul>
+<li><p>up to 2MB/sec for each shard (checked each 5 seconds - see below)</p></li>
+<li><p>up to 10MB of data (then throttle for 5 seconds)</p></li>
+<li><p>up to 10.000 records (then throttle for 5 seconds)</p></li>
+<li><p>up to 5 executions/second for GetRecords - means you have minimum 200ms latency of data</p></li>
+<li><p><strong>limits are shared by all consumers</strong> - means if you have i.e. 10 consumers consuming from the same shard, they have shared limit of 2MB/sec</p></li>
+</ul>
+</li>
+<li><p>above limits are shared by all consumers for shard - meaning if you have more consumers which polls data from one shard, their latency will be higher because they will share one 10MB/5sec limit and 5 executions/second</p></li>
+</ul>
+</div>
+<div class="section" id="fan-out-enhanced-fan-out">
+<h5>Fan-out enhanced (fan out)<a class="headerlink" href="#fan-out-enhanced-fan-out" title="Permalink to this heading">#</a></h5>
+<ul class="simple">
+<li><p>implemented in August 2018</p></li>
+<li><p>works with KCL 2.0 and AWS Lambda</p></li>
+<li><p>in opposition to classic, each consumer gets own limit of data transfered - 2MB per shard</p></li>
+<li><p>in opposition to classic, consumer not polling data, but subscribe to shard. After subscription, Kinesis <strong>pushes</strong> data to consumer over HTTP/2.</p></li>
+<li><p>easier scaling out - you can add more consumers which transforms data from kinesis stream (still there is a limit for producing data - 1MB/s, but can be helpful when consumer stopped work and after recover needs to eat the lag and transform records send to kinesis when consumer didn’t work)</p></li>
+<li><p>has additional costs, but throughput is increased and latency is decreased to ~70ms</p></li>
+</ul>
+<p>USE-CASE:</p>
+<ul class="simple">
+<li><p>standard:</p>
+<ul>
+<li><p>you can tolerate ~200ms latency</p></li>
+<li><p>low number of consuming application</p></li>
+<li><p>minimize costs</p></li>
+</ul>
+</li>
+<li><p>fan out consumers:</p>
+<ul>
+<li><p>low latency required (~70ms)</p></li>
+<li><p>multiple consumers for the same stream</p></li>
+<li><p>can accept higher costs</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="aws-kcl">
+<h4>AWS KCL<a class="headerlink" href="#aws-kcl" title="Permalink to this heading">#</a></h4>
+<p>KCL = Kinesis Client Library</p>
+<ul class="simple">
+<li><p>java-first library, but created also for other languages (python - https://github.com/awslabs/amazon-kinesis-client-python, go, ruby, node)</p></li>
+<li><p>can read records from Kinesis Stream produced with KPL (can de-aggregate records created by KPL)</p></li>
+<li><p>share multiple shards with multiple consumers (and aggregates their limits)</p></li>
+<li><p>able to checkpointing to resume progress in case of application downtime</p></li>
+<li><p>uses DynamoDB below for coordination and checkpointing (one row per shard)</p></li>
+<li><p>in case of ExpiredIteratorException raised, you need to increase WCU (write capacity units) in your dynamo table setup</p></li>
+</ul>
+</div>
+<div class="section" id="aws-kinesis-connector-library">
+<h4>AWS Kinesis Connector Library<a class="headerlink" href="#aws-kinesis-connector-library" title="Permalink to this heading">#</a></h4>
+<p>older java library</p>
+<ul class="simple">
+<li><p>reads data from Kinesis Stream and send them to other services like S3, DynamoDB, Redshift or Elasticsearch Service</p></li>
+<li><p>in most areas replaced by Kinesis Firehose or AWS Lambda</p></li>
+<li><p>must be running on EC2 instance</p></li>
+</ul>
+</div>
+<div class="section" id="aws-lambda">
+<h4>AWS Lambda<a class="headerlink" href="#aws-lambda" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>can read records from Kinesis Stream</p></li>
+<li><p>can de-aggregate records created by KPL (by usage of additional small library)</p></li>
+<li><p>can be used to lightweight ETL and saves data to:</p>
+<ul>
+<li><p>S3</p></li>
+<li><p>DynamoDB</p></li>
+<li><p>Redshift</p></li>
+<li><p>ElasticSearch</p></li>
+<li><p>other, almost not limited as long as implemented in programming language used in Lambda function</p></li>
+</ul>
+</li>
+<li><p>can be used to trigger notification (SNS)</p></li>
+<li><p>has a configurable batch size (you can declare how many records has to be waited to execute Lambda function and increase throughput)</p></li>
+</ul>
+<p><img alt="img.png" src="../../../_images/img1.png" /></p>
+</div>
+</div>
+<div class="section" id="handling-duplicates-on-consumer-side">
+<h3>Handling duplicates on consumer side<a class="headerlink" href="#handling-duplicates-on-consumer-side" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>duplicates can occur due to:</p>
+<ul>
+<li><p>worker (part of consumer KCL application) terminates unexpectedly</p></li>
+<li><p>worker instances are added or removed</p></li>
+<li><p>shards are merged or split</p></li>
+<li><p>the application is deployed</p></li>
+</ul>
+</li>
+</ul>
+<p>To fix it (quite difficult):</p>
+<ul class="simple">
+<li><p>make your consumer application idempotent</p></li>
+<li><p>handle duplicates in your final destination (so in other words be prepared for duplicates, i.e. if data are stored finally in database, use UPSERT instead of INSERT)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="properties-characteristics">
+<h2>Properties/characteristics<a class="headerlink" href="#properties-characteristics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>stream has <strong>retention</strong> defined by stream creator - can be from 1 to 365 days</p></li>
+<li><p>ability to reprocess data (based on retention mentioned in line above)</p></li>
+<li><p>data in stream are <strong>immutable</strong> (cannot be changed)</p></li>
+<li><p>records with the same partition key goes to the same shard</p></li>
+</ul>
+</div>
+<div class="section" id="capacity-modes">
+<h2>Capacity modes<a class="headerlink" href="#capacity-modes" title="Permalink to this heading">#</a></h2>
+<div class="section" id="provisioned-mode-older">
+<h3>provisioned mode (older)<a class="headerlink" href="#provisioned-mode-older" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>you need to manually declare number of shards for created Kinesis Stream</p></li>
+<li><p>each shard is limited by AWS limits (shard producer 1MB/sec or 1000 messages/sec, shard consumer 2MB/sec when enhanced fan out is disabled)</p></li>
+<li><p>costs are calculated by number of shards provisioned by hour</p></li>
+</ul>
+</div>
+<div class="section" id="on-demand-mode-newer">
+<h3>on-demand mode (newer)<a class="headerlink" href="#on-demand-mode-newer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>capacity is declared automatically</p></li>
+<li><p>default capacity = 4MB/s or 4000 records per second per shard</p></li>
+<li><p>maximum capacity = 200MB/s and 200000 records per second</p></li>
+<li><p>scales automatically based on throughput peak during the last 30 days</p></li>
+<li><p>costs are calculated based on number of streams and data transferred in and out of the stream</p></li>
+<li><p>best solution if you don’t know size of events</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="scaling">
+<h2>Scaling<a class="headerlink" href="#scaling" title="Permalink to this heading">#</a></h2>
+<div class="section" id="add-shard">
+<h3>Add Shard<a class="headerlink" href="#add-shard" title="Permalink to this heading">#</a></h3>
+<p>also called “shard splitting”</p>
+<p>Use to:</p>
+<ul class="simple">
+<li><p>increase stream capacity (throughput)</p></li>
+<li><p>divide a hot shard</p></li>
+</ul>
+<p>old shard is closed and deleted once the data is expired</p>
+<p>in practice, below steps happened when adding shard</p>
+<ul class="simple">
+<li><p>completely new shards are created</p></li>
+<li><p>new data are being saved to created shards, old one doesn’t receive any data from producers (old shard is closed)</p></li>
+<li><p>there is a move process which moves data from old shard to newly created one</p></li>
+<li><p>old shard will disappear when move process is done</p></li>
+</ul>
+<p><img alt="img_1.png" src="../../../_images/img_11.png" /></p>
+</div>
+<div class="section" id="remove-shard">
+<h3>Remove Shard<a class="headerlink" href="#remove-shard" title="Permalink to this heading">#</a></h3>
+<p>also called “shard merging”</p>
+<p>Use to:</p>
+<ul class="simple">
+<li><p>save costs (fewer shards = less money paid, while costs are mostly calculated on shards number)</p></li>
+<li><p>decrease the stream capacity</p></li>
+<li><p>when two low traffic shards can be merged into new one - that way we reduce costs because we pay for number of shards in stream</p></li>
+</ul>
+<p>in practice, it works similar to shard splitting - new shard is created, old ones are locked for receiving new records, old records are moved to new shard and after move is done, old shards disappear.</p>
+</div>
+<div class="section" id="out-of-order-records-after-resharding">
+<h3>Out-of-order records after resharding<a class="headerlink" href="#out-of-order-records-after-resharding" title="Permalink to this heading">#</a></h3>
+<p>When splitting shards it can be a situation when consumer starts reading from new shards without finishing reading data from historical shard.</p>
+<p>Solution for dealing with this is to read entirely from the parent until you don’t have new records after resharding.</p>
+<p>KCL has built-in this logic, even after resharding operations</p>
+</div>
+<div class="section" id="autoscaling">
+<h3>Autoscaling<a class="headerlink" href="#autoscaling" title="Permalink to this heading">#</a></h3>
+<p>there is no native autoscaling functionality - there is an API endpoint UpdateShardCount and can be used in custom Lambda, but still lambda has to be developed manually</p>
+</div>
+<div class="section" id="scaling-limitations">
+<h3>Scaling Limitations<a class="headerlink" href="#scaling-limitations" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>resharding operations can’t be done in parallel - so only one split or merge operations can be done at a time (meaning one shard split to two or two partitions merged to one)</p></li>
+<li><p>one resharding (split or merge) partitions at a time - i.e. if you have 10 partitions and want to increase this number to 20, 10 operations is needed</p></li>
+<li><p>each resharding operation takes a few seconds, depends on size of changed shard</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Kinesis Shards are created within your account and region</p></li>
+<li><p>Control access to stream using IAM policies</p></li>
+<li><p>shards can be connected from private subnet using VPC endpoint</p></li>
+<li><p>shards can be connected from public subnet using the internet</p></li>
+<li><p>transfer of data is encrypted using HTTPS</p></li>
+<li><p>data are encrypted at rest using KMS</p></li>
+<li><p>if you want to implement encryption on client side, you have to implement manually</p></li>
+<li><p>you can do private networking using VPC Endpoints</p></li>
+</ul>
+</div>
 <div class="section" id="hands-on">
-<h3>Hands-on<a class="headerlink" href="#hands-on" title="Permalink to this heading">#</a></h3>
+<h2>Hands-on<a class="headerlink" href="#hands-on" title="Permalink to this heading">#</a></h2>
 <div class="section" id="aws-sdk-cli">
-<h4>AWS SDK (CLI)<a class="headerlink" href="#aws-sdk-cli" title="Permalink to this heading">#</a></h4>
+<h3>AWS SDK (CLI)<a class="headerlink" href="#aws-sdk-cli" title="Permalink to this heading">#</a></h3>
 <div class="section" id="stream-management">
-<h5>Stream Management<a class="headerlink" href="#stream-management" title="Permalink to this heading">#</a></h5>
+<h4>Stream Management<a class="headerlink" href="#stream-management" title="Permalink to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>create-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--shard-count<span class="w"> </span><span class="m">1</span><span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
 aws<span class="w"> </span>kinesis<span class="w"> </span>list-streams<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
 aws<span class="w"> </span>kinesis<span class="w"> </span>describe-stream<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal
@@ -546,7 +1036,7 @@ aws<span class="w"> </span>kinesis<span class="w"> </span>delete-stream<span cla
 </div>
 </div>
 <div class="section" id="produce-records">
-<h5>Produce records<a class="headerlink" href="#produce-records" title="Permalink to this heading">#</a></h5>
+<h4>Produce records<a class="headerlink" href="#produce-records" title="Permalink to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--partition-key<span class="w"> </span>user1<span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;action&quot;: &quot;user signup&quot;}&#39;</span><span class="w"> </span>--cli-binary-format<span class="w"> </span>raw-in-base64-out
 aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--partition-key<span class="w"> </span>user1<span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;action&quot;: &quot;user login&quot;}&#39;</span><span class="w"> </span>--cli-binary-format<span class="w"> </span>raw-in-base64-out
 </pre></div>
@@ -581,64 +1071,23 @@ aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class=
 </pre></div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="consumers">
-<h2>Consumers<a class="headerlink" href="#consumers" title="Permalink to this heading">#</a></h2>
+<div class="section" id="consume-records">
+<h4>Consume records<a class="headerlink" href="#consume-records" title="Permalink to this heading">#</a></h4>
+<p><strong>get-shard-iterator</strong> is used to get current position of shard, option <code class="docutils literal notranslate"><span class="pre">TRIM_HORIZON</span></code> used here is to specify that shard data should be returned from the oldest data in the shard.
+Other types are:</p>
 <ul class="simple">
-<li><p>data ingested by shards of Kinesis Stream can be retrieved by other application - called Consumer</p></li>
-<li><p>consumer can be an application, AWS Lambda (by event), Kinesis Data Firehose or Kinesis Data Analytics</p></li>
-<li><p>additionally to record created by producer, consumer see <strong>sequence number</strong> field which describe the position of record within shard</p></li>
-<li><p>there are two types of limits for consumers</p>
-<ul>
-<li><p>2MB/sec per shard for <strong>all</strong> consumers</p></li>
-<li><p>2MB/sec per shard <strong>per</strong> consumer - if you enable <strong>enhanced consumer mode</strong></p></li>
+<li><p>LATEST - points to the newest data, allows to read only new data added after shard iterator is obtained</p></li>
+<li><p>AT_TIMESTAMP - points to data at specific time</p></li>
+<li><p>AFTER_SEQUENCE_NUMBER - points to data after specific sequence number</p></li>
 </ul>
-</li>
-</ul>
-<p><img alt="img.png" src="../../../_images/img1.png" /></p>
+<p>Function <code class="docutils literal notranslate"><span class="pre">get-records</span></code> in response returns NextShardIterator next to data - so you can use it in consuming next records from stream</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>kinesis<span class="w"> </span>get-shard-iterator<span class="w"> </span>--stream-name<span class="w"> </span>test_mg<span class="w"> </span>--shard-id<span class="w"> </span>shardId-000000000000<span class="w"> </span>--shard-iterator-type<span class="w"> </span>TRIM_HORIZON<span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+aws<span class="w"> </span>kinesis<span class="w"> </span>get-records<span class="w"> </span>--shard-iterator<span class="w"> </span><span class="s2">&quot;AAAAAAAAAAGqN+Z5rHgWgExCnlJa0txKc/95odt/jhTh6GtAwBS32R6QazWe8BMCBfcF7u3Q7wax+7y3avWcYLpw10lt+jDrJitVnmnQwcL3mTf9QATnv/hsFFUOb9uELHADYNsLM2Ee1X1mpkVEKewrUlswpEu3gBqbadqlZ9i+Vu44Ygyuf0SRhmvMDk9THfq9QgthynomGlumQmR6nmEjQCJPfzPbDg4O4hRbL2GkSK2n2wrjGA==&quot;</span><span class="w"> </span>--profile<span class="w"> </span>michal<span class="w"> </span>--region<span class="w"> </span>eu-west-1
+</pre></div>
 </div>
-<div class="section" id="properties-characteristics">
-<h2>Properties/characteristics<a class="headerlink" href="#properties-characteristics" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>has <strong>retention</strong>, which can be defined by stream creator - can be from 1 to 365 days</p></li>
-<li><p>ability to reprocess data (based on retention mentioned in line above)</p></li>
-<li><p>data in stream are <strong>immutable</strong> (cannot be changed)</p></li>
-<li><p>records with the same partition key goes to the same shard</p></li>
-</ul>
+<p><strong>when using SDK, you have to manually put shard id in command, in opposition to KCL when this option is managed automatically</strong></p>
 </div>
-<div class="section" id="capacity-modes">
-<h2>Capacity modes<a class="headerlink" href="#capacity-modes" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>provisioned mode (older)</p>
-<ul>
-<li><p>you need to manually declare number of shards for created Kinesis Stream</p></li>
-<li><p>each shard is limited by AWS limits (shard consumer 1MB/sec or 1000 messages/sec, shard producers 2MB/sec)</p></li>
-<li><p>costs are calculated by number of shards provisioned by hour</p></li>
-</ul>
-</li>
-<li><p>on-demand mode (newer)</p>
-<ul>
-<li><p>capacity is declared automatically</p></li>
-<li><p>default capacity = 4MB/s or 4000 records per second per shard</p></li>
-<li><p>maximum capacity = 200MB/s and 200000 records per second</p></li>
-<li><p>scales automatically based on throughput peak during the last 30 days</p></li>
-<li><p>costs are calculated based on number of streams and data transfered in and out of the stream</p></li>
-<li><p>if you don’t know size of events</p></li>
-</ul>
-</li>
-</ul>
 </div>
-<div class="section" id="security">
-<h2>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Kinesis Shards are created within your account and region</p></li>
-<li><p>shards can be connected from private subnet using VPC endpoint</p></li>
-<li><p>shards can be connected from public subnet using the internet</p></li>
-<li><p>transfer of data is encrypted using HTTPS</p></li>
-<li><p>data are encrypted at rest using KMS</p></li>
-</ul>
 </div>
 </div>
 
@@ -657,10 +1106,10 @@ aws<span class="w"> </span>kinesis<span class="w"> </span>put-record<span class=
             <p class="prev-next-title">Collection of data - intro</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html" title="next page">
+    <a class='right-next' id="next-link" href="02.01%20Kinesis%20Data%20Firehose.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Consumers</p>
+        <p class="prev-next-title">Kinesis Data Firehose</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

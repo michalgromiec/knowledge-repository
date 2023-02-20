@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS Elastic Map Reduce (EMR) &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -93,6 +93,16 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -103,28 +113,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../01%20Collection%20of%20data/01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../01%20Collection%20of%20data/02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01%20Collection%20of%20data/11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -263,62 +298,258 @@ title="Edit this page"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-cluster">
    EMR Cluster
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-nodes">
+   Types of nodes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#master-primary-node">
+     master/primary node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#core-node">
+     core node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-node">
+     task node
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-the-right-number-of-nodes">
+   choosing the right number of nodes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#primary-node">
+     primary node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-nodes">
+     task nodes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-instance-types">
+   EMR instance types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cluster-types-based-on-usage">
    Cluster types based on usage
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transient-cluster">
+     transient cluster
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#long-running-clusters">
+     long-running clusters
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-usage">
    EMR usage
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-integration-with-other-aws-services">
    EMR integration with other AWS services
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-storage-types">
    EMR storage types
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdfs-simple-hadoop-filesystem">
+     HDFS = simple Hadoop Filesystem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#emrfs-emr-file-system">
+     EMRFS = EMR file system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#local-file-system">
+     Local file system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ebs-for-hdfs">
+     EBS for HDFS
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pricing-model">
    Pricing model
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-monitoring">
+   EMR monitoring
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-scaling">
    EMR scaling
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manual-scaling">
+     Manual scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#automatic-scaling">
      Automatic scaling
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#managed-scaling">
      Managed scaling
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-security">
+   EMR Security
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-serverless">
    EMR Serverless
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3distcp">
+   S3DistCP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-applications">
+   EMR Applications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apache-spark">
+     Apache Spark
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#architecture">
+       Architecture
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#components">
+       Components
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#integrations">
+       Integrations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apache-hive">
+     Apache Hive
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hive-metastore">
+       Hive Metastore
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pig">
+     Pig
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hbase">
+     HBase
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#presto">
+     Presto
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zepellin">
+     Zepellin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#emr-notebooks">
+     EMR Notebooks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hue">
+     Hue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#splunk">
+     Splunk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flume">
+     Flume
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mxnet">
+     MXNet
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-tools">
+     Other Tools
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#faq">
+   FAQ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-configure-custom-hadoop-settings">
+     How do I configure custom Hadoop settings
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -329,7 +560,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>AWS Elastic Map Reduce (EMR)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -339,62 +570,258 @@ title="Edit this page"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-cluster">
    EMR Cluster
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-nodes">
+   Types of nodes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#master-primary-node">
+     master/primary node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#core-node">
+     core node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-node">
+     task node
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-the-right-number-of-nodes">
+   choosing the right number of nodes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#primary-node">
+     primary node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-nodes">
+     task nodes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-instance-types">
+   EMR instance types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cluster-types-based-on-usage">
    Cluster types based on usage
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transient-cluster">
+     transient cluster
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#long-running-clusters">
+     long-running clusters
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-usage">
    EMR usage
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-integration-with-other-aws-services">
    EMR integration with other AWS services
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-storage-types">
    EMR storage types
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdfs-simple-hadoop-filesystem">
+     HDFS = simple Hadoop Filesystem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#emrfs-emr-file-system">
+     EMRFS = EMR file system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#local-file-system">
+     Local file system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ebs-for-hdfs">
+     EBS for HDFS
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pricing-model">
    Pricing model
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-monitoring">
+   EMR monitoring
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-scaling">
    EMR scaling
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manual-scaling">
+     Manual scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#automatic-scaling">
      Automatic scaling
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#managed-scaling">
      Managed scaling
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-security">
+   EMR Security
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#emr-serverless">
    EMR Serverless
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3distcp">
+   S3DistCP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#emr-applications">
+   EMR Applications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apache-spark">
+     Apache Spark
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#architecture">
+       Architecture
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#components">
+       Components
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#integrations">
+       Integrations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apache-hive">
+     Apache Hive
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hive-metastore">
+       Hive Metastore
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pig">
+     Pig
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hbase">
+     HBase
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#presto">
+     Presto
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zepellin">
+     Zepellin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#emr-notebooks">
+     EMR Notebooks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hue">
+     Hue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#splunk">
+     Splunk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flume">
+     Flume
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mxnet">
+     MXNet
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-tools">
+     Other Tools
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#faq">
+   FAQ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-configure-custom-hadoop-settings">
+     How do I configure custom Hadoop settings
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -406,52 +833,124 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
+  <div class="section" id="aws-elastic-map-reduce-emr">
+<h1>AWS Elastic Map Reduce (EMR)<a class="headerlink" href="#aws-elastic-map-reduce-emr" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>EMR = Elastic Map Reduce</p></li>
 <li><p>Managed Hadoop framework run on EC2 instances (AWS implement Hadoop to automate set up using AWS EC2 instances)</p></li>
 <li><p>includes Spark/Hbase/Presto/Flink/Hive &amp; more, depends on EMR cluster version</p></li>
 <li><p>includes EMR Notebooks</p></li>
 <li><p>integrated with other AWS services (e.g. AWS Glue metastore)</p></li>
 </ul>
-</div>
 <div class="section" id="emr-cluster">
-<h1>EMR Cluster<a class="headerlink" href="#emr-cluster" title="Permalink to this heading">#</a></h1>
+<h2>EMR Cluster<a class="headerlink" href="#emr-cluster" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>collection of EC2 instances (node)</p></li>
-<li><p>types of nodes:</p>
+<li><p>collection of EC2 instances (node) runs processes</p></li>
+<li><p>all nodes <strong>reside in single Availability Zone (AZ)</strong> to improve communication between each other</p></li>
+<li><p>have dynamic replication factor:</p>
 <ul>
-<li><p>master - manages the cluster, tracks status of tasks, “leader node”, can runs tasks</p></li>
-<li><p>core node - hosts HDFS data and runs tasks</p></li>
-<li><p>task node - runs tasks, doesnt host data, use when you dont need local HDFS datastore, if you have data on S3 bucket, good use of spot instances because doesn’t contain data and there is no risk of data loss itself</p></li>
+<li><p>for clusters with core nodes number higher than 10 - replication factor equals 3</p></li>
+<li><p>for clusters with core nodes number between 4 and 9 - replication factor equals 2</p></li>
+<li><p>for smaller cluters with core nodes number less or equal 3 - replication factor equals 1</p></li>
+<li><p>you can override this default setting by editing hdfs-site.xml file</p></li>
 </ul>
 </li>
-<li><p>it is possible to create single node cluster composed of master node only</p></li>
+</ul>
+</div>
+<div class="section" id="types-of-nodes">
+<h2>Types of nodes<a class="headerlink" href="#types-of-nodes" title="Permalink to this heading">#</a></h2>
+<div class="section" id="master-primary-node">
+<h3>master/primary node<a class="headerlink" href="#master-primary-node" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>manages the cluster,</p></li>
+<li><p>tracks status of tasks,</p></li>
+<li><p>monitor health of core and task nodes</p></li>
+<li><p>can runs tasks</p></li>
+<li><p>since EMR 5.23, it is possible to make primary node redundant by <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">multiple</span> <span class="pre">primary</span> <span class="pre">nodes</span></code> option - this option run 3 primary nodes instead of 1 and provide election when primary node is corrupted and stop running</p></li>
+<li><p>possible option of single-node cluster when there is only primary node (no core nor task nodes) - in such case all works are run on primary node, so it is impossible to scale up in such scenario</p></li>
+</ul>
+</div>
+<div class="section" id="core-node">
+<h3>core node<a class="headerlink" href="#core-node" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>hosts HDFS data</strong></p></li>
+<li><p>runs tasks for the Primary Node</p></li>
+<li><p>not a good option to use here spot instances because of data holding (dead of spot would means lost of HDFS data)</p></li>
+</ul>
+</div>
+<div class="section" id="task-node">
+<h3>task node<a class="headerlink" href="#task-node" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>runs tasks, based on docs they are only optional helpers</p></li>
+<li><p>doesnt host data,</p></li>
+<li><p>use when you dont need local HDFS datastore, if you have data on S3 bucket,</p></li>
+<li><p>good use of spot instances because doesn’t contain data and there is no risk of data loss itself</p></li>
+<li><p>can be added and removed from running clusters</p></li>
 <li><p>like in every hadoop cluster, tasks will be executed by core and task nodes (and optionally by master node)</p></li>
 </ul>
 </div>
-<div class="section" id="cluster-types-based-on-usage">
-<h1>Cluster types based on usage<a class="headerlink" href="#cluster-types-based-on-usage" title="Permalink to this heading">#</a></h1>
+</div>
+<div class="section" id="choosing-the-right-number-of-nodes">
+<h2>choosing the right number of nodes<a class="headerlink" href="#choosing-the-right-number-of-nodes" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>transient cluster</p>
-<ul>
-<li><p>automatically terminates once all steps are complete</p></li>
-<li><p>exists only for the duration of steps processing</p></li>
-<li><p>costs reduction</p></li>
+<li><p>undersized cluster will be slow</p></li>
+<li><p>oversized cluster will be more expensive than needed</p></li>
 </ul>
-</li>
-<li><p>long-running clusters</p>
-<ul>
-<li><p>terminated manually</p></li>
-<li><p>best for data warehouse with periodic processing on large datasets (to reduce bootstrapping time for every process)</p></li>
-<li><p>can use reserved instances on long-running clusters to save money</p></li>
-</ul>
-</li>
+<div class="section" id="primary-node">
+<h3>primary node<a class="headerlink" href="#primary-node" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>mostly it will be one node</p></li>
+<li><p>can be three primary nodes for high availability</p></li>
 </ul>
 </div>
+<div class="section" id="task-nodes">
+<h3>task nodes<a class="headerlink" href="#task-nodes" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>important when hdfs will be used - because of hdd/sdd space required for storing data using setup replication factor</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="emr-instance-types">
+<h2>EMR instance types<a class="headerlink" href="#emr-instance-types" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>for master node, AWS recommend m5.xlarge if cluster contains less than 50 nodes, above this limit larger master node is recommended (m4 family)</p></li>
+<li><p>for core and task node</p>
+<ul>
+<li><p>in general, AWS recommend m5.xlarge</p></li>
+<li><p>if node have external dependencies (e.g. web crawlers), AWS recommend less expensive t2.medium</p></li>
+<li><p>for cpu intensive: c4, c5, z1d</p></li>
+<li><p>spark applications with lots of inmemory caching: r4/r5</p></li>
+<li><p>hdfs intensive: h1/i3/d2</p></li>
+<li><p>if you need improved performance, use m4.xlarge</p></li>
+<li><p>obviously, for more computational intensive application, choose instances with higher number of VCPu</p></li>
+</ul>
+</li>
+<li><p>spot instances are always good choice for task nodes</p></li>
+<li><p>AWS do not recommend spot instances for core and master node (risk of data loss)</p></li>
+</ul>
+</div>
+<div class="section" id="cluster-types-based-on-usage">
+<h2>Cluster types based on usage<a class="headerlink" href="#cluster-types-based-on-usage" title="Permalink to this heading">#</a></h2>
+<div class="section" id="transient-cluster">
+<h3>transient cluster<a class="headerlink" href="#transient-cluster" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>automatically terminates once all steps are complete</p></li>
+<li><p>exists only for the duration of steps processing</p></li>
+<li><p>requires definition of program to execute (can be hive query, spark application etc)</p></li>
+<li><p>costs reduction</p></li>
+</ul>
+</div>
+<div class="section" id="long-running-clusters">
+<h3>long-running clusters<a class="headerlink" href="#long-running-clusters" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>needs to and can be terminated only manually by user or after time of being idle defined on cluster creation</p></li>
+<li><p>best for data warehouse with periodic processing on large datasets (to reduce bootstrapping time for every process)</p></li>
+<li><p>can use reserved instances on long-running clusters to save money</p></li>
+<li><p>in rare cases, it can even be more cost-effective to store data on HDFS instead of S3 (?)</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="emr-usage">
-<h1>EMR usage<a class="headerlink" href="#emr-usage" title="Permalink to this heading">#</a></h1>
+<h2>EMR usage<a class="headerlink" href="#emr-usage" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>applications and their versions are selected at cluster creation</p></li>
 <li><p>user connects directly to master node to run jobs directly</p></li>
@@ -460,7 +959,7 @@ title="Edit this page"
 </ul>
 </div>
 <div class="section" id="emr-integration-with-other-aws-services">
-<h1>EMR integration with other AWS services<a class="headerlink" href="#emr-integration-with-other-aws-services" title="Permalink to this heading">#</a></h1>
+<h2>EMR integration with other AWS services<a class="headerlink" href="#emr-integration-with-other-aws-services" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>EC2 = uses EC2 instances for nodes</p></li>
 <li><p>VPC = nodes uses virtual network</p></li>
@@ -472,38 +971,40 @@ title="Edit this page"
 </ul>
 </div>
 <div class="section" id="emr-storage-types">
-<h1>EMR storage types<a class="headerlink" href="#emr-storage-types" title="Permalink to this heading">#</a></h1>
+<h2>EMR storage types<a class="headerlink" href="#emr-storage-types" title="Permalink to this heading">#</a></h2>
+<div class="section" id="hdfs-simple-hadoop-filesystem">
+<h3>HDFS = simple Hadoop Filesystem<a class="headerlink" href="#hdfs-simple-hadoop-filesystem" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>HDFS = simple Hadoop Filesystem</p>
-<ul>
 <li><p>data stored on core nodes of EMR cluster</p></li>
 <li><p>ephemeral - data is lost when cluster is terminated</p></li>
-<li><p>as in a standadrd HDFS implementation - data stored in blocks, redundant stored in core nodes</p></li>
-<li><p>data locality can be used - dadta are processed directly on node where they exists (can be faster than S3 bucket data)</p></li>
+<li><p>as in a standard HDFS implementation - data stored in blocks, redundantly stored in core nodes</p></li>
+<li><p>data locality can be used - data are processed directly on node where they exist (can be faster than S3 bucket data)</p></li>
 </ul>
-</li>
-<li><p>EMRFS = EMR file system</p>
-<ul>
-<li><p>access S3 as if it were HDFS</p></li>
+</div>
+<div class="section" id="emrfs-emr-file-system">
+<h3>EMRFS = EMR file system<a class="headerlink" href="#emrfs-emr-file-system" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>access S3 as if it were HDFS (in opposite to “s3distcp” variant when data are physically copied from S3 to HDFS)</p></li>
 <li><p>persistent storage, preserve also after cluster termination</p></li>
 </ul>
-</li>
-<li><p>Local file system</p>
-<ul>
+</div>
+<div class="section" id="local-file-system">
+<h3>Local file system<a class="headerlink" href="#local-file-system" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
 <li><p>ephemeral</p></li>
 <li><p>suitable only for temporary data (buffers, caches)</p></li>
 </ul>
-</li>
-<li><p>EBS for HDFS</p>
-<ul>
+</div>
+<div class="section" id="ebs-for-hdfs">
+<h3>EBS for HDFS<a class="headerlink" href="#ebs-for-hdfs" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
 <li><p>elastic block storage</p></li>
 <li><p>ephemeral</p></li>
 </ul>
-</li>
-</ul>
+</div>
 </div>
 <div class="section" id="pricing-model">
-<h1>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h1>
+<h2>Pricing model<a class="headerlink" href="#pricing-model" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>separate price for EMR, beyond this EC2 costs so you have to pay for them</p></li>
 <li><p>user can add or remove task node anytime on the fly</p></li>
@@ -511,28 +1012,255 @@ title="Edit this page"
 <li><p>you can temporarily improve EMR cluster efficiency by adding task nodes (or reduce it)</p></li>
 </ul>
 </div>
+<div class="section" id="emr-monitoring">
+<h2>EMR monitoring<a class="headerlink" href="#emr-monitoring" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>cloudwatch events: state change, emr configuration error</p></li>
+<li><p>cloudwatch metrics: e.g. runningmaptasks, remainingmaptasks, isidle, hdfsutilization</p></li>
+<li><p>user interfaces (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html)</p></li>
+</ul>
+</div>
 <div class="section" id="emr-scaling">
-<h1>EMR scaling<a class="headerlink" href="#emr-scaling" title="Permalink to this heading">#</a></h1>
+<h2>EMR scaling<a class="headerlink" href="#emr-scaling" title="Permalink to this heading">#</a></h2>
+<div class="section" id="manual-scaling">
+<h3>Manual scaling<a class="headerlink" href="#manual-scaling" title="Permalink to this heading">#</a></h3>
+<p>You can change number of noes using web gui or cli</p>
+</div>
 <div class="section" id="automatic-scaling">
-<h2>Automatic scaling<a class="headerlink" href="#automatic-scaling" title="Permalink to this heading">#</a></h2>
+<h3>Automatic scaling<a class="headerlink" href="#automatic-scaling" title="Permalink to this heading">#</a></h3>
 <p>Before 2020, the only option of scaling cluster was EMR Automatic Scaling.
 EMR cluster capacity was changed based on cloudwatch metrics.
-It was limited to instance groups only (only instances from same instance groups could be added)</p>
+It was limited to instance groups only (only instances from same instance groups could be added).</p>
 </div>
 <div class="section" id="managed-scaling">
-<h2>Managed scaling<a class="headerlink" href="#managed-scaling" title="Permalink to this heading">#</a></h2>
+<h3>Managed scaling<a class="headerlink" href="#managed-scaling" title="Permalink to this heading">#</a></h3>
 <p>Introduced in 2020.
 It allows specify minimum and maximum number of units which are taken into account when cluster resize is needed.</p>
 </div>
 </div>
+<div class="section" id="emr-security">
+<h2>EMR Security<a class="headerlink" href="#emr-security" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>IAM policies - permissions for EMR for Users</p></li>
+<li><p>Kerberos - user authentication</p></li>
+<li><p>SSH - secure connection to command line of nodes, can be used for tunneling to web interfaces</p></li>
+<li><p>IAM roles</p></li>
+<li><p>by default, security groups to which nodes are attached allowed communication only between each other (with no external access possible)</p></li>
+<li><p>“block public access” - you can prevent public access to data stored on EMR cluster, can be set before creating the cluster, block access to cluster, not for data</p></li>
+</ul>
+</div>
 <div class="section" id="emr-serverless">
-<h1>EMR Serverless<a class="headerlink" href="#emr-serverless" title="Permalink to this heading">#</a></h1>
+<h2>EMR Serverless<a class="headerlink" href="#emr-serverless" title="Permalink to this heading">#</a></h2>
 <p>It’s an option for creating EMR jobs but without bootstraping and defining EMR cluster (and using EC2 underthehood).
 It means you dont manage EMR cluster and AWS decide how many nodes with what power should be used to process your data.</p>
 <p>You need to use EMR studio to use this service.</p>
 <p>You can still specify default worker size &amp; pre-initialized capacity, otherwise capacity used will be defined automatically</p>
 <p>The most advantage is you dont have to define how many nodes, memory you need - it is calculated automatically.</p>
 <p><strong>BUT</strong> it is not a serveless like e.g. Athena - you still manage with create application, delete application etc.</p>
+</div>
+<div class="section" id="s3distcp">
+<h2>S3DistCP<a class="headerlink" href="#s3distcp" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>copy of Apache distcp optimized to S3</p></li>
+<li><p>used for copying large amounts of data from S3 to HDFS or in the opposite way</p></li>
+<li><p>uses MapReduce to copy data in a distribute manner</p></li>
+<li><p>copies data in distributed manner by using all nodes in your cluster</p></li>
+</ul>
+</div>
+<div class="section" id="emr-applications">
+<h2>EMR Applications<a class="headerlink" href="#emr-applications" title="Permalink to this heading">#</a></h2>
+<div class="section" id="apache-spark">
+<h3>Apache Spark<a class="headerlink" href="#apache-spark" title="Permalink to this heading">#</a></h3>
+<p>Open Source distributed framework used for big data workloads.</p>
+<ul class="simple">
+<li><p>kind of replacement for Map Reduce architecture - instead of Map Reduce which uses storage, Spark uses RAM memory (this is why it is faster)</p></li>
+<li><p>contains predefined transformations, additional libraries (Spark MLlib, Spark Structure Streaming, Graph Processing etc) which help users in faster development of big data distributed applications</p></li>
+<li><p>by using catalyst optimizer improves efficiency and is able to automate some processes which requires proper order of operations</p></li>
+<li><p>programming languages supported: Java, Scala, Python and R</p></li>
+<li><p>you can use it in interactive session and for batch processing or stream processing</p></li>
+<li><p>Spark is not meant for OLTP (it doesnt support transactions, it has overhead on starting application etc.)</p></li>
+</ul>
+<div class="section" id="architecture">
+<h4>Architecture<a class="headerlink" href="#architecture" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>driver node, Spark Context - coordinator, manages executor nodes by using YARN. All applications are send to this node</p></li>
+<li><p>executor node - run computations and store data, receives command from driver node, executes them and send back results to driver</p></li>
+</ul>
+</div>
+<div class="section" id="components">
+<h4>Components<a class="headerlink" href="#components" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Spark Core - foundation of platform, responsible for memory management, scheduling, distribute&amp;monitor jobs, interact with storage, uses RDD for processing data</p></li>
+<li><p>Spark SQL - best suitable for batch processing, distributed query engine, uses distriibuted DataFrames for processing data</p></li>
+<li><p>Spark Structured Streaming - streaming analytics, support real time straming, users can use the same code as in spark sql, supports Kafka, Flume, HDFS</p></li>
+<li><p>Spark MLLib - support machine learning algorithms</p></li>
+<li><p>Graphx - graph processing</p></li>
+</ul>
+</div>
+<div class="section" id="integrations">
+<h4>Integrations<a class="headerlink" href="#integrations" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>S3 - can be source or target for Spark applications</p></li>
+<li><p>Kinesis - you can read data from kinesis stream and do stream processing on this (e.g. compute number of records send to stream within one hour)</p></li>
+<li><p>Redshift - you can both read and store data into Redshift (separate library containing Spark Redshift connector)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="apache-hive">
+<h3>Apache Hive<a class="headerlink" href="#apache-hive" title="Permalink to this heading">#</a></h3>
+<p>distributed query engine allowing users to use sql on unstructured data. It uses mapreduce or tez (in-memory).</p>
+<ul class="simple">
+<li><p>uses HiveQL which is very similar to sql language</p></li>
+<li><p>allows for interactive query (still not as fast os OLTP databases)</p></li>
+<li><p>in some way, it replaces manually written map-reduce functions and allows user to simply use sql queries</p></li>
+<li><p>it’s horizontally scalable like any other application sitting on EMR cluster (hadoop cluster)</p></li>
+<li><p>high extensible (user defined functions, exposes data via jdbc and odbc driver)</p></li>
+</ul>
+<div class="section" id="hive-metastore">
+<h4>Hive Metastore<a class="headerlink" href="#hive-metastore" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>schema metadata collection on which Hive executes queries</p></li>
+<li><p>contains definition of fields and datatypes</p></li>
+<li><p>by default, hive metastore is stored in mysql database on the master node</p></li>
+<li><p>still can have external metastore - AWS Glue Data Catalog or store hive metastore in Amazon RDS (as it is AWS functionality for RDBS service, this way your hive metastore is persistent and doesn’t dissapear when cluster is terminated)</p></li>
+<li><p>serves the same functionality as AWS Glue Data Catalog</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="pig">
+<h3>Pig<a class="headerlink" href="#pig" title="Permalink to this heading">#</a></h3>
+<p>introduces pig latin, scripting language let use sql-like syntax instead of writing mappers and reducers by hand.
+Still, it’s not a SQL, it it a script language.</p>
+<p>Mostly used for processing data.</p>
+<p><img alt="img_4.png" src="../../../_images/img_4.png" /></p>
+<p>Quite old technology, not popular nowadays.</p>
+<p>Highly extensible with user-defined functions (UDFs)</p>
+<p>It works on top of MapReduce or Tez.</p>
+<p>It is not limited just to HDFS, it can query data in S3. Can load srcripts from S3.</p>
+</div>
+<div class="section" id="hbase">
+<h3>HBase<a class="headerlink" href="#hbase" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>non-relational, petabyte-scale database.</p></li>
+<li><p>based on Google BigTable, works on top of HDFS.</p></li>
+<li><p>it operates mostly in-memory (this is the main reason why it’s so fast)</p></li>
+<li><p>it’s similar to dynamodb</p>
+<ul>
+<li><p>both are nosql databases</p></li>
+<li><p>but dynamodb is fully managed and have native integration with other AWS services</p></li>
+<li><p>hbase is better for sparse data (columnal store?) and for high write&amp;update throughput</p></li>
+</ul>
+</li>
+<li><p>integrates with S3 via EMRFS</p></li>
+</ul>
+</div>
+<div class="section" id="presto">
+<h3>Presto<a class="headerlink" href="#presto" title="Permalink to this heading">#</a></h3>
+<p>connects to many different datasources and exposes them as one datasource (it can read data from hive and exposes it)</p>
+<ul class="simple">
+<li><p>unifies all data in one metastore</p></li>
+<li><p>allows for interactive queries at petabyte scale</p></li>
+<li><p>has familiar SQL syntax</p></li>
+<li><p>optimized for OLAP applications</p></li>
+<li><p>Amazon Athena uses Presto under the hood</p></li>
+<li><p>exposes jdbc, command line and tableau interfaces</p></li>
+<li><p>has own query optimizer (CBO)</p></li>
+<li><p>in open-source world, it has renamed to Trino after facebook claimed ownership for Presto name</p></li>
+<li><p>possible source of data:</p>
+<ul>
+<li><p>HDFS</p></li>
+<li><p>S3</p></li>
+<li><p>Cassandra</p></li>
+<li><p>MongoDB</p></li>
+<li><p>HBase</p></li>
+<li><p>SQL</p></li>
+<li><p>Redshift</p></li>
+<li><p>Teradata</p></li>
+</ul>
+</li>
+<li><p>it is even faster than Hive</p></li>
+<li><p>all processing is done in-memory (but still not appropriate for OLTP)</p></li>
+</ul>
+</div>
+<div class="section" id="zepellin">
+<h3>Zepellin<a class="headerlink" href="#zepellin" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>requires hadoop/EMR cluster</p></li>
+<li><p>similar to Jupyter Notebooks, but a little bit different</p></li>
+<li><p>let interactively run scripts/code against data</p></li>
+<li><p>share notebooks with others on cluster</p></li>
+<li><p>can run Spark code interactively</p></li>
+<li><p>can visualize query results in charts and graphs
+<img alt="img_5.png" src="../../../_images/img_5.png" /></p></li>
+</ul>
+</div>
+<div class="section" id="emr-notebooks">
+<h3>EMR Notebooks<a class="headerlink" href="#emr-notebooks" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>similar to apache zeppelin</p></li>
+<li><p>allow for provision cluters from the notebook</p></li>
+<li><p>hosted inside a VPC</p></li>
+<li><p>accessed only via AWS console</p></li>
+<li><p>costs charged on EC2 instances launched under the hood, no additional charge for jupyter</p></li>
+</ul>
+</div>
+<div class="section" id="hue">
+<h3>Hue<a class="headerlink" href="#hue" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>HUE = Hadoop User Experience, frontend for entire cluster</p></li>
+<li><p>open-source SQL assistant, self service data querying</p></li>
+<li><p>integrates with IAM roles (secruity/authorization)</p></li>
+<li><p>can browse &amp; move data between HFDS and S3</p></li>
+</ul>
+</div>
+<div class="section" id="splunk">
+<h3>Splunk<a class="headerlink" href="#splunk" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>visualize EMR and S3 data using EMR Hadoop cluster</p></li>
+</ul>
+</div>
+<div class="section" id="flume">
+<h3>Flume<a class="headerlink" href="#flume" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>streams data into cluster</p></li>
+<li><p>made from the start with hadoop in mind</p></li>
+<li><p>originally madde to handle log aggregation</p></li>
+<li><p>has similar usage as kinesis (streaming log data into cluster)</p></li>
+</ul>
+</div>
+<div class="section" id="mxnet">
+<h3>MXNet<a class="headerlink" href="#mxnet" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>alternative to tensorflow, library for neural networks, included on EMR</p></li>
+</ul>
+</div>
+<div class="section" id="other-tools">
+<h3>Other Tools<a class="headerlink" href="#other-tools" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ganglia (monitoring cluster status)</p></li>
+<li><p>mahout (machine learning on clusters, competitor of spark mllib)</p></li>
+<li><p>accumulo (another nosql database)</p></li>
+<li><p>sqoop (relational database connector, used for importing data from external databases in distributed manner)</p></li>
+<li><p>hcatalog (table and storage management for hive metastore)</p></li>
+<li><p>kinesis connector ()</p></li>
+<li><p>tachyon (accelerator for Spark, addon)</p></li>
+<li><p>derby (open-source relational DB in java)</p></li>
+<li><p>ranger (data security manager for Hadoop)</p></li>
+<li><p>other software (you can install any external library, as node is EC2 instance…)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this heading">#</a></h2>
+<div class="section" id="how-do-i-configure-custom-hadoop-settings">
+<h3>How do I configure custom Hadoop settings<a class="headerlink" href="#how-do-i-configure-custom-hadoop-settings" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>by using bootstrap actions</p></li>
+<li><p>by appllying them in console, cli or sdk</p></li>
+<li><p>https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-3x-customizeappconfig.html</p></li>
+</ul>
+</div>
+</div>
 </div>
 
 

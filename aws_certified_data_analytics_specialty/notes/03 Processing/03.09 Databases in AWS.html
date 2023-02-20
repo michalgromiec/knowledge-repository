@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Analytics - general info &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>Databases in AWS &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,8 +34,6 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Collection of data - intro" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html" />
-    <link rel="prev" title="DAS-C01 certification info" href="00.01%20cerfification%20info.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -93,14 +91,14 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="00.01%20cerfification%20info.html">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
    DAS-C01 certification info
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
    Data Analytics - general info
   </a>
  </li>
@@ -259,7 +257,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/00 Certification/00.02 data analytics in general.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/03 Processing/03.09 Databases in AWS.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -301,13 +299,57 @@ title="Edit this page"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#steps-for-success">
-   Steps for success
+  <a class="reference internal nav-link" href="#rds">
+   RDS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#available-engines">
+     Available Engines
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-az-deployment">
+     Multi-AZ deployment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neptune-db">
+   Neptune DB
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-cases">
-   Use cases
+  <a class="reference internal nav-link" href="#documentdb">
+   DocumentDB
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-cases">
+     Use cases
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aurora-serverless">
+   Aurora (serverless)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamodb-serverless">
+   DynamoDB (Serverless)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#athena">
+   Athena
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3-select">
+   S3 Select
   </a>
  </li>
 </ul>
@@ -319,7 +361,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data Analytics - general info</h1>
+                <h1>Databases in AWS</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -330,13 +372,57 @@ title="Edit this page"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#steps-for-success">
-   Steps for success
+  <a class="reference internal nav-link" href="#rds">
+   RDS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#available-engines">
+     Available Engines
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-az-deployment">
+     Multi-AZ deployment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neptune-db">
+   Neptune DB
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-cases">
-   Use cases
+  <a class="reference internal nav-link" href="#documentdb">
+   DocumentDB
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-cases">
+     Use cases
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aurora-serverless">
+   Aurora (serverless)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamodb-serverless">
+   DynamoDB (Serverless)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#athena">
+   Athena
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#s3-select">
+   S3 Select
   </a>
  </li>
 </ul>
@@ -349,29 +435,108 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="data-analytics-general-info">
-<h1>Data Analytics - general info<a class="headerlink" href="#data-analytics-general-info" title="Permalink to this heading">#</a></h1>
-<p>This note has been made based on CloudGuru course</p>
-<div class="section" id="steps-for-success">
-<h2>Steps for success<a class="headerlink" href="#steps-for-success" title="Permalink to this heading">#</a></h2>
-<p>Below steps are executed in a cycle (results of discovery phase is input for next loop which helps us in refine the process and improve it)</p>
+  <div class="section" id="databases-in-aws">
+<h1>Databases in AWS<a class="headerlink" href="#databases-in-aws" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Define</p></li>
-<li><p>Data Collection</p></li>
-<li><p>Data Preparation</p></li>
-<li><p>Data Analysis</p></li>
-<li><p>Data Interpolation</p></li>
-<li><p>Discovery</p></li>
+<li><p>used for preprocessing data, collecting or storage</p></li>
+<li><p>exam doesnt go deeply in this area, but can include those topics in wrong answers for exam questions</p></li>
+<li><p>available types of databases in AWS:</p>
+<ul>
+<li><p>relational (postgres, mariadb, aurora, sql server, oracle etc)</p>
+<ul>
+<li><p>row (for OLTP, transations)</p></li>
+<li><p>columnar (for analysis, OLAP)</p></li>
+</ul>
+</li>
+<li><p>non-relational (no-sql)</p>
+<ul>
+<li><p>key-value (elasticache, dynamodb)</p></li>
+<li><p>document (dybamodb, documentdb)</p></li>
+</ul>
+</li>
+<li><p>graph (neptune)</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="rds">
+<h2>RDS<a class="headerlink" href="#rds" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>no operating system access</p></li>
+<li><p>SaaS (software-as-a-service)</p></li>
+<li><p>managed service</p></li>
+<li><p>in practice, EC2 instances are created underneath, available indirect via route53 endpoint and management API</p></li>
+</ul>
+<div class="section" id="available-engines">
+<h3>Available Engines<a class="headerlink" href="#available-engines" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Amazon Aurora (mySQL or Postgres) - databases in clusters</p></li>
+<li><p>MySQL</p></li>
+<li><p>MariaDB</p></li>
+<li><p>PostgreSQL</p></li>
+<li><p>SQLServer</p></li>
+<li><p>Oracle</p></li>
 </ul>
 </div>
-<div class="section" id="use-cases">
-<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<div class="section" id="multi-az-deployment">
+<h3>Multi-AZ deployment<a class="headerlink" href="#multi-az-deployment" title="Permalink to this heading">#</a></h3>
+<p>Created for disaster recovery.</p>
+<p>User can create two “instances” of databases, working in two separate availability zones. One of them are treated as primary replica and is working with users requests, whilst the other one is “sleeping” and is repliacted at the block storage level (storage connected to EC2). This means, replication is not done at the database level, thanks to which replication is very fast.</p>
+<p>RDS is constantly monitoring both replicas, and if any of database engine, ec2 or ebs volume corrupt, whole replica is being destroyed and secondary replica is promoted to primary (database engine on secondary replica is woken up). Next, new secondary replica is being created (with inactive engine) and replication at storage level (EBS) is started.</p>
+<p>Despite we can run rds in single availability zone, it is highly not recommended. In such case, failure of any part of rds will lead to full data loss.</p>
+</div>
+</div>
+<div class="section" id="neptune-db">
+<h2>Neptune DB<a class="headerlink" href="#neptune-db" title="Permalink to this heading">#</a></h2>
+<p>Graph database service.</p>
+<p>Interference language:</p>
 <ul class="simple">
-<li><p>application monitoring</p></li>
-<li><p>financial analysis</p></li>
-<li><p>machine learning</p></li>
-<li><p>iot management</p></li>
+<li><p>Apache TinkerPop Gremlin, with interface via WebSocket</p></li>
+<li><p>W3C SPARQL Protocol and RDF Query Language, with interface via HTTP rest and query pattern similar to SQL</p></li>
 </ul>
+</div>
+<div class="section" id="documentdb">
+<h2>DocumentDB<a class="headerlink" href="#documentdb" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>MongoDB <strong>compatible</strong> (it is not mongodb, it’s only compatible)</p></li>
+<li><p>filly managed like RDS (saas)</p></li>
+<li><p>storage auto-scaling is possible</p></li>
+<li><p>able to index json data structures</p></li>
+<li><p>in opposite to rdbs, data are stored in denormalized way, so redundancy is often used</p></li>
+</ul>
+<div class="section" id="use-cases">
+<h3>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>social media profiles</p></li>
+<li><p>object catalogues</p></li>
+<li><p>content management system</p></li>
+<li><p>not good for transaction systems</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="aurora-serverless">
+<h2>Aurora (serverless)<a class="headerlink" href="#aurora-serverless" title="Permalink to this heading">#</a></h2>
+<p>leveraging aurora architecture and allow clusters to be serverless</p>
+</div>
+<div class="section" id="dynamodb-serverless">
+<h2>DynamoDB (Serverless)<a class="headerlink" href="#dynamodb-serverless" title="Permalink to this heading">#</a></h2>
+<p>key-value nosql database, full serverless</p>
+</div>
+<div class="section" id="athena">
+<h2>Athena<a class="headerlink" href="#athena" title="Permalink to this heading">#</a></h2>
+<p>it is not a database, it is a query interface based on AWS Glue which is presto.</p>
+<p>Available in GUI, CLI and SDK.</p>
+</div>
+<div class="section" id="s3-select">
+<h2>S3 Select<a class="headerlink" href="#s3-select" title="Permalink to this heading">#</a></h2>
+<p>in practice, it is not a database, it’s API call which allow for making SQL selects on data stored in S3 buckets.</p>
+<p>Used only for filtering data, any aggregation of data is not possible.</p>
+<p>Available in AWS CLI and SDK’s.</p>
+<p>Can read data from CSV, JSON or Parquet. Data must be encoded in UTF8.</p>
+<p>Compression is possible (GZIP, BZIP for CSV and JSON only).</p>
+<p>Encryption on server-side is supported (client side encryption is not possible)</p>
+<div class="highlight-commandline notranslate"><div class="highlight"><pre><span></span>aws s3api select-object-content --bucket DAS_Bucket --key DAS_Data.csv --expression &quot;SELECT * FROM s3object&quot; --expression-type &quot;SQL&quot; --input-serialization &#39;{&quot;CSV&quot;: {}, &quot;CompressionType&quot;: &quot;NONE&quot;}&#39; --output-serialization &#39;{&quot;CSV&quot;: {}}&#39; &quot;DAS_OUTPUT.csv&quot;
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -383,20 +548,6 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="00.01%20cerfification%20info.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">DAS-C01 certification info</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../01%20Collection%20of%20data/01.01%20Data%20Collection%20intro.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Collection of data - intro</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

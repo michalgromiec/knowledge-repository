@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is it &#8212; Knowledge Repository 0.1 documentation</title>
+    <title>AWS Snow (family) &#8212; Knowledge Repository 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,6 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AWS Lambda" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html" />
+    <link rel="prev" title="AWS Direct Connect (DX)" href="08.01%20Direct%20Connect%20%28DX%29.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -91,7 +93,17 @@
   Kinesis Data Streams
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
@@ -103,28 +115,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="02.01%20Kinesis%20Data%20Firehose.html">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -222,7 +259,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/09.01 AWS Snow.md"
+        <a href="https://github.com/michalgromiec/knowledge-repository/edit/master/docs/source/aws_certified_data_analytics_specialty/notes/01 Collection of data/09.01 AWS Snow Family.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -265,55 +302,57 @@ title="Edit this page"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-it-is-used">
-   Why it is used?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#types-of-devices">
-   Types of devices
+   AWS Snow (family)
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#snowball-edge">
-     Snowball Edge
+    <a class="reference internal nav-link" href="#why-is-it-used">
+     Why is it used?
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aws-snowcone">
-     AWS Snowcone
+    <a class="reference internal nav-link" href="#device-types">
+     Device types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#snowball-edge">
+       Snowball Edge
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-snowcone">
+       AWS Snowcone
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-snowmobile">
+       AWS Snowmobile
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#usage-process">
+     Usage process
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aws-snowmobile">
-     AWS Snowmobile
+    <a class="reference internal nav-link" href="#edge-computing">
+     Edge computing
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#usage-process">
-   Usage process
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#edge-computing">
-   Edge computing
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#use-cases">
-     use cases
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     types of devices
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-cases">
+       use cases
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#types-of-devices">
+       types of devices
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -331,7 +370,7 @@ title="Edit this page"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>What is it</h1>
+                <h1>AWS Snow (family)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -343,55 +382,57 @@ title="Edit this page"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   What is it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-it-is-used">
-   Why it is used?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#types-of-devices">
-   Types of devices
+   AWS Snow (family)
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#snowball-edge">
-     Snowball Edge
+    <a class="reference internal nav-link" href="#why-is-it-used">
+     Why is it used?
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aws-snowcone">
-     AWS Snowcone
+    <a class="reference internal nav-link" href="#device-types">
+     Device types
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#snowball-edge">
+       Snowball Edge
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-snowcone">
+       AWS Snowcone
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aws-snowmobile">
+       AWS Snowmobile
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#usage-process">
+     Usage process
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aws-snowmobile">
-     AWS Snowmobile
+    <a class="reference internal nav-link" href="#edge-computing">
+     Edge computing
     </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#usage-process">
-   Usage process
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#edge-computing">
-   Edge computing
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#use-cases">
-     use cases
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     types of devices
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-cases">
+       use cases
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#types-of-devices">
+       types of devices
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -410,39 +451,38 @@ title="Edit this page"
                 
               <div>
                 
-  <div class="section" id="what-is-it">
-<h1>What is it<a class="headerlink" href="#what-is-it" title="Permalink to this heading">#</a></h1>
+  <div class="section" id="aws-snow-family">
+<h1>AWS Snow (family)<a class="headerlink" href="#aws-snow-family" title="Permalink to this heading">#</a></h1>
 <p>Set of highly secure, offline portable devices.</p>
 <p>Used to:</p>
 <ul class="simple">
-<li><p>(mostly) migrate data into and out of AWS</p>
+<li><p>(mostly) migrate data in and out of AWS</p>
 <ul>
-<li><p>snowcone</p></li>
-<li><p>snowball edge</p></li>
-<li><p>snowmobile</p></li>
+<li><p>AWS Snowcone</p></li>
+<li><p>AWS Snowball Edge</p></li>
+<li><p>AWS Snow Mobile</p></li>
 </ul>
 </li>
-<li><p>collect and process data at the edge</p>
+<li><p>collect and process data at the edge (EC2 instances locally)</p>
 <ul>
-<li><p>snowcone</p></li>
-<li><p>snowball edge</p></li>
+<li><p>AWS Snowcone</p></li>
+<li><p>AWS Snowball Edge</p></li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="why-it-is-used">
-<h1>Why it is used?<a class="headerlink" href="#why-it-is-used" title="Permalink to this heading">#</a></h1>
+<div class="section" id="why-is-it-used">
+<h2>Why is it used?<a class="headerlink" href="#why-is-it-used" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>sometimes it is faster/cheaper to move data physically instead of transfering data</p></li>
-<li><p>to not to block whole internet connection with data transfer</p></li>
+<li><p>sometimes it is faster/cheaper to move data physically instead of transferring data using public internet or even AWS Direct Connect</p></li>
+<li><p>to not block whole local internet connection with data transfer</p></li>
 </ul>
 </div>
-<div class="section" id="types-of-devices">
-<h1>Types of devices<a class="headerlink" href="#types-of-devices" title="Permalink to this heading">#</a></h1>
+<div class="section" id="device-types">
+<h2>Device types<a class="headerlink" href="#device-types" title="Permalink to this heading">#</a></h2>
 <div class="section" id="snowball-edge">
-<h2>Snowball Edge<a class="headerlink" href="#snowball-edge" title="Permalink to this heading">#</a></h2>
+<h3>Snowball Edge<a class="headerlink" href="#snowball-edge" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>physical data transport solution, move TBs or PBs to or from AWS</p></li>
+<li><p>physical data transport solution, move TBs or PBs (when multiple devices stacked) to or from AWS</p></li>
 <li><p>alternative to moving data over the network</p></li>
 <li><p>pay per data transfer job</p></li>
 <li><p>two types of snowball edge devices:</p>
@@ -454,9 +494,9 @@ title="Edit this page"
 </ul>
 </div>
 <div class="section" id="aws-snowcone">
-<h2>AWS Snowcone<a class="headerlink" href="#aws-snowcone" title="Permalink to this heading">#</a></h2>
+<h3>AWS Snowcone<a class="headerlink" href="#aws-snowcone" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>much smaller than snowball edge</p></li>
+<li><p>much smaller than snowball edge - 8TB</p></li>
 <li><p>secure, withstands harsh environments (i.e. desert)</p></li>
 <li><p>very light (2.1kg)</p></li>
 <li><p>8TB of HDD capacity</p></li>
@@ -464,34 +504,32 @@ title="Edit this page"
 </ul>
 </div>
 <div class="section" id="aws-snowmobile">
-<h2>AWS Snowmobile<a class="headerlink" href="#aws-snowmobile" title="Permalink to this heading">#</a></h2>
+<h3>AWS Snowmobile<a class="headerlink" href="#aws-snowmobile" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>truck (car) which allows to transfer exabytes of data</p></li>
+<li><p>truck (literally the car) which allows to transfer petabytes of data</p></li>
 <li><p>each snowmobile has 100PB of capacity</p></li>
-<li><p>highly secure, temperature controlled, gps, video surveilance</p></li>
+<li><p>highly secure, temperature controlled, gps, video surveillance</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="usage-process">
-<h1>Usage process<a class="headerlink" href="#usage-process" title="Permalink to this heading">#</a></h1>
+<h2>Usage process<a class="headerlink" href="#usage-process" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Request device from the AWS Console</p></li>
 <li><p>install snowball client on your server</p></li>
 <li><p>connect snowball and copy files</p></li>
 <li><p>ship back to aws</p></li>
-<li><p>data will be loaded into an s3 bucket</p></li>
-<li><p>snowball is completely wiped</p></li>
+<li><p>data will be loaded into s3 bucket</p></li>
+<li><p>snowball is completely wiped at AWS side</p></li>
 </ol>
 </div>
 <div class="section" id="edge-computing">
-<h1>Edge computing<a class="headerlink" href="#edge-computing" title="Permalink to this heading">#</a></h1>
-<p>process data while it’s being created on an edge location (truck on the road, ship on the sea, mining area)</p>
-<ul class="simple">
-<li><p>location with limited access to internet or no easy access to computing power</p></li>
-</ul>
-<p>You can setup snowball edge or snowcone to do edge computing</p>
+<h2>Edge computing<a class="headerlink" href="#edge-computing" title="Permalink to this heading">#</a></h2>
+<p>allows processing data while it’s being created on an edge location (truck on the road, ship on the sea, mining area)
+mostly used in location with limited access to internet or no easy access to computing power</p>
+<p>You can set up snowball edge or snowcone to do edge computing</p>
 <div class="section" id="use-cases">
-<h2>use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h2>
+<h3>use cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>preprocess data</p></li>
 <li><p>machine learning at the edge</p></li>
@@ -499,8 +537,8 @@ title="Edit this page"
 <li><p>(eventually) ship back device to aws for transfering data</p></li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>types of devices<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="section" id="types-of-devices">
+<h3>types of devices<a class="headerlink" href="#types-of-devices" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>snowcone</p>
 <ul>
@@ -514,11 +552,12 @@ title="Edit this page"
 </li>
 <li><p>snowball edge - storage optimized</p>
 <ul>
-<li><p>up to 40vCPU, 80GB RAM</p></li>
+<li><p>up to 40vCPU, 80GB RAM, 80TB HDD</p></li>
 </ul>
 </li>
 </ul>
 <p>all of them can run ec2 instances &amp; aws lambda functions (using AWS IoT Greengrass)</p>
+</div>
 </div>
 </div>
 <div class="section" id="aws-opshub">
@@ -534,6 +573,20 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="08.01%20Direct%20Connect%20%28DX%29.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">AWS Direct Connect (DX)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AWS Lambda</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

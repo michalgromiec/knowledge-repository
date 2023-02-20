@@ -34,8 +34,8 @@
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="AWS S3 (Simple Storage Service)" href="../02%20Storage%20of%20data/02.01%20AWS%20S3.html" />
-    <link rel="prev" title="Security" href="01.07%20Kinesis%20Data%20Streams%20Security.html" />
+    <link rel="next" title="Kinesis Video Streams" href="02.50%20Kinesis%20Video%20Streams.html" />
+    <link rel="prev" title="Kinesis Data Streams" href="01.02%20Kinesis%20Data%20Streams.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -95,6 +95,16 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.01%20cerfification%20info.html">
+   DAS-C01 certification info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00%20Certification/00.02%20data%20analytics%20in%20general.html">
+   Data Analytics - general info
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="01.01%20Data%20Collection%20intro.html">
    Collection of data - intro
   </a>
@@ -104,29 +114,54 @@
    Kinesis Data Streams
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.04%20Kinesis%20Data%20Streams%20-%20consumers.html">
-   Consumers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.05%20Kinesis%20Data%20Streams%20Scaling.html">
-   Scaling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.06%20Kinesis%20Data%20Streams%20-%20handling%20duplicates.html">
-   Handling duplicates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01.07%20Kinesis%20Data%20Streams%20Security.html">
-   Security
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Kinesis Data Firehose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.50%20Kinesis%20Video%20Streams.html">
+   Kinesis Video Streams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20Cloudwatch%20Logs%20Subscription%20Filter.html">
+   Cloudwatch Logs Subscription Filter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20AWS%20MSK%20%28Managed%20Streaming%20for%20Apache%20Kafka%29.html">
+   AWS MSK (Managed Streaming for Apache Kafka)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.01%20SQS.html">
+   AWS SQS (Simple Queue Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.01%20IOT.html">
+   AWS IOT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.01%20Database%20Migration%20Service.html">
+   AWS DMS (Database Migration Service)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.01%20Direct%20Connect%20%28DX%29.html">
+   AWS Direct Connect (DX)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.01%20AWS%20Snow%20Family.html">
+   AWS Snow (family)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.01%20Lambda%2C%20API%20and%20Cloudfront.html">
+   AWS Lambda
   </a>
  </li>
  <li class="toctree-l1">
@@ -326,48 +361,50 @@ title="Edit this page"
                 
   <div class="section" id="kinesis-data-firehose">
 <h1>Kinesis Data Firehose<a class="headerlink" href="#kinesis-data-firehose" title="Permalink to this heading">#</a></h1>
-<p>Purpose of kinesis firehose is to store data from kinesis streams directly in targets.</p>
-<p>Firehose stores data in bigger batches, instead of streaming. It means data availability is near-real-time.</p>
+<p>Purpose of Kinesis Firehose is to store data from kinesis streams or from producer directly in targets.</p>
+<p>Firehose stores data in bigger batches, instead of streaming. It means data availability is <strong>near-real-time</strong>.</p>
 <ul class="simple">
-<li><p>fully managed service, so it doesn’t require any administration</p></li>
-<li><p>near real time, minimum 60 seconds latency due to way how it handles data (batching)</p></li>
-<li><p>automatic scalling</p></li>
+<li><p>fully managed service, doesn’t require any administration</p></li>
+<li><p>near real time = minimum 60 seconds data latency due to way how it handles data (batching, buffer inteval or buffer size)</p></li>
+<li><p>automatic scaling</p></li>
 <li><p>supports many data formats</p></li>
-<li><p>possible data conversion from json to parquet or manual conversion using AWS Lambda</p></li>
-<li><p>support compession GZIP, ZIP or Snappy (when target is amazon S3) or GZIP (Redshift)</p></li>
-<li><p>possible to store all source data on separate S3 bucket (to be able to see source history, ie. in case of transformation failures)</p></li>
-<li><p>costs are calculated on amount of data (so if there is no source data, you pay nothing )</p></li>
+<li><p><strong>possible data conversion from json to parquet (using aws glue table schema definitions)</strong> or manual conversion using AWS Lambda</p></li>
+<li><p>support compression GZIP, ZIP or Snappy (when target is amazon S3) or GZIP (Redshift)</p></li>
+<li><p>possible to store copy of all source data on separate S3 bucket (to be able to see source history, e.g. in case of transformation failures)</p></li>
+<li><p>costs are calculated based on size of processed data (so if there is no source data, you pay nothing)</p></li>
 </ul>
 <div class="section" id="available-destinations">
 <h2>Available Destinations<a class="headerlink" href="#available-destinations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>AWS S3</p></li>
-<li><p>AWS Redshift (through S3 COPY)</p></li>
+<li><p>AWS Redshift (through COPY command issued by Firehose after storing data in S3 bucket)</p></li>
 <li><p>AWS ElasticSearch</p></li>
 <li><p>datadog</p></li>
 <li><p>mongodb</p></li>
-<li><p>splunk ()</p></li>
+<li><p>splunk (aggregate log files, single place where all log files are aggregated)</p></li>
 <li><p>(possible other new 3rd party partners)</p></li>
-<li><p>custom destinations - via http endpoint (API)</p></li>
+<li><p>custom destinations - via <strong>http endpoint</strong> (API)</p></li>
 </ul>
 </div>
 <div class="section" id="firehose-buffer-sizing">
 <h2>Firehose Buffer Sizing<a class="headerlink" href="#firehose-buffer-sizing" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>firehose accumulate records in a buffer</p></li>
-<li><p>buffer is flushed based on time and size rules</p></li>
-<li><p>it means data are stored on target when buffer size or butter time is exceeded</p></li>
+<li><p>buffer is flushed based on time (buffer interval) or size (buffer size) rules</p></li>
+<li><p>it means data are stored on target when buffer size or buffer time is exceeded</p></li>
 <li><p>firehose can automatically increase buffer size to increase throughput</p></li>
 </ul>
-<p>there is a minimum limit for buffer time - equal 1 minute</p>
+<p>Buffer Interval range from 60 seconds to 900 seconds (so <strong>minimum is one minute</strong>, but only when buffer size is not exceeded, e.g. when one record with small size is sent to stream)
+Buffer Size ranges from 1MB to 128MB for S3 destination or 1MB to 100MB for elasticsearch destination. Buffer size is applied before compression.</p>
 </div>
 <div class="section" id="comparison-to-data-streams-consumer">
 <h2>Comparison to data streams consumer<a class="headerlink" href="#comparison-to-data-streams-consumer" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>streams data is focused on processing messages, where firehose is focused on data ingestion and delivery</p></li>
-<li><p>streams stores data for certain period, while firehose doesn’t store data at all - it sends data to target destinations</p></li>
+<li><p>streams store data for certain period, while firehose doesn’t store data at all - it sends data to target destinations and data exists only in those destinations</p></li>
 <li><p>firehose has builtin functionality of implementing lambda for processing data, in streams you have to implement it by yourself</p></li>
 <li><p>firehose is near-real-time (&gt;1 minute latency) vs streams is real-time (&gt;200ms of latency)</p></li>
+<li><p>still, you can use kinesis firehose as a kinesis streams client (in case when more than one client is needed, if there is only firehose enabled you could skip kinesis streams and put records directly to kinesis firehose)</p></li>
 </ul>
 </div>
 </div>
@@ -380,17 +417,17 @@ title="Edit this page"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="01.07%20Kinesis%20Data%20Streams%20Security.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="01.02%20Kinesis%20Data%20Streams.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Security</p>
+            <p class="prev-next-title">Kinesis Data Streams</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../02%20Storage%20of%20data/02.01%20AWS%20S3.html" title="next page">
+    <a class='right-next' id="next-link" href="02.50%20Kinesis%20Video%20Streams.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">AWS S3 (Simple Storage Service)</p>
+        <p class="prev-next-title">Kinesis Video Streams</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
