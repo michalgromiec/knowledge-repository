@@ -23,6 +23,7 @@ Fully-managed, petabyte-scale data warehouse.
 
 ## Architecture
 redshift aggregates all objects into cluster
+
 cluster contains nodes
 
 ### Node types
@@ -40,20 +41,20 @@ cluster contains nodes
 * executing commands/steps received from leader node
 * transmitting data between compute nodes to serve queries
 * sends intermediate results to leader node
-* cluster can contain up to 128 compute nodes and one leader node (so it's not "infinetely scalable")
+* cluster can contain up to 128 compute nodes and one leader node (so it's not "infinitely scalable")
 * compute nodes can be one of below types:
   * **dense storage** node = allows for very large warehouses and uses HDDs (low price, lower performance), available two versions with 2TB and 16TB of storage and different number of vCPU and RAM (ds2 family)
   * **dense compute** node = allows for very high performance nodes (SSD), have less capacity than compute dense storage node (dc2 family)
 * every worker node is divided into **slices**
   * portion of each node CPU and memory is allocated to each slice
   * number of slices per node is determined by node size
-  * queries executed by node are splitted into slices to have more parallel processing so in practice slice executes script and returing results (not the node)
+  * queries executed by node are split into slices to have more parallel processing so in practice slice executes script and returning results (not the node)
 
 ![img.png](img.png)
 
 ## Spectrum
 * allows querying exabytes of unstructured data in S3 without COPY to the redshift itself
-* support `SELECT` and `INSERT` but doesnt support `DELETE` and `INSERT` operation
+* support `SELECT` and `INSERT` but doesn't support `DELETE` and `UPDATE` operation
 * do the same type of work like Athena does with AWS Glue Datacatalog (so it can be treated as replacement for Presto)
 * when creating table in spectrum, in reality table is created in glue data catalog
 * limitless concurrency
@@ -65,7 +66,7 @@ cluster contains nodes
 ## Performance
 redshift is fast because of three aspects:
 * massively parallel processing (MPP)
-* columnar data storage (splitable, querying one column is faster than all columns)
+* columnar data storage (splittable, querying one column is faster than all columns)
 * column compression (thanks to columnar data storage repeatable data in column need less space, also additional compression is possible)
 
 ## Durability
@@ -79,17 +80,17 @@ redshift is fast because of three aspects:
 * supports both vertical and horizontal scaling
 * scaling is done in specific way:
   * new cluster is created while old one remains available for reads
+  * redshift move data from old cluster to new cluster in parallel way
   * CNAME is moved from old to new cluster (which results in few minutes of downtime, done during some sort of maintenance window)
-  * then redshift move data from old cluster to new cluster in parallel way
 
 ## Distribution Styles
-When data is loaded to table, **redshift is distributing data across the compute nodes into slices** according to the distribution style defined when creating the table.
+When data is loaded to table, **redshift is distributing data across compute nodes into slices** according to the distribution style defined when creating the table.
 
 The main aim of data distribution is to distribute workload among the nodes and to minimize data movement during query execution. What's more, thanks to this massive parallel computing is possible.
 
 There are four distribution styles:
 ### AUTO 
-default, based on the size of the table redshift assign optimal distribution for user. If can be EVEN, KEY or ALL
+default, based on the size of the table redshift assign optimal distribution for user. It can be EVEN, KEY or ALL
 ### EVEN 
 default. Regardless of the record value, all records are divided into slices evenly (round robin). Best solution when table is not joined with other table or when it's difficult to decide between KEY and ALL distribution styles.
 ### KEY (distkey)
@@ -100,7 +101,7 @@ entire table is copied to all nodes. It multiplies storage, insert or updates in
 ## Sort Keys
 Similar to indexes in RDBS - Redshift stores values of selected field in order, therefore this can reduce number of disk scans when range filtering is required for query.
 
-The best sort key is a field which is often used in WHERE clauses (i.e. when most recent queries are important, it will be helpful when sort key will be a field with timestamp). Also helpful is to define sort key when field is part of joins, but in this case more important is to specify this field as a distribution key.
+The best sort key is a field which is often used in WHERE clauses (i.e. when most recent queries are important, it will be helpful when sort key will be a field with timestamp). Also, it is helpful to define sort key when field is part of joins, but in this case more important is to specify this field as a distribution key.
 
 Types of sort key:
 * single - one field, useful when only one field is used in filtering or joins
@@ -202,9 +203,9 @@ We can overwrite percentage threshold with `TO threshold PERCENT` option
 Normally, all above commands takes no priority before other commands, you can change it by `BOOST` option, with which vacuum option uses all cluster resources
 
 ### Automatic Vacuuming
-Redshift do automatic vacuuming based on special criteria. It monitors when cluter is not used by queries and run those commands based on threshold of rows marked for deletion and percentage of unsorted rows.
+Redshift do automatic vacuuming based on special criteria. It monitors when cluster is not used by queries and run those commands based on threshold of rows marked for deletion and percentage of unsorted rows.
 
-Redshift automaticall ypdates table statistics.
+Redshift automatically updates table statistics.
 
 ### Deep Copy
 It's a process which can be done on unsorted table or table with lots of records marked for deletion with which we will have new table with sorted and non-markeed for deletion rows, but it's not as expensive as full vacuum.
@@ -213,7 +214,7 @@ In practice:
 1. create new table with the same schema as existing table
 2. copy data to new table (redshift automatically skip rows marked for deletion and sort data)
 3. delete source table
-4. rename target atble to the same name as source table
+4. rename target table to the same name as source table
 
 Deep Copy requires source table is not actively queried during this process.
 
@@ -235,13 +236,13 @@ You can choose which queries take advantage of this feature, still it obviously 
 * quickly add or remove nodes of same type only (precisely, in the same "family" so we can't for example change dc2 to bigger dc2 node)
 * cluster is **read-only only for few minutes**, but tries to keep connections open during the downtime and resume them after capacity is added to cluster
 * for some dc2 and ra3 node types you can only double or halve number of instances
-* in practice, cluster snapshot is created and then is restored to newly created resized cluster, then cluter endpoint is switched to resized cluster
+* in practice, cluster snapshot is created and then is restored to newly created resized cluster, then cluster endpoint is switched to resized cluster
 * can't be used on single-node clusters
 * new resized cluster must be in the same VPC as old cluster
 
 ### Classic resize
 * can add nodes of other type
-* cluster is **read-only for hours to days**, depending mostly by size of data, but creating empty cluter is also time consuming
+* cluster is **read-only for hours to days**, depending mostly on size of data, but creating empty cluster is also time-consuming
 * read-only duration depends also on source cluster activity (other queries consume computing power)
 * resized cluster is in practice the whole new cluster
 * once all schemas, tables and mostly data are copied to new cluster, endpoint leading to cluster is switch to the new cluster

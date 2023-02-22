@@ -1,4 +1,4 @@
-# What is it
+# Elasticache
 aws service to get managed Redis or Memcached - in other words this service can be used to have serverless redis or memcached
 
 helps load off of databases for read intensive workloads
@@ -7,13 +7,13 @@ helps load off of databases for read intensive workloads
 * in-memory key-value store
 * super-low latency
 * implemented persistence (cache survive reboots)
-* use cache
+* use cases
   * user sessions
   * leaderboard (for gaming)
   * distributed states
 
 ## Memcached
 * in-memory **object** store
-* doesnt hav persistence (cache doesnt survive reboots
+* doesnt have persistence (cache doesnt survive reboots)
 * less popular than Redis
 

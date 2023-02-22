@@ -1,5 +1,5 @@
 # AWS Glue
-Serverless system used as a central metadata and schema repository for datalake.
+Serverless system used as a central metadata and tables schema repository for datalake.
 
 The purpose is to extract structure (schema) from unstructured data and serve extracted structure as a schema for other tools - Athena, Redshift, EMR.
 So in other way - if you have unstructured data, glue allow you to query those data using structured query language (SQL)
@@ -18,7 +18,7 @@ The other thing Glue does is custom ETL jobs (using Apache Spark under the hood)
 ## Glue Data Catalog
 * persistent metadata store (similar to Apache Hive metastore)
 * centralized repository - there is only one data catalog per AWS region
-* beside schema you can have custom properties describing your table
+* beside schema, you can have custom properties describing your table
 * provides comprehensive audit - you can track schema changes and data access control in one place
   
 ## Glue Crawler
@@ -46,7 +46,7 @@ You can also import hive metadata store into AWS Glue.
 * you can provide your own Apache Spark code (scala or python)
 * handles encryption
 * can be event driven (so you can have processes which are started automatically after certain change in your AWS account is made)
-* can provision additional "DPU's" (data procesisng units) when builtin aws glue etl efficiency is not enough
+* can provision additional "DPU's" (data processing units) when builtin aws glue etl efficiency is not enough
 * errors are reported directly to cloudwatch
 * targets can be S3, JDBC (RDS, Redshift) or Glue Data Catalog (create table in glue metastore)
 * fully managed, cost-effective (pay only for the resources consumed)
@@ -67,7 +67,7 @@ You can also import hive metadata store into AWS Glue.
 ### Dynamic Frame
 basic object used in glue studio etl jobs - it's a spark dataframe with additional etl functions which expands default functionality of dataframe
 
-in simillar way as spark dataframe contains many datarows, dynamicframe contains one or mode `DynamicRecord`. Each dynamic record contains fields/columns.
+in similar way as spark dataframe contains many datarows, dynamicframe contains one or more `DynamicRecord`. Each dynamic record contains fields/columns.
 
 ### Available Transformations
 * bundled transformations: 
@@ -103,18 +103,18 @@ Restrictions:
 * nested schemas are not supported
 
 ### Development Endpoints
-* allows for develop etl scripts using notebook environements, but it looks like engine only, you need to have client which can connect to this instance.
+* allows for develop etl scripts using notebook environments, but it looks like engine only, you need to have client which can connect to this instance.
 
 ### Running Glue jobs
 * time-based schedules (like any cron style runs)
 * Job bookmarks
   * used to persist state from the job run
   * allows for running job for increment processing
-  * prevents from reprocessing of old data
+  * **prevents from reprocessing of old data**
   * only handles new rows, not updated rows, new objects in S3 not old objects etc
   * job bookmark can be:
     * enabled - process only new objects
-    * disabled - (default), allways process entire dataset
+    * disabled - (default), always process entire dataset
     * pause - processing objects processed in job runs marked by `from-value` and `to-value` parameters (effectively - to not process new objects) 
 * CloudWatch events
   * you can fire lambda function or sns notification when ETL succeeds or fails
@@ -124,7 +124,7 @@ Restrictions:
 You pay for:
 * Glue Data Catalog - for number of objects and access to the Glue Data Catalog (first million is free)
 * Glue ETL Jobs - for the time it takes to run your Glue ETL Jobs (based on DPUs which are in some way multiplication of power of node and time consumed by node). Billed by the second
-* Glue Developement Endpoints - same as for etl jobs - payed for DPU used by number of time, minimum billing duration is 10 minutes. Billed by minute.
+* Glue Developement Endpoints - same as for etl jobs - paid for DPU used by number of time, minimum billing duration is 10 minutes. Billed by minute.
 * Glue Triggers - 
 * Glue Crawlers - similar to etl jobs, pay for DPU and duration of crawling data. 
 
